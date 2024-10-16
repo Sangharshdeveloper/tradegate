@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app')
 
-@section('title', 'Add New Supplier')
+@section('title', 'Add New Dropshipper')
 @push('css_or_js')
     <link rel="stylesheet" href="{{ dynamicAsset(path: 'public/assets/back-end/plugins/intl-tel-input/css/intlTelInput.css') }}">
 @endpush
@@ -9,7 +9,7 @@
     <div class="mb-4">
         <h2 class="h1 mb-0 text-capitalize d-flex align-items-center gap-2">
             <img src="{{dynamicAsset(path: 'public/assets/back-end/img/add-new-seller.png')}}" class="mb-1" alt="">
-            {{ 'Add New Supplier' }}
+            {{ 'Add New Dropshipper' }}
         </h2>
     </div>
     <form class="user" action="{{route('admin.dropshippers.add')}}" method="post" enctype="multipart/form-data" id="add-vendor-form">
