@@ -96,7 +96,7 @@
                                     <td>
                                         <a title="{{translate('view')}}"
                                            class="title-color"
-                                           href="{{route('admin.vendors.view',$seller->id)}}">
+                                           href="{{route('admin.suppliers.view',$seller->id)}}">
                                             {{$seller->f_name}} {{$seller->l_name}}
                                         </a>
                                     </td>

@@ -48,7 +48,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <a href="{{route('admin.suppliers.add')}}" type="button" class="btn btn--primary text-nowrap">
+                                <a href="{{route('admin.dropshippers.add')}}" type="button" class="btn btn--primary text-nowrap">
                                     <i class="tio-add"></i>
                                     {{'Add New Dropshipper'}}
                                 </a>
@@ -125,7 +125,7 @@
                                         <div class="d-flex justify-content-center gap-2">
                                             <a title="{{translate('view')}}"
                                                 class="btn btn-outline-info btn-sm square-btn"
-                                                href="{{route('admin.vendors.view',$seller->id)}}">
+                                                href="{{route('admin.dropshippers.view',$seller->id)}}">
                                                 <i class="tio-invisible"></i>
                                             </a>
                                         </div>
