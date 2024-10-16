@@ -125,7 +125,7 @@
                                         <div class="d-flex justify-content-center gap-2">
                                             <a title="{{translate('view')}}"
                                                 class="btn btn-outline-info btn-sm square-btn"
-                                                href="{{route('admin.vendors.view',$seller->id)}}">
+                                                href="{{route('admin.suppliers.view',$seller->id)}}">
                                                 <i class="tio-invisible"></i>
                                             </a>
                                         </div>
