@@ -53,7 +53,7 @@ class VendorRepository implements VendorRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit);
     }
 
-    public function getListWhere(array $orderBy=[], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null):  Collection|LengthAwarePaginator
+    public function getListWhere(array $orderBy=[], string $searchValue = null, array $filters = ['type'=>'0'], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null):  Collection|LengthAwarePaginator
     {
         $query = $this->vendor->with($relations)->where($filters)
             ->when($searchValue, function ($query) use ($searchValue) {
