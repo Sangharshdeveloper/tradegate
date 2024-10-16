@@ -7,7 +7,7 @@
         <div class="mb-3">
             <h2 class="h1 mb-0 text-capitalize d-flex align-items-center gap-2">
                 <img src="{{dynamicAsset(path: 'public/assets/back-end/img/add-new-seller.png')}}" alt="">
-                {{translate('vendor_details')}}
+                {{'Dropshipper Details'}}
             </h2>
         </div>
         <div class="page-header border-0 mb-4">
@@ -155,7 +155,7 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{$seller['id']}}">
                                 <input type="hidden" name="status" value="suspended">
-                                <button type="button" class="btn btn-danger px-5 form-alert" data-message="{{translate('want_to_suspend_this_vendor').'?'}}" data-id="suspend-form">{{translate('suspend_this_vendor')}}</button>
+                                <button type="button" class="btn btn-danger px-5 form-alert" data-message="{{translate('want_to_suspend_this_vendor').'?'}}" data-id="suspend-form">{{'Suspend this dropshipper'}}</button>
                             </form>
                         </div>
                     @endif
