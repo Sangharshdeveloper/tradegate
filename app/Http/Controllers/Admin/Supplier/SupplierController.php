@@ -199,7 +199,7 @@ class SupplierController extends BaseController
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT),
         );
         $seller = $this->supplierRepo->getFirstWhere(params: ['id' => $seller_id]);
-        return view(Vendor::ORDER_LIST[VIEW], compact('orders', 'seller'));
+        return view(Supplier::ORDER_LIST[VIEW], compact('orders', 'seller'));
     }
 
     public function exportOrderList(Request $request, $vendorId): BinaryFileResponse
@@ -388,7 +388,7 @@ class SupplierController extends BaseController
             dataLimit: 'all',
         )->count();
 
-        return view(Vendor::VIEW_ORDER[VIEW], compact('seller', 'orders', 'pendingOrder', 'deliveredOrder'));
+        return view(Supplier::VIEW_ORDER[VIEW], compact('seller', 'orders', 'pendingOrder', 'deliveredOrder'));
     }
 
     public function getProductListTabView(Request $request, $seller): View
@@ -400,12 +400,12 @@ class SupplierController extends BaseController
             relations: ['translations'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
-        return view(Vendor::VIEW_PRODUCT[VIEW], compact('seller', 'products'));
+        return view(Supplier::VIEW_PRODUCT[VIEW], compact('seller', 'products'));
     }
 
     public function getSettingListTabView(Request $request, $seller, $id): View
     {
-        return view(Vendor::VIEW_SETTING[VIEW], compact('seller'));
+        return view(Supplier::VIEW_SETTING[VIEW], compact('seller'));
     }
 
     public function updateSetting(Request $request, $id): RedirectResponse
@@ -451,7 +451,7 @@ class SupplierController extends BaseController
             relations: ['order.customer'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT),
         );
-        return view(Vendor::VIEW_TRANSACTION[VIEW], compact('seller', 'transactions'));
+        return view(Supplier::VIEW_TRANSACTION[VIEW], compact('seller', 'transactions'));
     }
 
     public function getReviewListTabView(Request $request, $seller): View
@@ -478,7 +478,7 @@ class SupplierController extends BaseController
                 relations: ['product', 'customer'],
                 dataLimit: getWebConfig(name: 'pagination_limit'));
         }
-        return view(Vendor::VIEW_REVIEW[VIEW], [
+        return view(Supplier::VIEW_REVIEW[VIEW], [
             'seller' => $seller,
             'reviews' => $reviews,
         ]);
@@ -490,7 +490,7 @@ class SupplierController extends BaseController
         if ($withdrawRequest) {
             $withdrawalMethod = is_array($withdrawRequest['withdrawal_method_fields']) ? $withdrawRequest['withdrawal_method_fields'] : json_decode($withdrawRequest['withdrawal_method_fields']);
             $direction = session('direction');
-            return view(Vendor::WITHDRAW_VIEW[VIEW], compact('withdrawRequest', 'withdrawalMethod', 'direction'));
+            return view(Supplier::WITHDRAW_VIEW[VIEW], compact('withdrawRequest', 'withdrawalMethod', 'direction'));
         }
         Toastr::error(translate('withdraw_request_not_found'));
         return back();
@@ -506,7 +506,7 @@ class SupplierController extends BaseController
             relations: ['seller'],
             dataLimit: getWebConfig(name: 'pagination_limit')
         );
-        return view(Vendor::WITHDRAW_LIST[VIEW], compact('withdrawRequests'));
+        return view(Supplier::WITHDRAW_LIST[VIEW], compact('withdrawRequests'));
     }
 
     public function exportWithdrawList(Request $request): BinaryFileResponse

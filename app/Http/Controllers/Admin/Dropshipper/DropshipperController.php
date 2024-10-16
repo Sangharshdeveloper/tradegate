@@ -199,7 +199,7 @@ class DropshipperController extends BaseController
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT),
         );
         $seller = $this->supplierRepo->getFirstWhere(params: ['id' => $seller_id]);
-        return view(Vendor::ORDER_LIST[VIEW], compact('orders', 'seller'));
+        return view(Dropshipper::ORDER_LIST[VIEW], compact('orders', 'seller'));
     }
 
     public function exportOrderList(Request $request, $vendorId): BinaryFileResponse
@@ -240,7 +240,7 @@ class DropshipperController extends BaseController
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
         $seller = $this->supplierRepo->getFirstWhere(params: ['id' => $seller_id]);
-        return view(Vendor::PRODUCT_LIST[VIEW], compact('products', 'seller'));
+        return view(Dropshipper::PRODUCT_LIST[VIEW], compact('products', 'seller'));
     }
 
     public function updateSalesCommission(Request $request, $id): RedirectResponse
@@ -297,7 +297,7 @@ class DropshipperController extends BaseController
         } else {
             $orderCount = $this->orderRepo->getListWhereCount(filters: ['customer_id' => $order['customer_id'], 'order_type' => 'POS']);
         }
-        return view(Vendor::ORDER_DETAILS[VIEW], compact(
+        return view(Dropshipper::ORDER_DETAILS[VIEW], compact(
             'order',
             'seller_id',
             'delivery_men',
@@ -400,7 +400,7 @@ class DropshipperController extends BaseController
             dataLimit: 'all',
         )->count();
 
-        return view(Vendor::VIEW_ORDER[VIEW], compact('seller', 'orders', 'pendingOrder', 'deliveredOrder'));
+        return view(Dropshipper::VIEW_ORDER[VIEW], compact('seller', 'orders', 'pendingOrder', 'deliveredOrder'));
     }
 
     public function getProductListTabView(Request $request, $seller): View
@@ -412,12 +412,12 @@ class DropshipperController extends BaseController
             relations: ['translations'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
-        return view(Vendor::VIEW_PRODUCT[VIEW], compact('seller', 'products'));
+        return view(Dropshipper::VIEW_PRODUCT[VIEW], compact('seller', 'products'));
     }
 
     public function getSettingListTabView(Request $request, $seller, $id): View
     {
-        return view(Vendor::VIEW_SETTING[VIEW], compact('seller'));
+        return view(Dropshipper::VIEW_SETTING[VIEW], compact('seller'));
     }
 
     public function updateSetting(Request $request, $id): RedirectResponse
@@ -463,7 +463,7 @@ class DropshipperController extends BaseController
             relations: ['order.customer'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT),
         );
-        return view(Vendor::VIEW_TRANSACTION[VIEW], compact('seller', 'transactions'));
+        return view(Dropshipper::VIEW_TRANSACTION[VIEW], compact('seller', 'transactions'));
     }
 
     public function getReviewListTabView(Request $request, $seller): View
@@ -521,7 +521,7 @@ class DropshipperController extends BaseController
             relations: ['seller'],
             dataLimit: getWebConfig(name: 'pagination_limit')
         );
-        return view(Vendor::WITHDRAW_LIST[VIEW], compact('withdrawRequests'));
+        return view(Dropshipper::WITHDRAW_LIST[VIEW], compact('withdrawRequests'));
     }
 
     public function exportWithdrawList(Request $request): BinaryFileResponse
