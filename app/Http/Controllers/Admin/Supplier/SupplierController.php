@@ -240,7 +240,7 @@ class SupplierController extends BaseController
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
         $seller = $this->supplierRepo->getFirstWhere(params: ['id' => $seller_id]);
-        return view(Vendor::PRODUCT_LIST[VIEW], compact('products', 'seller'));
+        return view(Supplier::PRODUCT_LIST[VIEW], compact('products', 'seller'));
     }
 
     public function updateSalesCommission(Request $request, $id): RedirectResponse
@@ -297,7 +297,7 @@ class SupplierController extends BaseController
         } else {
             $orderCount = $this->orderRepo->getListWhereCount(filters: ['customer_id' => $order['customer_id'], 'order_type' => 'POS']);
         }
-        return view(Vendor::ORDER_DETAILS[VIEW], compact('order', 'seller_id', 'delivery_men', 'linked_orders', 'physical_product',
+        return view(Supplier::ORDER_DETAILS[VIEW], compact('order', 'seller_id', 'delivery_men', 'linked_orders', 'physical_product',
             'shipping_address', 'total_delivered', 'countries', 'zip_codes', 'zip_restrict_status', 'country_restrict_status', 'orderCount'));
     }
 
@@ -361,7 +361,7 @@ class SupplierController extends BaseController
             return $this->getReviewListTabView(request: $request, seller: $seller);
         }
 
-        return view(Vendor::VIEW[VIEW], [
+        return view(Supplier::VIEW[VIEW], [
             'seller' => $seller,
             'current_date' => date('Y-m-d'),
         ]);
