@@ -15,28 +15,28 @@
                 <ul class="nav nav-tabs flex-wrap page-header-tabs">
                     <li class="nav-item">
                         <a class="nav-link active"
-                           href="{{ route('admin.vendors.view', $seller['id']) }}">{{translate('shop_overview')}}</a>
+                           href="{{ route('admin.suppliers.view', $seller['id']) }}">{{translate('shop_overview')}}</a>
                     </li>
                     @if ($seller['status']!="pending")
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="{{ route('admin.vendors.view',['id'=>$seller['id'], 'tab'=>'order']) }}">{{translate('order')}}</a>
+                               href="{{ route('admin.suppliers.view',['id'=>$seller['id'], 'tab'=>'order']) }}">{{translate('order')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="{{ route('admin.vendors.view',['id'=>$seller['id'], 'tab'=>'product']) }}">{{translate('product')}}</a>
+                               href="{{ route('admin.suppliers.view',['id'=>$seller['id'], 'tab'=>'product']) }}">{{translate('product')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="{{ route('admin.vendors.view',['id'=>$seller['id'], 'tab'=>'setting']) }}">{{translate('setting')}}</a>
+                               href="{{ route('admin.suppliers.view',['id'=>$seller['id'], 'tab'=>'setting']) }}">{{translate('setting')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="{{ route('admin.vendors.view',['id'=>$seller['id'], 'tab'=>'transaction']) }}">{{translate('transaction')}}</a>
+                               href="{{ route('admin.suppliers.view',['id'=>$seller['id'], 'tab'=>'transaction']) }}">{{translate('transaction')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                               href="{{ route('admin.vendors.view',['id'=>$seller['id'], 'tab'=>'review']) }}">{{translate('review')}}</a>
+                               href="{{ route('admin.suppliers.view',['id'=>$seller['id'], 'tab'=>'review']) }}">{{translate('review')}}</a>
                         </li>
                     @endif
                 </ul>
@@ -121,7 +121,7 @@
                                     <a href="javascript:"
                                        class="text-dark">{{$seller->total_rating}} {{translate('ratings')}}</a>
                                     <span class="border-left"></span>
-                                    <a href="{{ $seller['status']!="pending" ? route('admin.vendors.view',['id'=>$seller['id'], 'tab'=>'review']): 'javascript:' }}"
+                                    <a href="{{ $seller['status']!="pending" ? route('admin.suppliers.view',['id'=>$seller['id'], 'tab'=>'review']): 'javascript:' }}"
                                        class="text-dark">{{$seller->rating_count}} {{translate('reviews')}}</a>
                                 </div>
                                 @if ( $seller['status']!="pending" && $seller['status']!="suspended" && $seller['status']!="rejected" && $seller?->shop)
