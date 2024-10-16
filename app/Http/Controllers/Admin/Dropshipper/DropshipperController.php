@@ -97,7 +97,7 @@ class DropshipperController extends BaseController
 
     public function add(SupplierAddRequest $request): JsonResponse
     {
-        $vendor = $this->supplierRepo->add(data: $this->supplierService->getAddData($request));
+        $vendor = $this->supplierRepo->add(data: $this->supplierService->getAddDataDrop($request));
         $this->shopRepo->add($this->shopService->getAddShopDataForRegistration(request: $request, vendorId: $vendor['id']));
         $this->vendorWalletRepo->add($this->supplierService->getInitialWalletData(vendorId: $vendor['id']));
         $data = [
