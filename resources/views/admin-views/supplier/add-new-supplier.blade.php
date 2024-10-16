@@ -12,7 +12,7 @@
             {{ 'Add New Supplier' }}
         </h2>
     </div>
-    <form class="user" action="{{route('admin.vendors.add')}}" method="post" enctype="multipart/form-data" id="add-vendor-form">
+    <form class="user" action="{{route('admin.suppliers.add')}}" method="post" enctype="multipart/form-data" id="add-vendor-form">
         @csrf
         <div class="card">
             <div class="card-body">
