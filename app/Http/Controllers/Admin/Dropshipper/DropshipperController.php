@@ -62,7 +62,7 @@ class DropshipperController extends BaseController
         private readonly WithdrawRequestRepositoryInterface  $withdrawRequestRepo,
         private readonly VendorWalletRepositoryInterface     $vendorWalletRepo,
         private readonly ShopRepositoryInterface             $shopRepo,
-        private readonly SupplierService                       $supplierService,
+        private readonly SupplierService                      $supplierService,
         private readonly ShopService                         $shopService,
     ) {}
 

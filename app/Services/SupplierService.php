@@ -115,7 +115,20 @@ class SupplierService
             'phone' => $request['phone'],
             'email' => $request['email'],
             'type' => 1,
-            // 'image' => $this->upload(dir: 'supplier/', format: 'webp', image: $request->file('image')),
+             'image' => $this->upload(dir: 'supplier/', format: 'webp', image: $request->file('image')),
+            'password' => bcrypt($request['password']),
+            'status' => $request['status'] == 'approved' ? 'approved' : 'pending',
+        ];
+    }
+    public function getAddDataDrop(object $request):array
+    {
+        return [
+            'f_name' => $request['f_name'],
+            'l_name' => $request['l_name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'type' => 2,
+             'image' => $this->upload(dir: 'dropshipper/', format: 'webp', image: $request->file('image')),
             'password' => bcrypt($request['password']),
             'status' => $request['status'] == 'approved' ? 'approved' : 'pending',
         ];
