@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Supplier;
+namespace App\Http\Controllers\Admin\Dropshipper;
 
 use App\Contracts\Repositories\DeliveryManRepositoryInterface;
 use App\Contracts\Repositories\DeliveryZipCodeRepositoryInterface;
@@ -15,6 +15,7 @@ use App\Contracts\Repositories\SupplierRepositoryInterface;
 use App\Contracts\Repositories\VendorWalletRepositoryInterface;
 use App\Contracts\Repositories\WithdrawRequestRepositoryInterface;
 use App\Enums\ExportFileNames\Admin\Vendor as VendorExport;
+use App\Enums\ViewPaths\Admin\Dropshipper;
 use App\Enums\WebConfigKey;
 use App\Events\VendorRegistrationEvent;
 use App\Events\WithdrawStatusUpdateEvent;
@@ -23,6 +24,7 @@ use App\Exports\VendorWithdrawRequest;
 use App\Exports\VendorOrderListExport;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\SupplierAddRequest;
+use App\Repositories\DropshipperRepository;
 use App\Services\ShopService;
 use App\Services\SupplierService;
 use App\Services\VendorService;
@@ -41,7 +43,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class SupplierController extends BaseController
+class DropshipperController extends BaseController
 {
     use PaginatorTrait;
     use CommonTrait;
@@ -49,7 +51,7 @@ class SupplierController extends BaseController
     use EmailTemplateTrait;
 
     public function __construct(
-        private readonly SupplierRepositoryInterface          $supplierRepo,
+        private readonly DropshipperRepository          $supplierRepo,
         private readonly OrderRepositoryInterface            $orderRepo,
         private readonly ProductRepositoryInterface          $productRepo,
         private readonly ReviewRepositoryInterface           $reviewRepo,
@@ -62,9 +64,7 @@ class SupplierController extends BaseController
         private readonly ShopRepositoryInterface             $shopRepo,
         private readonly SupplierService                       $supplierService,
         private readonly ShopService                         $shopService,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @param Request|null $request
@@ -74,7 +74,7 @@ class SupplierController extends BaseController
      */
     public function index(Request|null $request, string $type = null): View
     {
-     
+
         return $this->getListView($request);
     }
 
@@ -87,12 +87,12 @@ class SupplierController extends BaseController
             relations: ['orders', 'product'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
-        return view(Supplier::LIST[VIEW], compact('suppliers', 'current_date'));
+        return view(Dropshipper::LIST[VIEW], compact('suppliers', 'current_date'));
     }
 
     public function getAddView(Request $request): View
     {
-        return view(Supplier::ADD[VIEW]);
+        return view(Dropshipper::ADD[VIEW]);
     }
 
     public function add(SupplierAddRequest $request): JsonResponse
@@ -103,14 +103,14 @@ class SupplierController extends BaseController
         $data = [
             'vendorName' => $request['f_name'],
             'status' => 'pending',
-            'subject' => translate('Supplier_Registration_Successfully_Completed'),
-            'title' => translate('Supplier_Registration_Successfully_Completed'),
-            'userType' => 'supplier',
-            'type'=>'1',
+            'subject' => 'Dropshipper Registration Successfully Completed',
+            'title' => 'Dropshipper Registration Successfully Completed',
+            'userType' => 'dropshipper',
+            'type' => '2',
             'templateName' => 'registration',
         ];
         event(new VendorRegistrationEvent(email: $request['email'], data: $data));
-        return response()->json(['message' => 'Supplier added successfully']);
+        return response()->json(['message' => 'Dropshipper added successfully']);
     }
 
     public function updateStatus(Request $request): RedirectResponse
@@ -297,8 +297,20 @@ class SupplierController extends BaseController
         } else {
             $orderCount = $this->orderRepo->getListWhereCount(filters: ['customer_id' => $order['customer_id'], 'order_type' => 'POS']);
         }
-        return view(Vendor::ORDER_DETAILS[VIEW], compact('order', 'seller_id', 'delivery_men', 'linked_orders', 'physical_product',
-            'shipping_address', 'total_delivered', 'countries', 'zip_codes', 'zip_restrict_status', 'country_restrict_status', 'orderCount'));
+        return view(Vendor::ORDER_DETAILS[VIEW], compact(
+            'order',
+            'seller_id',
+            'delivery_men',
+            'linked_orders',
+            'physical_product',
+            'shipping_address',
+            'total_delivered',
+            'countries',
+            'zip_codes',
+            'zip_restrict_status',
+            'country_restrict_status',
+            'orderCount'
+        ));
     }
 
     public function getView(Request $request, $id, $tab = null): View|RedirectResponse
@@ -361,7 +373,7 @@ class SupplierController extends BaseController
             return $this->getReviewListTabView(request: $request, seller: $seller);
         }
 
-        return view(Vendor::VIEW[VIEW], [
+        return view(Dropshipper::VIEW[VIEW], [
             'seller' => $seller,
             'current_date' => date('Y-m-d'),
         ]);
@@ -460,7 +472,8 @@ class SupplierController extends BaseController
             $product_id = $this->productRepo->getListWhere(
                 searchValue: $request['searchValue'],
                 filters: ['added_by' => 'seller', 'seller_id' => $seller['id']],
-                dataLimit: 'all')->pluck('id')->toArray();
+                dataLimit: 'all'
+            )->pluck('id')->toArray();
             $filtersBy = [
                 'product_id' => $product_id,
             ];
@@ -470,15 +483,17 @@ class SupplierController extends BaseController
                 whereInFilters: $filtersBy,
                 relations: ['product'],
                 nullFields: ['delivery_man_id'],
-                dataLimit: getWebConfig(name: 'pagination_limit'));
+                dataLimit: getWebConfig(name: 'pagination_limit')
+            );
         } else {
             $reviews = $this->reviewRepo->getListWhereIn(
                 orderBy: ['id' => 'desc'],
                 filters: ['product_user_id' => $seller['id']],
                 relations: ['product', 'customer'],
-                dataLimit: getWebConfig(name: 'pagination_limit'));
+                dataLimit: getWebConfig(name: 'pagination_limit')
+            );
         }
-        return view(Vendor::VIEW_REVIEW[VIEW], [
+        return view(Dropshipper::VIEW_REVIEW[VIEW], [
             'seller' => $seller,
             'reviews' => $reviews,
         ]);
@@ -490,7 +505,7 @@ class SupplierController extends BaseController
         if ($withdrawRequest) {
             $withdrawalMethod = is_array($withdrawRequest['withdrawal_method_fields']) ? $withdrawRequest['withdrawal_method_fields'] : json_decode($withdrawRequest['withdrawal_method_fields']);
             $direction = session('direction');
-            return view(Vendor::WITHDRAW_VIEW[VIEW], compact('withdrawRequest', 'withdrawalMethod', 'direction'));
+            return view(Dropshipper::WITHDRAW_VIEW[VIEW], compact('withdrawRequest', 'withdrawalMethod', 'direction'));
         }
         Toastr::error(translate('withdraw_request_not_found'));
         return back();
@@ -540,14 +555,16 @@ class SupplierController extends BaseController
         $approved = $withdrawRequests->where('approved', 1)->count();
         $denied = $withdrawRequests->where('approved', 2)->count();
 
-        return Excel::download(new VendorWithdrawRequest([
-            'data-from' => 'admin',
-            'withdraw_request' => $withdrawRequests,
-            'filter' => session('withdraw_status_filter'),
-            'pending' => $pending,
-            'approved' => $approved,
-            'denied' => $denied,
-        ]), 'Vendor-Withdraw-Request.xlsx'
+        return Excel::download(
+            new VendorWithdrawRequest([
+                'data-from' => 'admin',
+                'withdraw_request' => $withdrawRequests,
+                'filter' => session('withdraw_status_filter'),
+                'pending' => $pending,
+                'approved' => $approved,
+                'denied' => $denied,
+            ]),
+            'Vendor-Withdraw-Request.xlsx'
         );
     }
 
@@ -579,8 +596,5 @@ class SupplierController extends BaseController
 
         Toastr::info(translate('Vendor_Payment_request_has_been_Denied_successfully'));
         return redirect()->route('admin.vendors.withdraw_list');
-
     }
-
-
 }

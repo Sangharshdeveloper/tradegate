@@ -34,6 +34,7 @@ use App\Enums\ViewPaths\Admin\SocialLoginSettings;
 use App\Enums\ViewPaths\Admin\SocialMedia;
 use App\Enums\ViewPaths\Admin\SoftwareUpdate;
 use App\Enums\ViewPaths\Admin\Supplier;
+use App\Enums\ViewPaths\Admin\Dropshipper;
 use App\Enums\ViewPaths\Admin\SubCategory;
 use App\Enums\ViewPaths\Admin\SubSubCategory;
 use App\Enums\ViewPaths\Admin\ThemeSetup;
@@ -973,6 +974,40 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                         </li>
 
                         <!-- Suppliers End -->
+
+                         <!-- Dropshipper Start -->
+
+                         <li class="navbar-vertical-aside-has-menu {{ Request::is('admin/dropshippers*') || Request::is('admin/vendors/withdraw-method/*') || (Request::is('admin/orders/details/*') && request()->has('vendor-order-list')) ? 'active' : '' }}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
+                                href="javascript:" title="{{translate('vendors')}}">
+                                <i class="tio-users-switch nav-icon"></i>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{'Dropshipper'}}</span>
+                            </a>
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+                                style="display: {{Request::is('admin/dropshippers*') || (Request::is('admin/orders/details/*') && request()->has('vendor-order-list'))?'block':'none'}}">
+                                <li class="nav-item {{Request::is('admin/dropshippers/'.Dropshipper::ADD[URI])?'active':''}}">
+                                    <a class="nav-link" title="{{translate('add_New_Vendor')}}"
+                                        href="{{route('admin.dropshippers.add')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">
+                                            {{'Add new dropshipper'}}
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('admin/dropshippers/'.Dropshipper::LIST[URI]) ||Request::is('admin/dropshippers/'.Dropshipper::VIEW[URI].'*') ?'active':''}}">
+                                    <a class="nav-link" title="Dropshipper list"
+                                        href="{{route('admin.dropshippers.dropshippers-list')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">
+                                            {{'Dropshipper list'}}
+                                        </span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        <!-- Dropshipper End -->
 
                         <li class="navbar-vertical-aside-has-menu {{ Request::is('admin/vendors*') || Request::is('admin/vendors/withdraw-method/*') || (Request::is('admin/orders/details/*') && request()->has('vendor-order-list')) ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"

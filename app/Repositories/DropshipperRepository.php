@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class SupplierRepository implements SupplierRepositoryInterface
+class DropshipperRepository implements SupplierRepositoryInterface
 {
     public function __construct(
         private readonly Seller $supplier,
@@ -54,7 +54,7 @@ class SupplierRepository implements SupplierRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit);
     }
 
-    public function getListWhere(array $orderBy=[], string $searchValue = null, array $filters = ['type'=>'1'], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null):  Collection|LengthAwarePaginator
+    public function getListWhere(array $orderBy=[], string $searchValue = null, array $filters = ['type'=>'2'], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null):  Collection|LengthAwarePaginator
     {
         $query = $this->supplier->with($relations)->where($filters)
             ->when($searchValue, function ($query) use ($searchValue) {

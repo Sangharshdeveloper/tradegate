@@ -8782,4 +8782,5 @@ return [
 	"Minimum order quantity is required!" => "Minimum order quantity is required!",
 	"Minimum_order_quantity" => "Minimum order quantity",
 	"The code format is invalid." => "The code format is invalid.",
+	"no_vendor_found" => "No vendor found",
 ];

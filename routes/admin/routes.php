@@ -12,6 +12,7 @@ use App\Enums\ViewPaths\Admin\Coupon;
 use App\Enums\ViewPaths\Admin\Review;
 use App\Enums\ViewPaths\Admin\Vendor;
 use App\Enums\ViewPaths\Admin\Supplier;
+use App\Enums\ViewPaths\Admin\Dropshipper;
 use App\Http\Controllers\Admin\Settings\FirebaseOTPVerificationController;
 use Illuminate\Support\Facades\Route;
 use App\Enums\ViewPaths\Admin\Contact;
@@ -94,6 +95,7 @@ use App\Http\Controllers\Admin\Warehouse\WarehouseProductController;
 use App\Http\Controllers\Admin\ProductReportController;
 use App\Http\Controllers\Admin\Vendor\VendorController;
 use App\Http\Controllers\Admin\Supplier\SupplierController;
+use App\Http\Controllers\Admin\Dropshipper\DropshipperController;
 use App\Enums\ViewPaths\Admin\StorageConnectionSettings;
 use App\Enums\ViewPaths\Admin\VendorRegistrationSetting;
 use App\Http\Controllers\Admin\EmailTemplatesController;
@@ -457,7 +459,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         });
     });
 
-     // Suppliers Data
+     // Suppliers Route Data
 
      Route::group(['prefix' => 'suppliers', 'as' => 'suppliers.', 'middleware' => ['module:user_section']], function () {
         Route::controller(SupplierController::class)->group(function () {
@@ -482,7 +484,34 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         });
     });    
    
-    // Suppliers Data End
+    // Suppliers Route Data End
+
+       // Dropshippers Route Data
+
+       Route::group(['prefix' => 'dropshippers', 'as' => 'dropshippers.', 'middleware' => ['module:user_section']], function () {
+        Route::controller(DropshipperController::class)->group(function () {
+            Route::get(Dropshipper::LIST[URI], 'index')->name('dropshippers-list');
+            Route::get(Dropshipper::ADD[URI], 'getAddView')->name('add');
+            Route::POST(Dropshipper::ADD[URI], 'add');
+            Route::get(Dropshipper::ORDER_LIST[URI] . '/{supplier_id}', 'getOrderListView')->name('order-list');
+            Route::get(Dropshipper::ORDER_LIST_EXPORT[URI] . '/{supplier_id}', 'exportOrderList')->name('order-list-export');
+            Route::post(Dropshipper::STATUS[URI], 'updateStatus')->name('updateStatus');
+            Route::get(Dropshipper::EXPORT[URI], 'exportList')->name('export');
+            Route::get(Dropshipper::PRODUCT_LIST[URI] . '/{supplier_id}', 'getProductListView')->name('product-list');
+
+            Route::post(Dropshipper::SALES_COMMISSION_UPDATE[URI] . '/{id}', 'updateSalesCommission')->name('sales-commission-update');
+            Route::get(Dropshipper::ORDER_DETAILS[URI] . '/{order_id}/{supplier_id}', 'getOrderDetailsView')->name('order-details');
+            Route::get(Dropshipper::VIEW[URI] . '/{id}/{tab?}', 'getView')->name('view');
+            Route::post(Dropshipper::UPDATE_SETTING[URI] . '/{id}', 'updateSetting')->name('update-setting');
+
+            Route::get(Dropshipper::WITHDRAW_LIST[URI], 'getWithdrawListView')->name('withdraw_list');
+            Route::get(Dropshipper::WITHDRAW_LIST_EXPORT[URI], 'exportWithdrawList')->name('withdraw-list-export-excel');
+            Route::get(Dropshipper::WITHDRAW_VIEW[URI] . '/{withdrawId}/{vendorId}', 'getWithdrawView')->name('withdraw_view');
+            Route::post(Dropshipper::WITHDRAW_STATUS[URI] . '/{id}', 'withdrawStatus')->name('withdraw_status');
+        });
+    });    
+   
+    // Dropshippers Route Data End
 
     Route::group(['prefix' => 'vendors', 'as' => 'vendors.', 'middleware' => ['module:user_section']], function () {
         Route::controller(VendorController::class)->group(function () {
