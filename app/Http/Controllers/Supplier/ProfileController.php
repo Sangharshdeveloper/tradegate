@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Supplier;
 
 use App\Contracts\Repositories\ShopRepositoryInterface;
 use App\Enums\ViewPaths\Vendor\Profile;

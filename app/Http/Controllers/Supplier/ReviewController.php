@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Supplier;
 
 use App\Contracts\Repositories\CustomerRepositoryInterface;
 use App\Contracts\Repositories\ProductRepositoryInterface;

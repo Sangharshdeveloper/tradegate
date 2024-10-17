@@ -1,60 +1,60 @@
 <?php
 
-use App\Enums\ViewPaths\Vendor\Auth;
-use App\Enums\ViewPaths\Vendor\Cart;
-use App\Enums\ViewPaths\Vendor\CategoryShippingCost;
-use App\Enums\ViewPaths\Vendor\Chatting;
-use App\Enums\ViewPaths\Vendor\Coupon;
-use App\Enums\ViewPaths\Vendor\Customer;
-use App\Enums\ViewPaths\Vendor\Dashboard;
-use App\Enums\ViewPaths\Vendor\DeliveryMan;
-use App\Enums\ViewPaths\Vendor\DeliveryManWallet;
-use App\Enums\ViewPaths\Vendor\DeliveryManWithdraw;
-use App\Enums\ViewPaths\Vendor\EmergencyContact;
-use App\Enums\ViewPaths\Vendor\ForgotPassword;
-use App\Enums\ViewPaths\Vendor\Notification;
-use App\Enums\ViewPaths\Vendor\POS;
-use App\Enums\ViewPaths\Vendor\POSOrder;
-use App\Enums\ViewPaths\Vendor\Product;
-use App\Enums\ViewPaths\Vendor\Profile;
-use App\Enums\ViewPaths\Vendor\Refund;
-use App\Enums\ViewPaths\Vendor\Review;
-use App\Enums\ViewPaths\Vendor\ShippingMethod;
-use App\Enums\ViewPaths\Vendor\ShippingType;
-use App\Enums\ViewPaths\Vendor\Shop;
-use App\Enums\ViewPaths\Vendor\Withdraw;
-use App\Http\Controllers\Vendor\Auth\ForgotPasswordController;
-use App\Http\Controllers\Vendor\Auth\LoginController;
-use App\Enums\ViewPaths\Vendor\Order;
-use App\Http\Controllers\Vendor\Auth\RegisterController;
-use App\Http\Controllers\Vendor\DashboardController;
-use App\Http\Controllers\Vendor\ChattingController;
-use App\Http\Controllers\Vendor\Coupon\CouponController;
-use App\Http\Controllers\Vendor\CustomerController;
-use App\Http\Controllers\Vendor\DeliveryMan\DeliveryManController;
-use App\Http\Controllers\Vendor\DeliveryMan\DeliveryManWalletController;
-use App\Http\Controllers\Vendor\DeliveryMan\DeliveryManWithdrawController;
-use App\Http\Controllers\Vendor\DeliveryMan\EmergencyContactController;
-use App\Http\Controllers\Vendor\NotificationController;
-use App\Http\Controllers\Vendor\POS\CartController;
-use App\Http\Controllers\Vendor\POS\POSController;
-use App\Http\Controllers\Vendor\POS\POSOrderController;
-use App\Http\Controllers\Vendor\Product\ProductController;
-use App\Http\Controllers\Vendor\ProfileController;
-use App\Http\Controllers\Vendor\RefundController;
-use App\Http\Controllers\Vendor\ReviewController;
-use App\Http\Controllers\Vendor\Shipping\CategoryShippingCostController;
-use App\Http\Controllers\Vendor\Shipping\ShippingMethodController;
-use App\Http\Controllers\Vendor\Shipping\ShippingTypeController;
-use App\Http\Controllers\Vendor\ShopController;
-use App\Http\Controllers\Vendor\SystemController;
-use App\Http\Controllers\Vendor\WithdrawController;
+use App\Enums\ViewPaths\Supplier\Auth;
+use App\Enums\ViewPaths\Supplier\Cart;
+use App\Enums\ViewPaths\Supplier\CategoryShippingCost;
+use App\Enums\ViewPaths\Supplier\Chatting;
+use App\Enums\ViewPaths\Supplier\Coupon;
+use App\Enums\ViewPaths\Supplier\Customer;
+use App\Enums\ViewPaths\Supplier\Dashboard;
+use App\Enums\ViewPaths\Supplier\DeliveryMan;
+use App\Enums\ViewPaths\Supplier\DeliveryManWallet;
+use App\Enums\ViewPaths\Supplier\DeliveryManWithdraw;
+use App\Enums\ViewPaths\Supplier\EmergencyContact;
+use App\Enums\ViewPaths\Supplier\ForgotPassword;
+use App\Enums\ViewPaths\Supplier\Notification;
+use App\Enums\ViewPaths\Supplier\POS;
+use App\Enums\ViewPaths\Supplier\POSOrder;
+use App\Enums\ViewPaths\Supplier\Product;
+use App\Enums\ViewPaths\Supplier\Profile;
+use App\Enums\ViewPaths\Supplier\Refund;
+use App\Enums\ViewPaths\Supplier\Review;
+use App\Enums\ViewPaths\Supplier\ShippingMethod;
+use App\Enums\ViewPaths\Supplier\ShippingType;
+use App\Enums\ViewPaths\Supplier\Shop;
+use App\Enums\ViewPaths\Supplier\Withdraw;
+use App\Http\Controllers\Supplier\Auth\ForgotPasswordController;
+use App\Http\Controllers\Supplier\Auth\LoginController;
+use App\Enums\ViewPaths\Supplier\Order;
+use App\Http\Controllers\Supplier\Auth\RegisterController;
+use App\Http\Controllers\Supplier\DashboardController;
+use App\Http\Controllers\Supplier\ChattingController;
+use App\Http\Controllers\Supplier\Coupon\CouponController;
+use App\Http\Controllers\Supplier\CustomerController;
+use App\Http\Controllers\Supplier\DeliveryMan\DeliveryManController;
+use App\Http\Controllers\Supplier\DeliveryMan\DeliveryManWalletController;
+use App\Http\Controllers\Supplier\DeliveryMan\DeliveryManWithdrawController;
+use App\Http\Controllers\Supplier\DeliveryMan\EmergencyContactController;
+use App\Http\Controllers\Supplier\NotificationController;
+use App\Http\Controllers\Supplier\POS\CartController;
+use App\Http\Controllers\Supplier\POS\POSController;
+use App\Http\Controllers\Supplier\POS\POSOrderController;
+use App\Http\Controllers\Supplier\Product\ProductController;
+use App\Http\Controllers\Supplier\ProfileController;
+use App\Http\Controllers\Supplier\RefundController;
+use App\Http\Controllers\Supplier\ReviewController;
+use App\Http\Controllers\Supplier\Shipping\CategoryShippingCostController;
+use App\Http\Controllers\Supplier\Shipping\ShippingMethodController;
+use App\Http\Controllers\Supplier\Shipping\ShippingTypeController;
+use App\Http\Controllers\Supplier\ShopController;
+use App\Http\Controllers\Supplier\SystemController;
+use App\Http\Controllers\Supplier\WithdrawController;
 use App\Http\Middleware\MaintenanceModeMiddleware;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Vendor\Order\OrderController;
-use App\Http\Controllers\Vendor\TransactionReportController;
-use App\Http\Controllers\Vendor\ProductReportController;
-use App\Http\Controllers\Vendor\OrderReportController;
+use App\Http\Controllers\Supplier\Order\OrderController;
+use App\Http\Controllers\Supplier\TransactionReportController;
+use App\Http\Controllers\Supplier\ProductReportController;
+use App\Http\Controllers\Supplier\OrderReportController;
 
 Route::group(['middleware' => ['maintenance_mode']], function () {
 
@@ -79,8 +79,8 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
             });
             Route::group(['prefix' => 'registration', 'as' => 'registration.'], function () {
                 Route::controller(RegisterController::class)->group(function () {
-                    Route::get(Auth::VENDOR_REGISTRATION[URI], 'index')->name('index');
-                    Route::post(Auth::VENDOR_REGISTRATION[URI], 'add');
+                    Route::get(Auth::SUPPLIER_REGISTRATION[URI], 'index')->name('index');
+                    Route::post(Auth::SUPPLIER_REGISTRATION[URI], 'add');
                 });
             });
         });
@@ -332,7 +332,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                     Route::get('order-report-pdf', 'exportOrderReportInPDF')->name('order-report-pdf');
                 });
 
-                Route::any('set-date', 'App\Http\Controllers\Vendor\ReportController@set_date')->name('set-date');
+                Route::any('set-date', 'App\Http\Controllers\Supplier\ReportController@set_date')->name('set-date');
             });
 
             Route::group(['prefix' => 'transaction', 'as' => 'transaction.'], function () {

@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\Auth;
+namespace App\Http\Controllers\Supplier\Auth;
 
 use App\Contracts\Repositories\PasswordResetRepositoryInterface;
 use App\Contracts\Repositories\VendorRepositoryInterface;
 use App\Enums\SessionKey;
-use App\Enums\ViewPaths\Vendor\Auth;
-use App\Enums\ViewPaths\Vendor\ForgotPassword;
+use App\Enums\ViewPaths\Supplier\Auth;
+use App\Enums\ViewPaths\Supplier\ForgotPassword;
 use App\Events\PasswordResetEvent;
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Vendor\PasswordResetRequest;
-use App\Http\Requests\Vendor\VendorPasswordRequest;
+use App\Http\Requests\Supplier\PasswordResetRequest;
+use App\Http\Requests\Supplier\VendorPasswordRequest;
 use App\Services\PasswordResetService;
 use App\Traits\EmailTemplateTrait;
 use App\Traits\SmsGateway;

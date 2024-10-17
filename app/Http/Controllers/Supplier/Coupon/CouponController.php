@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\Coupon;
+namespace App\Http\Controllers\Supplier\Coupon;
 
 use App\Contracts\Repositories\CouponRepositoryInterface;
 use App\Contracts\Repositories\CustomerRepositoryInterface;

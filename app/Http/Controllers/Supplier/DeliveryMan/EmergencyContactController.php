@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\DeliveryMan;
+namespace App\Http\Controllers\Supplier\DeliveryMan;
 
 use App\Contracts\Repositories\EmergencyContactRepositoryInterface;
 use App\Enums\ViewPaths\Vendor\Dashboard;

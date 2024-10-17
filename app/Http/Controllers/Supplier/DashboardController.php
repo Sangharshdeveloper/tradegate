@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Supplier;
 
 use App\Contracts\Repositories\CustomerRepositoryInterface;
 use App\Contracts\Repositories\DeliveryManRepositoryInterface;
@@ -10,9 +10,9 @@ use App\Contracts\Repositories\VendorWalletRepositoryInterface;
 use App\Contracts\Repositories\WithdrawalMethodRepositoryInterface;
 use App\Contracts\Repositories\WithdrawRequestRepositoryInterface;
 use App\Enums\OrderStatus;
-use App\Enums\ViewPaths\Vendor\Dashboard;
+use App\Enums\ViewPaths\Supplier\Dashboard;
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Vendor\WithdrawRequest;
+use App\Http\Requests\Supplier\WithdrawRequest;
 use App\Repositories\BrandRepository;
 use App\Repositories\OrderTransactionRepository;
 use App\Services\DashboardService;

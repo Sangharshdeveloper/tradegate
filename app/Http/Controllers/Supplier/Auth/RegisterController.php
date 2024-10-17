@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\Auth;
+namespace App\Http\Controllers\Supplier\Auth;
 
 use App\Contracts\Repositories\BusinessSettingRepositoryInterface;
 use App\Contracts\Repositories\EmailTemplatesRepositoryInterface;

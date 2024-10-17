@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Supplier;
 
 use App\Contracts\Repositories\ChattingRepositoryInterface;
 use App\Contracts\Repositories\CustomerRepositoryInterface;
 use App\Contracts\Repositories\DeliveryManRepositoryInterface;
 use App\Contracts\Repositories\ShopRepositoryInterface;
 use App\Contracts\Repositories\VendorRepositoryInterface;
-use App\Enums\ViewPaths\Vendor\Chatting;
+use App\Enums\ViewPaths\Supplier\Chatting;
 use App\Events\ChattingEvent;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Vendor\ChattingRequest;

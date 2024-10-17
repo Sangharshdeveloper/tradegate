@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\Shipping;
+namespace App\Http\Controllers\Supplier\Shipping;
 
 use App\Contracts\Repositories\ShippingTypeRepositoryInterface;
 use App\Http\Controllers\BaseController;

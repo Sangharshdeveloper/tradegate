@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\Auth;
+namespace App\Http\Controllers\Supplier\Auth;
 
 use App\Contracts\Repositories\VendorRepositoryInterface;
 use App\Enums\SessionKey;
-use App\Enums\ViewPaths\Vendor\Auth;
+use App\Enums\ViewPaths\Supplier\Auth;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Vendor\LoginRequest;
+use App\Http\Requests\Supplier\LoginRequest;
 use App\Repositories\VendorWalletRepository;
 use App\Services\VendorService;
 use App\Traits\RecaptchaTrait;
@@ -49,14 +49,14 @@ class LoginController extends Controller
         $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
         $recaptcha = getWebConfig(name: 'recaptcha');
         Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
-        return view(Auth::VENDOR_LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
+        return view(Auth::SUPPLIER_LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
     }
     public function getLoginViewDropshipper(): View
     {
         $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
         $recaptcha = getWebConfig(name: 'recaptcha');
         Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
-        return view(Auth::DROPSHIPPER_LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
+        return view(Auth::SUPPLIER_LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
     }
 
     public function getLoginViewSupplier(): View

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Supplier;
 
 use App\Contracts\Repositories\VendorRepositoryInterface;
 use App\Contracts\Repositories\VendorWalletRepositoryInterface;
 use App\Contracts\Repositories\WithdrawRequestRepositoryInterface;
-use App\Enums\ViewPaths\Vendor\DeliveryManWithdraw;
-use App\Enums\ViewPaths\Vendor\Withdraw;
+use App\Enums\ViewPaths\Supplier\DeliveryManWithdraw;
+use App\Enums\ViewPaths\Supplier\Withdraw;
 use App\Exports\VendorWithdrawRequest;
 use App\Http\Controllers\BaseController;
 use App\Services\VendorWalletService;

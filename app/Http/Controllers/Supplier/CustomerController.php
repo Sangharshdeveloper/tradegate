@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Supplier;
 
 use App\Contracts\Repositories\CustomerRepositoryInterface;
 use App\Contracts\Repositories\PasswordResetRepositoryInterface;
 use App\Events\CustomerRegistrationEvent;
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Vendor\CustomerRequest;
+use App\Http\Requests\Supplier\CustomerRequest;
 use App\Repositories\ShippingAddressRepository;
 use App\Services\CustomerService;
 use App\Services\PasswordResetService;

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Vendor;
+namespace App\Http\Controllers\Supplier;
 
 use App\Contracts\Repositories\NotificationRepositoryInterface;
 use App\Contracts\Repositories\ShopRepositoryInterface;
-use App\Enums\ViewPaths\Vendor\Notification;
+use App\Enums\ViewPaths\Supplier\Notification;
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Vendor\NotificationModalViewRequest;
+use App\Http\Requests\Supplier\NotificationModalViewRequest;
 use App\Repositories\NotificationSeenRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;

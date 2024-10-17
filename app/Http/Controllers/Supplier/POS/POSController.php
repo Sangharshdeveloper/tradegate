@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Vendor\POS;
+namespace App\Http\Controllers\Supplier\POS;
 
 use App\Contracts\Repositories\CategoryRepositoryInterface;
 use App\Contracts\Repositories\CouponRepositoryInterface;
