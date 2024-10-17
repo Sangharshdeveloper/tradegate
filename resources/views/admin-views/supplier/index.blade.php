@@ -58,7 +58,7 @@
                                             <span>{{ translate('reviews') }}</span>
                                         </div>
                                         <div class="info-item">
-                                            <h6 class="web-text-primary">{{$$seller->products_count < 1000 ? $seller->products_count : number_format($seller->products_count /1000 , 1).'K'}}</h6>
+                                            <h6 class="web-text-primary">{{$seller->products_count < 1000 ? $seller->products_count : number_format($seller->products_count /1000 , 1).'K'}}</h6>
                                             <span>{{ translate('products') }}</span>
                                         </div>
                                     </div>
