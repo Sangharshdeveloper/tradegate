@@ -57,6 +57,27 @@ class LoginSetupRepository implements LoginSetupRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->loginSetup
+            ->with($relations)
+            ->when($searchValue, function ($query) use($searchValue){
+                $query->where('key', 'like', "%{$searchValue}%");
+            })
+            ->when(isset($filters['id']) , function ($query) use ($filters){
+                return $query->where(['id' => $filters['id']]);
+            })
+            ->when(isset($filters['key']) , function ($query) use ($filters){
+                return $query->where(['key' => $filters['key']]);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(key($orderBy),current($orderBy));
+            });
+
+        $filters += ['searchValue' =>$searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
     public function getListWhereIn(array $orderBy = [], string $searchValue = null, array $filters = [], array $whereInFilters = [], array $relations = [], array $nullFields = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
         $query = $this->loginSetup
