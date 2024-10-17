@@ -17,7 +17,7 @@
             <section class="col-lg-12">
                 @if(count($suppliers) > 0)
                     <div class="row mx-n2 __min-h-200px">
-                        @foreach ($suppliers as as $key=>$seller)
+                        @foreach ($suppliers  as $key=>$seller)
                             @php($current_date = date('Y-m-d'))
                             @php($start_date = date('Y-m-d', strtotime($seller->vacation_start_date')))
                             @php($end_date = date('Y-m-d', strtotime($seller->vacation_end_date')))
