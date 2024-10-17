@@ -46,6 +46,20 @@ class WithdrawalMethodRepository implements WithdrawalMethodRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->withdrawalMethod->where($filters)->with($relations)
+            ->when($searchValue, function ($query) use($searchValue){
+                $query->where('method_name', 'LIKE', "%$searchValue%");
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy),array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' =>$searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
     public function update(string $id, array $data): bool
     {
         $this->withdrawalMethod->where(['id'=>$id])->update($data);
