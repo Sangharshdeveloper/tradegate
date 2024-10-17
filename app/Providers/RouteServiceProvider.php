@@ -49,12 +49,10 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
         $this->mapApiv2Routes();
         $this->mapApiv3Routes();
-
-        //$this->mapInstallRoutes();
-        //$this->mapUpdateRoutes();
-
         $this->mapBetaAdminRoutes();
         $this->mapBetaVendorRoutes();
+        $this->mapBetaSupplierRoutes();
+        $this->mapBetaDropshipperRoutes();
         $this->mapBetaWebRoutes();
     }
 
@@ -131,6 +129,20 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/vendor/routes.php'));
     }
+    protected function mapBetaSupplierRoutes(): void
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/supplier/routes.php'));
+    }
+
+    protected function mapBetaDropshipperRoutes(): void
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/dropshipper/routes.php'));
+    }
+
     protected function mapBetaWebRoutes(): void
     {
         Route::middleware('web')
