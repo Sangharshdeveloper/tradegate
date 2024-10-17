@@ -54,6 +54,24 @@ class PhoneOrEmailVerificationRepository implements PhoneOrEmailVerificationRepo
 
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy=[], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->phoneOrEmailVerification
+            ->when(isset($filters['phone_or_email']), function ($query) use($filters) {
+                return $query->where(['phone_or_email' => $filters['phone_or_email']]);
+            })
+            ->when(isset($filters['token']), function ($query) use($filters) {
+                return $query->where(['token' => $filters['token']]);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy),array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' =>$searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+
+    }
+
     public function update(string $id, array $data): bool
     {
         return $this->phoneOrEmailVerification->find($id)->update($data);
