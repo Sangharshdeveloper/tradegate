@@ -30,6 +30,8 @@ class NotificationRepository implements NotificationRepositoryInterface
         // TODO: Implement getList() method.
     }
 
+ 
+
     public function getListWhere(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
         $query =  $this->notification->with($relations)
@@ -46,6 +48,24 @@ class NotificationRepository implements NotificationRepositoryInterface
         $filters += ['searchValue' => $searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query =  $this->notification->with($relations)
+            ->when(isset($filters['send_to']),function ($query)use($filters){
+                return $query->where('send_to',$filters['send_to']);
+            })
+            ->when(isset($searchValue),function ($query)use($searchValue){
+                return $query->where('title', 'like', "%{$searchValue}%");
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy),array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
+
     public function getListWhereBetween(array $params = [], array $filters = [], array|string $relations = null, int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
         return $this->notification->whereBetween('created_at',$params)->where($filters)->whereDoesntHave($relations)->get();

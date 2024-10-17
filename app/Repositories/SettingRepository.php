@@ -61,6 +61,30 @@ class SettingRepository implements SettingRepositoryInterface
         $filters += ['searchValue' =>$searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
+    public function getListWhereWarehouseProducts(
+        array      $orderBy = [],
+        string     $searchValue = null,
+        array      $filters = [], array $relations = [],
+        int|string $dataLimit = DEFAULT_DATA_LIMIT,
+        int        $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->setting
+            ->when($searchValue, function ($query) use ($searchValue) {
+                return $query->where('key_name', 'like', "%$searchValue%");
+            })
+            ->when(isset($filters['settings_type']), function ($query) use ($filters) {
+                return $query->where(['settings_type' => $filters['settings_type']]);
+            })
+            ->when(isset($filters['is_active']), function ($query) use ($filters) {
+                $query->where('is_active', $filters['is_active']);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' =>$searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
 
     public function getListWhereIn(array $orderBy = [], string $searchValue = null, array $filters = [], array $whereInFilters = [], array $relations = [], array $nullFields = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {

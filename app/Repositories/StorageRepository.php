@@ -52,6 +52,27 @@ class StorageRepository implements StorageRepositoryInterface
         $filters += ['searchValue' => $searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->storage
+            ->with($relations)
+            ->when(isset($filters['id']), function ($query) use ($filters) {
+                return $query->where(['id' => $filters['id']]);
+            })->when(isset($filters['data_type']), function ($query) use ($filters) {
+                return $query->where(['data_type' => $filters['data_type']]);
+            })->when(isset($filters['data_id']), function ($query) use ($filters) {
+                return $query->where(['data_id' => $filters['data_id']]);
+            })->when(isset($filters['key']), function ($query) use ($filters) {
+                return $query->where(['key' => $filters['key']]);
+            })->when(isset($filters['value']), function ($query) use ($filters) {
+                return $query->where(['value' => $filters['value']]);
+            })->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
 
     public function getListWhereNotIn(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], array $nullFields = [], array $whereNotIn = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {

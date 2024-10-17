@@ -47,6 +47,21 @@ class RobotsMetaContentRepository implements RobotsMetaContentRepositoryInterfac
         $filters += ['searchValue' => $searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->robotsMetaContent
+            ->with($relations)
+            ->when(isset($filters['id']), function ($query) use ($filters) {
+                return $query->where(['id' => $filters['id']]);
+            })->when(isset($filters['page_name']), function ($query) use ($filters) {
+                return $query->where(['page_name' => $filters['page_name']]);
+            })->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
 
     public function getListWhereNotIn(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], array $nullFields = [], array $whereNotIn = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {

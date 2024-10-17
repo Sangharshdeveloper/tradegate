@@ -63,6 +63,33 @@ class SupportTicketRepository implements SupportTicketRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->supportTicket
+            ->with($relations)
+            ->when($searchValue, function ($query) use($searchValue){
+                return $query->Where('subject', 'like', "%{$searchValue}%")
+                    ->orWhere('type', 'like', "%{$searchValue}%")
+                    ->orWhere('description', 'like', "%{$searchValue}%")
+                    ->orWhere('status', 'like', "%{$searchValue}%");
+            })
+            ->when(isset($filters['id']), function ($query) use ($filters) {
+                $query->where('id', $filters['id']);
+            })
+            ->when(isset($filters['priority']) && $filters['priority'] != 'all', function ($query) use ($filters) {
+                $query->where('priority', $filters['priority']);
+            })
+            ->when(isset($filters['status']) && $filters['status'] != 'all', function ($query) use ($filters) {
+                $query->where('status', $filters['status']);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                return $query->orderBy(array_key_first($orderBy),array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' =>$searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
 
     public function update(string $id, array $data): bool
     {

@@ -52,6 +52,22 @@ class AdminRepository implements AdminRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->admin->with($relations)
+                ->when($searchValue, function ($query) use($searchValue){
+                    $query->where('name', 'like', "%$searchValue%")
+                        ->orWhere('phone', 'like', "%$searchValue%")
+                        ->orWhere('email', 'like', "%$searchValue%");
+                })
+                ->when($filters['admin_role_id'] && $filters['admin_role_id'] !='all', function($query)use($filters){
+                    $query->where('admin_role_id', $filters['admin_role_id']);
+                });
+
+        $filters += ['searchValue' =>$searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
     public function update(string $id, array $data): bool
     {
         return $this->admin->find($id)->update($data);

@@ -58,6 +58,21 @@ class WalletTransactionRepository implements WalletTransactionRepositoryInterfac
 
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends(['searchValue' => $searchValue]);
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->walletTransaction
+            ->when(!empty($filters['from']) && !empty($filters['to']),function($query)use($filters){
+                $query->whereBetween('created_at', [$filters['from'].' 00:00:00', $filters['to'].' 23:59:59']);
+            })
+            ->when(!empty($filters['transaction_type']) && $filters['transaction_type'] != 'all', function($query)use($filters){
+                $query->where('transaction_type',$filters['transaction_type']);
+            })
+            ->when(!empty($filters['customer_id']) &&  $filters['customer_id'] != 'all', function($query)use($filters) {
+                $query->where('user_id', $filters['customer_id']);
+            })->latest();
+
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends(['searchValue' => $searchValue]);
+    }
 
     public function getListWhereSelect(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {

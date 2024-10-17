@@ -44,6 +44,14 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface
             })->latest();
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends(['searchValue' => $searchValue]);
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->subscription->where($filters)->with($relations)
+            ->when($searchValue, function ($query) use($searchValue){
+                $query->orWhere('email', 'like', "%$searchValue%");
+            })->latest();
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends(['searchValue' => $searchValue]);
+    }
 
     public function update(string $id, array $data): bool
     {

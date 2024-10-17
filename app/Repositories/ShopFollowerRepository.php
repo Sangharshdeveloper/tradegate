@@ -45,6 +45,21 @@ class ShopFollowerRepository implements ShopFollowerRepositoryInterface
         $filters += ['searchValue' => $searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->shopFollower->with($relations)
+            ->when(isset($filters['user_id']), function ($query) use ($filters) {
+                return $query->where('user_id', $filters['user_id']);
+            })
+            ->when(isset($filters['shop_id']), function ($query) use ($filters) {
+                return $query->where('shop_id', $filters['shop_id']);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(key($orderBy), current($orderBy));
+            });
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
 
     public function update(string $id, array $data): bool
     {

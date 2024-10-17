@@ -40,6 +40,15 @@ class ErrorLogsRepository implements ErrorLogsRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->errorLog
+                ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                    $query->orderBy(key($orderBy), current($orderBy));
+                });
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
     public function update(string $id, array $data): bool
     {
         return $this->errorLog->find($id)->update($data);

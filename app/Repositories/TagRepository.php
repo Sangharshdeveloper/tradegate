@@ -33,6 +33,10 @@ class TagRepository implements TagRepositoryInterface
     {
         // TODO: Implement getListWhere() method.
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        // TODO: Implement getListWhere() method.
+    }
 
     public function update(string $id, array $data): bool
     {

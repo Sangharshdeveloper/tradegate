@@ -50,6 +50,25 @@ class RefundTransactionRepository implements RefundTransactionRepositoryInterfac
         $filters += ['searchValue' => $searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query =  $this->refundTransaction->with($relations)
+            ->when(isset($filters['payment_method']),function ($query)use($filters){
+                return $query->where('payment_method',$filters['payment_method']);
+            })
+            ->when(isset($searchValue),function ($query)use($searchValue){
+                $key = explode(' ', $searchValue);
+                foreach ($key as $value) {
+                    return $query->orWhere('order_id', 'like', "%{$value}%")
+                        ->orWhere('refund_id', 'like', "%{$value}%");
+                }
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(key($orderBy),current($orderBy));
+            });
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
 
     public function getListWhereHas(array $orderBy = [], string $searchValue = null, array $filters = [], string $whereHas = null, array $whereHasFilters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {

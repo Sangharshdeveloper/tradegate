@@ -50,6 +50,24 @@ class OfflinePaymentMethodRepository implements OfflinePaymentMethodRepositoryIn
         $filters += ['searchValue' => $searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query =  $this->offlinePaymentMethod->with($relations)
+            ->when(isset($filters['status']) && $filters['status'] == 'active' ,function ($query)use($filters){
+                return $query->where('status',1);
+            })
+            ->when(isset($filters['status']) && $filters['status'] == 'inactive' ,function ($query)use($filters){
+                return $query->where('status',0);
+            })
+            ->when(isset($searchValue),function ($query)use($searchValue){
+                return $query->where('method_name', 'like', "%{$searchValue}%");
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(key($orderBy),current($orderBy));
+            });
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
 
     public function update(string $id, array $data): bool
     {

@@ -49,6 +49,25 @@ class DeliveryManTransactionRepository implements DeliveryManTransactionReposito
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->deliveryManTransaction->with($relations)
+            ->when($searchValue, function ($query)use($searchValue){
+                $query->orWhere('f_name', 'like', "%$searchValue%")
+                    ->orWhere('l_name', 'like', "%$searchValue%")
+                    ->orWhere('phone', 'like', "%$searchValue%");
+            })
+            ->when(isset($filters['delivery_man_id']), function($query) use($filters){
+                return $query->where(['delivery_man_id' => $filters['delivery_man_id']]);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
     public function update(string $id, array $data): bool
     {
         // TODO: Implement update() method.

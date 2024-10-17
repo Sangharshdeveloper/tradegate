@@ -35,6 +35,11 @@ class CategoryShippingCostRepository implements CategoryShippingCostRepositoryIn
        return $this->categoryShippingCost->with($relations)->where($filters)->get();
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+       return $this->categoryShippingCost->with($relations)->where($filters)->get();
+    }
+
     public function update(string $id, array $data): bool
     {
         return $this->categoryShippingCost->find($id)->update($data);

@@ -61,6 +61,32 @@ class HelpTopicRepository implements HelpTopicRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->helpTopic
+            ->with($relations)
+            ->when($searchValue, function ($query) use ($searchValue) {
+                $query->where('question', 'like', "%{$searchValue}%")
+                    ->orWhere('answer', 'like', "%{$searchValue}%");
+            })
+            ->when(isset($filters['type']), function ($query) use ($filters) {
+                return $query->where(['type' => $filters['type']]);
+            })
+            ->when(isset($filters['ranking']), function ($query) use ($filters) {
+                return $query->where(['ranking' => $filters['ranking']]);
+            })
+            ->when(isset($filters['status']), function ($query) use ($filters) {
+                return $query->where(['status' => $filters['status']]);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(key($orderBy), current($orderBy));
+            });
+
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
     public function update(string $id, array $data): bool
     {
         return $this->helpTopic->where('id', $id)->update($data);

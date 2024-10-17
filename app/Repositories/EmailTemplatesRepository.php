@@ -39,6 +39,15 @@ class EmailTemplatesRepository implements EmailTemplatesRepositoryInterface
 
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        return $this->emailTemplate->with($relations)->where($filters)
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy),array_values($orderBy)[0]);
+            })->get();
+
+    }
+
     public function update(string $id, array $data): bool
     {
         return $this->emailTemplate->find($id)->update($data);

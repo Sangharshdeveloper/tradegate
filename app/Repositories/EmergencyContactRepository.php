@@ -38,6 +38,11 @@ class EmergencyContactRepository  implements EmergencyContactRepositoryInterface
         return $this->emergencyContact->where($filters)->latest()->paginate($dataLimit);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        return $this->emergencyContact->where($filters)->latest()->paginate($dataLimit);
+    }
+
     public function update(string $id, array $data): bool
     {
         return $this->emergencyContact->find($id)->update($data);
