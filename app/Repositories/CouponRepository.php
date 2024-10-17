@@ -79,6 +79,31 @@ class CouponRepository implements CouponRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->coupon->with($relations)
+            ->when(!empty($searchValue), function ($query) use ($searchValue) {
+                return $query->where(function ($query) use ($searchValue) {
+                    return $query->orWhere('title', 'like', "%{$searchValue}%")
+                        ->orWhere('code', 'like', "%{$searchValue}%")
+                        ->orWhere('discount_type', 'like', "%{$searchValue}%");
+                });
+            })
+            ->when(isset($filters['added_by']) && $filters['added_by'] == 'seller', function ($query) use ($filters) {
+                return $query->whereIn('seller_id', ['0', $filters['vendorId']]);
+            })
+            ->when(isset($filters['added_by']) && $filters['added_by'] == 'admin', function ($query) use ($filters) {
+                return $query->where(['added_by' => $filters['added_by']]);
+            })
+            ->withCount('order')
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(key($orderBy), current($orderBy));
+            });
+        $filters += ['searchValue' => $searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
     public function update(string $id, array $data): bool
     {
         return $this->coupon->where('id', $id)->update($data);

@@ -74,6 +74,36 @@ class ChattingRepository implements ChattingRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->chatting->with($relations)
+            ->when(isset($filters['user_id']), function ($query) use ($filters) {
+                return $query->where(['user_id'=>$filters['user_id']]);
+            })
+            ->when(isset($filters['seller_id']), function ($query) use ($filters) {
+                return $query->where(['seller_id'=>$filters['seller_id']]);
+            })
+            ->when(isset($filters['shop_id']), function ($query) use ($filters) {
+                return $query->where(['shop_id'=>$filters['shop_id']]);
+            })
+            ->when(isset($filters['delivery_man_id']), function ($query) use ($filters) {
+                return $query->where(['delivery_man_id'=>$filters['delivery_man_id']]);
+            })
+            ->when(isset($filters['admin_id']), function ($query) use ($filters) {
+                return $query->where(['admin_id'=>$filters['admin_id']]);
+            })->when(isset($filters['sent_by_customer']), function ($query) use ($filters) {
+                return $query->where(['sent_by_customer'=>$filters['sent_by_customer']]);
+            })->when(isset($filters['seen_by_customer']), function ($query) use ($filters) {
+                return $query->where(['seen_by_customer'=>$filters['seen_by_customer']]);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                return $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
+            });
+
+        $filters += ['searchValue' =>$searchValue];
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
+    }
+
     public function getListWhereNotNull(array $orderBy = [], string $searchValue = null, array $filters = [], array $whereNotNull = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
         $query = $this->chatting->with($relations)

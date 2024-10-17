@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-seller')
+@extends('layouts.back-end.app-supplier')
 
 @section('title', translate('shop_view'))
 
