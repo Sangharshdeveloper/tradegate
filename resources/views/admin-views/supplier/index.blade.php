@@ -18,7 +18,7 @@
                 @if(count($suppliers) > 0)
                     <div class="row mx-n2 __min-h-200px">
                         @foreach ($suppliers as $vendorItem)
-                        @php dd($vendorItem); @endphp
+                        @php dd(getStorageImages(path: $vendorItem->banner_full_url, type: 'shop-banner')); @endphp
                             @php($current_date = date('Y-m-d'))
                             @php($start_date = date('Y-m-d', strtotime($vendorItem['vacation_start_date'])))
                             @php($end_date = date('Y-m-d', strtotime($vendorItem['vacation_end_date'])))
