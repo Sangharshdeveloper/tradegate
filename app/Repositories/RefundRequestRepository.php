@@ -36,6 +36,12 @@ class RefundRequestRepository implements RefundRequestRepositoryInterface
         // TODO: Implement getListWhere() method.
     }
 
+
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        // TODO: Implement getListWhere() method.
+    }
+
     public function getListWhereHas(array $orderBy = [], string $searchValue = null, array $filters = [], string $whereHas = null, array $whereHasFilters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
         $query = $this->refundRequest->whereHas($whereHas, function ($query) use ($whereHasFilters) {

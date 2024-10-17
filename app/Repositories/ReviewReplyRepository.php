@@ -56,6 +56,28 @@ class ReviewReplyRepository implements ReviewReplyRepositoryInterface
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends(['searchValue' => $searchValue]);
     }
 
+    public function getListWhereWarehouseProducts(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
+    {
+        $query = $this->reviewReply->with($relations)
+            ->when(!empty($searchValue), function ($query) use ($searchValue) {
+                $query->where('review_id', 'like', "%{$searchValue}%");
+            })
+            ->when(isset($filters['review_id']), function ($query) use ($filters) {
+                $query->where(['review_id' => $filters['review_id']]);
+            })
+            ->when(isset($filters['added_by_id']), function ($query) use ($filters) {
+                $query->where(['added_by_id' => $filters['added_by_id']]);
+            })
+            ->when(isset($filters['whereNull']), function ($query) use ($filters) {
+                $query->whereNull($filters['whereNull']['column']);
+            })
+            ->when(!empty($orderBy), function ($query) use ($orderBy) {
+                $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
+            });
+
+        return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends(['searchValue' => $searchValue]);
+    }
+
     public function getListWhereIn(bool $globalScope = true, array $orderBy = [], string $searchValue = null, array $filters = [], array $whereInFilters = [], array $relations = [], array $nullFields = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
         $query = $this->reviewReply->with($relations)
