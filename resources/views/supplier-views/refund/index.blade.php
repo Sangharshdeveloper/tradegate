@@ -1,5 +1,5 @@
 @php use Illuminate\Support\Str; @endphp
-@extends('layouts.back-end.app-seller')
+@extends('layouts.back-end.app-supplier')
 
 @section('title', translate('refund_list'))
 

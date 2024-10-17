@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-seller')
+@extends('layouts.back-end.app-supplier')
 
 @section('title', translate('profile_Settings'))
 @push('css_or_js')

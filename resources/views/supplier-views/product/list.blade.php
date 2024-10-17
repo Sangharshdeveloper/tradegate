@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-seller')
+@extends('layouts.back-end.app-supplier')
 
 @section('title', translate($type=='new-request'?'pending_products':($type=='approved'?'approved_products':'product_list')))
 
