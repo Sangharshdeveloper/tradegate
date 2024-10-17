@@ -98,6 +98,12 @@ class LoginController extends Controller
         if ($passwordCheck && $vendor['status'] !== 'approved') {
             return response()->json(['status' => $vendor['status']]);
         }
+        if($vendor['type'] == '0'){
+            // return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
+        }else{
+            return response()->json(['error'=>'This is not vendor !']);
+
+        }
         if ($this->vendorService->isLoginSuccessful($request->email, $request->password, $request->remember)) {
             if ($this->vendorWalletRepo->getFirstWhere(params:['id'=>auth('seller')->id()]) === false) {
                 $this->vendorWalletRepo->add($this->vendorService->getInitialWalletData(vendorId:auth('seller')->id()));
@@ -141,8 +147,14 @@ class LoginController extends Controller
             return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
         }
         $passwordCheck = Hash::check($request['password'],$vendor['password']);
-        if ($passwordCheck && $vendor['status'] !== 'approved' && $vendor['type'] !== '1') {
+        if ($passwordCheck && $vendor['status'] !== 'approved' && $vendor['type'] == '1') {
             return response()->json(['status' => $vendor['status']]);
+        }
+
+        if($vendor['type'] == '1'){
+            // return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
+        }else{
+            return response()->json(['error'=>'This is not supplier !']);
         }
         if ($this->vendorService->isLoginSuccessful($request->email, $request->password, $request->remember)) {
             if ($this->vendorWalletRepo->getFirstWhere(params:['id'=>auth('seller')->id()]) === false) {
@@ -187,8 +199,15 @@ class LoginController extends Controller
             return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
         }
         $passwordCheck = Hash::check($request['password'],$vendor['password']);
-        if ($passwordCheck && $vendor['status'] !== 'approved' && $vendor['type'] !== '2') {
+        if ($passwordCheck && $vendor['status'] !== 'approved' && $vendor['type'] == '2') {
             return response()->json(['status' => $vendor['status']]);
+        }
+
+        if($vendor['type'] == '2'){
+            // return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
+        }else{
+            return response()->json(['error'=>'This is not dropshipper !']);
+
         }
         if ($this->vendorService->isLoginSuccessful($request->email, $request->password, $request->remember)) {
             if ($this->vendorWalletRepo->getFirstWhere(params:['id'=>auth('seller')->id()]) === false) {
