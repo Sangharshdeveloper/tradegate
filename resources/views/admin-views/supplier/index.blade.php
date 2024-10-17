@@ -19,8 +19,8 @@
                     <div class="row mx-n2 __min-h-200px">
                         @foreach ($suppliers  as $key=>$seller)
                             @php($current_date = date('Y-m-d'))
-                            @php($start_date = date('Y-m-d', strtotime($seller->vacation_start_date')))
-                            @php($end_date = date('Y-m-d', strtotime($seller->vacation_end_date')))
+                            @php($start_date = date('Y-m-d', strtotime($seller->vacation_start_date)))
+                            @php($end_date = date('Y-m-d', strtotime($seller->vacation_end_date)))
                             <div class="col-lg-3 col-md-6 col-sm-12 px-2 pb-4 text-center">
                                 <a href="{{route('shopView',['id' => $seller->id])}}" class="others-store-card text-capitalize">
                                     <div class="overflow-hidden other-store-banner">
