@@ -65,7 +65,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                 Route::get(Auth::SUPPLIER_LOGIN[URI], 'getLoginViewSupplier');
                 Route::get(Auth::RECAPTURE[URI] . '/{tmp}', 'generateReCaptcha')->name('recaptcha');
                 Route::post(Auth::SUPPLIER_LOGIN[URI], 'loginSupplier')->name('login');
-                Route::get(Auth::SUPPLIER_LOGOUT[URI], 'logout')->name('logout');
+                Route::get(Auth::SUPPLIER_LOGOUT[URI], 'logoutSupplier')->name('logout');
             });
             Route::group(['prefix' => 'forgot-password', 'as' => 'forgot-password.'], function () {
                 Route::controller(ForgotPasswordController::class)->group(function () {

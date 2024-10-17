@@ -65,7 +65,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                 Route::get(Auth::DROPSHIPPER_LOGIN[URI], 'getLoginViewDropshipper');
                 Route::get(Auth::RECAPTURE[URI] . '/{tmp}', 'generateReCaptcha')->name('recaptcha');
                 Route::post(Auth::DROPSHIPPER_LOGIN[URI], 'loginDropshipper')->name('login');
-                Route::get(Auth::DROPSHIPPER_LOGOUT[URI], 'logout')->name('logout');
+                Route::get(Auth::DROPSHIPPER_LOGOUT[URI], 'logoutDropshipper')->name('logout');
             });
             Route::group(['prefix' => 'forgot-password', 'as' => 'forgot-password.'], function () {
                 Route::controller(ForgotPasswordController::class)->group(function () {

@@ -163,7 +163,7 @@ class LoginController extends Controller
             Toastr::info(translate('welcome_to_your_dashboard').'.');
             return response()->json([
                 'success' =>translate('login_successful') . '!',
-                'redirectRoute'=>route('vendor.dashboard.index'),
+                'redirectRoute'=>route('supplier.dashboard.index'),
             ]);
         }else{
             return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
@@ -216,11 +216,10 @@ class LoginController extends Controller
             Toastr::info(translate('welcome_to_your_dashboard').'.');
             return response()->json([
                 'success' =>translate('login_successful') . '!',
-                'redirectRoute'=>route('vendor.dashboard.index'),
+                'redirectRoute'=>route('dropshipper.dashboard.index'),
             ]);
         }else{
             return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
-
         }
     }
 
@@ -229,5 +228,19 @@ class LoginController extends Controller
         $this->vendorService->logout();
         Toastr::success(translate('logged_out_successfully').'.');
         return redirect()->route('vendor.auth.login');
+    }
+
+    public function logoutDropshipper(): RedirectResponse
+    {
+        $this->vendorService->logout();
+        Toastr::success(translate('logged_out_successfully').'.');
+        return redirect()->route('dropshipper.auth.login');
+    }
+
+    public function logoutSupplier(): RedirectResponse
+    {
+        $this->vendorService->logout();
+        Toastr::success(translate('logged_out_successfully').'.');
+        return redirect()->route('supplier.auth.login');
     }
 }
