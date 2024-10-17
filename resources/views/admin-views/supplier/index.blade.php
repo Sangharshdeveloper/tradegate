@@ -17,36 +17,36 @@
             <section class="col-lg-12">
                 @if(count($suppliers) > 0)
                     <div class="row mx-n2 __min-h-200px">
-                        @foreach ($suppliers as $vendorItem)
+                        @foreach ($suppliers as as $key=>$seller)
                             @php($current_date = date('Y-m-d'))
-                            @php($start_date = date('Y-m-d', strtotime($vendorItem['vacation_start_date'])))
-                            @php($end_date = date('Y-m-d', strtotime($vendorItem['vacation_end_date'])))
+                            @php($start_date = date('Y-m-d', strtotime($seller->vacation_start_date')))
+                            @php($end_date = date('Y-m-d', strtotime($seller->vacation_end_date')))
                             <div class="col-lg-3 col-md-6 col-sm-12 px-2 pb-4 text-center">
-                                <a href="{{route('shopView',['id' => $vendorItem['id']])}}" class="others-store-card text-capitalize">
+                                <a href="{{route('shopView',['id' => $seller->id])}}" class="others-store-card text-capitalize">
                                     <div class="overflow-hidden other-store-banner">
-                                        <img class="w-100 h-100 object-cover" alt="" src="{{ getStorageImages(path: $vendorItem->banner_full_url, type: 'shop-banner') }}">
+                                        <img class="w-100 h-100 object-cover" alt="" src="{{ getStorageImages(path: $seller->banner_full_url, type: 'shop-banner') }}">
                                     </div>
                                     <div class="name-area">
                                         <div class="position-relative">
                                             <div class="overflow-hidden other-store-logo rounded-full">
                                                 <img class="rounded-full" alt="{{ translate('store') }}"
-                                                     src="{{ getStorageImages(path: $vendorItem->image_full_url, type: 'shop') }}">
+                                                     src="{{ getStorageImages(path: $seller->image_full_url, type: 'shop') }}">
                                             </div>
 
-                                            @if($vendorItem['temporary_close'])
+                                            @if($seller->temporary_close)
                                                 <span class="temporary-closed position-absolute text-center rounded-full p-2">
                                                     <span>{{translate('Temporary_OFF')}}</span>
                                                 </span>
-                                            @elseif(($vendorItem['vacation_status'] && ($current_date >= $vendorItem['vacation_start_date']) && ($current_date <= $vendorItem['vacation_end_date'])))
+                                            @elseif(($seller->vacation_status && ($current_date >= $seller->vacation_start_date) && ($current_date <= $seller->vacation_end_date)))
                                                 <span class="temporary-closed position-absolute text-center rounded-full p-2">
                                                     <span>{{translate('closed_now')}}</span>
                                                 </span>
                                             @endif
                                         </div>
                                         <div class="info pt-2">
-                                            <h5 class="text-start">{{ $vendorItem['name'] }}</h5>
+                                            <h5 class="text-start">{{ $seller->name }}</h5>
                                             <div class="d-flex align-items-center">
-                                                <h6 class="web-text-primary">{{number_format($vendorItem['average_rating'],1)}}</h6>
+                                                <h6 class="web-text-primary">{{number_format($seller->average_rating,1)}}</h6>
                                                 <i class="tio-star text-star mx-1"></i>
                                                 <small>{{ translate('rating') }}</small>
                                             </div>
@@ -54,11 +54,11 @@
                                     </div>
                                     <div class="info-area">
                                         <div class="info-item">
-                                            <h6 class="web-text-primary">{{$vendorItem['review_count'] < 1000 ? $vendorItem['review_count'] : number_format($vendorItem['review_count']/1000 , 1).'K'}}</h6>
+                                            <h6 class="web-text-primary">{{$seller->review_count < 1000 ? $seller->review_count : number_format($seller->review_count / 1000 , 1).'K'}}</h6>
                                             <span>{{ translate('reviews') }}</span>
                                         </div>
                                         <div class="info-item">
-                                            <h6 class="web-text-primary">{{$vendorItem['products_count'] < 1000 ? $vendorItem['products_count'] : number_format($vendorItem['products_count']/1000 , 1).'K'}}</h6>
+                                            <h6 class="web-text-primary">{{$$seller->products_count < 1000 ? $seller->products_count : number_format($seller->products_count /1000 , 1).'K'}}</h6>
                                             <span>{{ translate('products') }}</span>
                                         </div>
                                     </div>
