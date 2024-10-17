@@ -30,7 +30,8 @@
                                         <div class="position-relative">
                                             <div class="overflow-hidden other-store-logo rounded-full">
                                                 <img class="rounded-full" alt="{{ translate('store') }}"
-                                                     src="{{ getStorageImages(path: $seller->image_full_url, type: 'shop') }}">
+                                                     src="{{ getStorageImages(path: $seller?->shop?->image_full_url, type: 'backend-basic') }}">
+<!-- {{ getStorageImages(path: $seller->image_full_url, type: 'shop') }} -->
                                             </div>
 
                                             @if($seller->temporary_close)
