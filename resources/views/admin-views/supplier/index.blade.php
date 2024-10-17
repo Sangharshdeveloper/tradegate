@@ -87,7 +87,7 @@
             </section>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-4" style="display:none;">
             <div class="col-md-12">
                 <div class="card">
                     <div class="px-3 py-4">
