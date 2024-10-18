@@ -152,7 +152,7 @@ class ProductController extends BaseController
         $this->productSeoRepo->add(data: $service->getProductSEOData(request: $request, product: $savedProduct, action: 'add'));
 
         Toastr::success(translate('product_added_successfully'));
-        return redirect()->route('vendor.products.list', ['type' => 'all']);
+        return redirect()->route('supplier.products.list', ['type' => 'all']);
     }
 
     public function getUpdateView(string|int $id): RedirectResponse|View
