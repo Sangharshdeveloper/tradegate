@@ -128,10 +128,36 @@ if (!function_exists('getVendorProductsCount')) {
         };
     }
 }
+if (!function_exists('getSupplierProductsCount')) {
+    function getSupplierProductsCount(string $type):int
+    {
+        $products = \Illuminate\Support\Facades\DB::table('products')->where(['added_by'=>'supplier'])->get();
+        return match ($type) {
+            'new-product' => $products->where('request_status', 0)->count(),
+            'product-updated-request' => $products->whereNotNull('is_shipping_cost_updated')->where('is_shipping_cost_updated', 0)->count(),
+            'approved' => $products->where('request_status', 1)->count(),
+            'denied' => $products->where('request_status', 2)->where('status' , 0)->count(),
+        };
+    }
+}
 if (!function_exists('getAdminProductsCount')) {
     function getAdminProductsCount(string $type):int
     {
         $products = \Illuminate\Support\Facades\DB::table('products')->where(['added_by'=>'admin'])->get();
+        return match ($type) {
+            'all' => $products->count(),
+            'new-product' => $products->where('request_status', 0)->count(),
+            'product-updated-request' => $products->whereNotNull('is_shipping_cost_updated')->where('is_shipping_cost_updated', 0)->count(),
+            'approved' => $products->where('request_status', 1)->count(),
+            'denied' => $products->where('request_status', 2)->where('status' , 0)->count(),
+        };
+    }
+}
+
+if (!function_exists('getWarehouseProductsCount')) {
+    function getWarehouseProductsCount(string $type):int
+    {
+        $products = \Illuminate\Support\Facades\DB::table('products')->where(['added_by'=>'admin','from_warehouse'=>'1'])->get();
         return match ($type) {
             'all' => $products->count(),
             'new-product' => $products->where('request_status', 0)->count(),
