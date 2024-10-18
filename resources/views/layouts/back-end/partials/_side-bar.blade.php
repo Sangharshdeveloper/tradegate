@@ -527,7 +527,7 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                 </li>
                             </ul>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('admin/warehouse-products/'.Product::LIST[URI].'/vendor*')||(Request::is('admin/warehouse-products/'.\App\Enums\ViewPaths\Admin\Product::VIEW[URI].'/vendor/*'))||Request::is('admin/warehouse-products/'.\App\Enums\ViewPaths\Admin\Product::UPDATED_PRODUCT_LIST[URI])?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('admin/supplier-products/'.Product::LIST[URI].'/supplier*')||(Request::is('admin/supplier-products/'.\App\Enums\ViewPaths\Admin\Product::VIEW[URI].'/supplier/*'))||Request::is('admin/supplier-products/'.\App\Enums\ViewPaths\Admin\Product::UPDATED_PRODUCT_LIST[URI])?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
                                 href="javascript:"
                                 title="Suppliers Products">
@@ -537,11 +537,11 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                 </span>
                             </a>
                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                style="display: {{Request::is('admin/products/'.\App\Enums\ViewPaths\Admin\Product::LIST[URI].'/supplier*')||(Request::is('admin/products/'.\App\Enums\ViewPaths\Admin\Product::VIEW[URI].'/vendor/*'))||Request::is('admin/products/'.\App\Enums\ViewPaths\Admin\Product::UPDATED_PRODUCT_LIST[URI])?'block':''}}">
+                                style="display: {{Request::is('admin/products/'.\App\Enums\ViewPaths\Admin\Product::LIST[URI].'/supplier*')||(Request::is('admin/products/'.\App\Enums\ViewPaths\Admin\Product::VIEW[URI].'/supplier/*'))||Request::is('admin/products/'.\App\Enums\ViewPaths\Admin\Product::UPDATED_PRODUCT_LIST[URI])?'block':''}}">
                                 <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'admin/products/'.\App\Enums\ViewPaths\Admin\Product::LIST[URI].'/supplier?status=0')==1?'active':''}}">
                                     <a class="nav-link"
                                         title="{{translate('new_Products_Requests')}}"
-                                        href="{{route('admin.products.list',['supplier', 'status'=>'0'])}}">
+                                        href="{{route('admin.supplier-products.list',['supplier', 'status'=>'0'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">{{translate('new_Products_Requests')}}
                                             <span class="badge badge-soft-danger badge-pill ml-1">
@@ -553,7 +553,7 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                 @if (getWebConfig(name: 'product_wise_shipping_cost_approval')==1)
                                 <li class="nav-item {{Request::is('admin/supplier-products/'.Product::UPDATED_PRODUCT_LIST[URI])?'active':''}}">
                                     <a class="nav-link text-capitalize" title="{{translate('product_update_requests')}}"
-                                        href="{{route('admin.products.updated-product-list')}}">
+                                        href="{{route('admin.supplier-products.updated-product-list')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{Str::limit(translate('product_update_requests'), 18, '...')}}
                                             <span class="badge badge-soft-info badge-pill ml-1">
@@ -563,10 +563,10 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                     </a>
                                 </li>
                                 @endif
-                                <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'/admin/warehouse-products/'.Product::LIST[URI].'/vendor?status=1')==1?'active':''}}">
+                                <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'/admin/warehouse-products/'.Product::LIST[URI].'/supplier?status=1')==1?'active':''}}">
                                     <a class="nav-link"
                                         title="{{translate('approved_Products')}}"
-                                        href="{{route('admin.products.list',['supplier', 'status'=>'1'])}}">
+                                        href="{{route('admin.supplier-products.list',['supplier', 'status'=>'1'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">{{translate('approved_Products')}}
                                             <span class="badge badge-soft-success badge-pill ml-1">
@@ -575,10 +575,10 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'/admin/products/'.Product::LIST[URI].'/vendor?status=2')==1?'active':''}}">
+                                <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'/admin/products/'.Product::LIST[URI].'/supplier?status=2')==1?'active':''}}">
                                     <a class="nav-link"
                                         title="{{translate('denied_Products')}}"
-                                        href="{{route('admin.products.list',['supplier', 'status'=>'2'])}}">
+                                        href="{{route('admin.supplier-products.list',['supplier', 'status'=>'2'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">{{translate('denied_Products')}}
                                             <span class="badge badge-soft-danger badge-pill ml-1">
