@@ -110,11 +110,9 @@ class DropshipperController extends BaseController
             'templateName' => 'registration',
         ];
         event(new VendorRegistrationEvent(email: $request['email'], data: $data));
+
         
-        Toastr::success('Dropshipper added successfully');
-        return redirect()->route('dropshipper.products.list', ['type' => 'all']);
-        
-        // return response()->json(['message' => 'Dropshipper added successfully']);
+        return response()->json(['message' => 'Dropshipper added successfully']);
     }
 
     public function updateStatus(Request $request): RedirectResponse

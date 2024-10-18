@@ -110,8 +110,8 @@ class SupplierController extends BaseController
             'templateName' => 'registration',
         ];
         event(new VendorRegistrationEvent(email: $request['email'], data: $data));
-        Toastr::success('Supplier added successfully');
-        return back();
+        return response()->json(['message' => 'Dropshipper added successfully']);
+
 
     }
 
