@@ -111,7 +111,7 @@ class SupplierController extends BaseController
         ];
         event(new VendorRegistrationEvent(email: $request['email'], data: $data));
         Toastr::success('Supplier added successfully');
-        return redirect()->route('supplier.products.list', ['type' => 'all']);
+        return back();
 
     }
 
