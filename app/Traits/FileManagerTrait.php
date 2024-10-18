@@ -34,6 +34,7 @@ trait FileManagerTrait
                     $format = 'png';
                 }
                 $imageWebp = Image::make($image)->encode($format);
+                // $imageWebp = Image::make($image)->encode($format);
                 $imageName = Carbon::now()->toDateString() . "-" . uniqid() . "." . $format;
                 Storage::disk($storage)->put($dir . $imageName, $imageWebp);
                 $imageWebp->destroy();
