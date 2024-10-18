@@ -10,6 +10,8 @@
                 <img src="{{ dynamicAsset(path: 'public/assets/back-end/img/inhouse-product-list.png') }}" alt="">
                 @if($type == 'in_house')
                     {{ translate('in_House_Product_List') }}
+                @elseif($type == 'supplier')  
+                  {{ 'Suppliers product list' }}  
                 @elseif($type == 'seller')
                     {{ translate('vendor_Product_List') }}
                 @endif
