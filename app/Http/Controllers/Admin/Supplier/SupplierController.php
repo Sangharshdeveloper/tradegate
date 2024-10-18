@@ -41,6 +41,8 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
+use function Aws\filter;
+
 class SupplierController extends BaseController
 {
     use PaginatorTrait;
@@ -82,6 +84,7 @@ class SupplierController extends BaseController
     {
         $current_date = date('Y-m-d');
         $suppliers = $this->supplierRepo->getListWhere(
+            filters: ['addedBy'=>'supplier'],
             orderBy: ['id' => 'desc'],
             searchValue: $request['searchValue'],
             relations: ['orders', 'product'],
