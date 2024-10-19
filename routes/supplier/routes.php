@@ -230,6 +230,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                     Route::delete(DeliveryMan::DELETE[URI] . '/{id}', 'delete')->name('delete');
                     Route::get(DeliveryMan::RATING[URI] . '/{id}', 'getRatingView')->name('rating');
                 });
+                
                 Route::group(['prefix' => 'wallet', 'as' => 'wallet.'], function () {
                     Route::controller(DeliveryManWalletController::class)->group(function () {
                         Route::get(DeliveryManWallet::INDEX[URI] . '/{id}', 'index')->name('index');

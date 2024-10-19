@@ -167,9 +167,9 @@ class ProductController extends BaseController
 
     public function getListView(Request $request, string $type): View
     {
-    //    dd($request['type']);
+
         $filters = [
-            'added_by' => 'supplier',
+            'added_by' => $request['type'],
             'request_status' => $request['status'],
             'seller_id' => $request['seller_id'],
             'brand_id' => $request['brand_id'],

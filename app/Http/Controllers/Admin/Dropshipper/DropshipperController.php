@@ -233,7 +233,7 @@ class DropshipperController extends BaseController
 
     public function getProductListView(Request $request, $seller_id): View
     {
-        $filters = ['seller_id' => $seller_id, 'added_by' => 'seller'];
+        $filters = [];
         $products = $this->productRepo->getListWhere(
             orderBy: ['id' => 'desc'],
             searchValue: $request['searchValue'],

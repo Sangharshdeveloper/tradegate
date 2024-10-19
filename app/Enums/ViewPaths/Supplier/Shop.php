@@ -7,7 +7,7 @@ enum Shop
     const INDEX = [
         URI => 'index',
         VIEW => 'supplier-views.shop.index',
-        ROUTE => 'vendor.shop.index',
+        ROUTE => 'supplier.shop.index',
     ];
     const ORDER_SETTINGS = [
         URI => 'update-order-settings',

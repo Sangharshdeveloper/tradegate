@@ -7,7 +7,7 @@ enum Profile
     const INDEX = [
         URI => 'index',
         VIEW => 'supplier-views.profile.index',
-        ROUTE => 'vendor.profile.index'
+        ROUTE => 'supplier.profile.index'
     ];
     const UPDATE = [
         URI => 'update',

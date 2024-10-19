@@ -7,7 +7,7 @@ enum Coupon
     const INDEX = [
         URI => 'index',
         VIEW => 'supplier-views.coupon.index',
-        ROUTE => 'vendor.coupon.index'
+        ROUTE => 'supplier.coupon.index'
     ];
     const ADD = [
         URI => 'add',

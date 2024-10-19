@@ -7,7 +7,7 @@ enum DeliveryManWallet
     const INDEX = [
         URI => 'index',
         VIEW => 'supplier-views.delivery-man.wallet.index',
-        ROUTE => 'vendor.delivery-man.withdraw.index',
+        ROUTE => 'supplier.delivery-man.withdraw.index',
     ];
     const ORDER_HISTORY = [
         URI => 'order-history',

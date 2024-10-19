@@ -11,7 +11,7 @@ enum DeliveryMan
     const LIST = [
         URI => 'list',
         VIEW => 'supplier-views.delivery-man.list',
-        ROUTE => 'vendor.delivery-man.list'
+        ROUTE => 'supplier.delivery-man.list'
     ];
     const UPDATE = [
         URI => 'update',

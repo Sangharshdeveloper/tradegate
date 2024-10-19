@@ -8,7 +8,7 @@ enum ShippingMethod
     const INDEX = [
         URI => 'index',
         VIEW => 'supplier-views.shipping-method.index',
-        ROUTE =>'vendor.business-settings.shipping-method.index'
+        ROUTE =>'supplier.business-settings.shipping-method.index'
     ];
     const UPDATE = [
         URI => 'update',
