@@ -9,7 +9,7 @@
                     <img src="{{dynamicAsset(path: 'public/assets/back-end/img/all-orders.png')}}" class="mb-1 mr-1" alt="">
                     {{translate('product_gallery')}}
                 </h2>
-                <span class="badge badge-soft-dark radius-50 fz-14">{{$products->total()}}</span>
+                <span class="badge badge-soft-dark radius-50 fz-14">1</span>
             </div>
             <div class="card">
                 <div class="card-body">
