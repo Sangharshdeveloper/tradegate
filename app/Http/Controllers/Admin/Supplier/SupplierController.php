@@ -84,7 +84,6 @@ class SupplierController extends BaseController
     {
         $current_date = date('Y-m-d');
         $suppliers = $this->supplierRepo->getListWhere(
-            filters: ['added_by'=>'supplier'],
             orderBy: ['id' => 'desc'],
             searchValue: $request['searchValue'],
             relations: ['orders', 'product'],

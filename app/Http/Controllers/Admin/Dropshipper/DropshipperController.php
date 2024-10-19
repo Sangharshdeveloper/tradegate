@@ -82,7 +82,6 @@ class DropshipperController extends BaseController
     {
         $current_date = date('Y-m-d');
         $suppliers = $this->supplierRepo->getListWhere(
-            filters: ['added_by'=>'dropshipper'],
             orderBy: ['id' => 'desc'],
             searchValue: $request['searchValue'],
             relations: ['orders', 'product'],
