@@ -633,6 +633,7 @@ class ProductController extends BaseController
             'brand_id' => $request['brand_id'],
             'category_id' => $request['category_id'],
             'type' => '2',
+            'added_by' => 'supplier',
 
         ];
 
