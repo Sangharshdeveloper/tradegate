@@ -625,7 +625,7 @@ class ProductController extends BaseController
         $vendorId = auth('seller')->id();
         $searchValue = $request['searchValue'];
         $filters = [
-            // 'added_by' => 'seller',
+             'added_by' => 'supplier',
             'searchValue' => $searchValue,
             'request_status' => 1,
             // 'seller_id' => $vendorId,
