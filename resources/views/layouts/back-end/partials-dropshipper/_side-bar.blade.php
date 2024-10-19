@@ -287,25 +287,25 @@
                                         <span class="text-truncate text-capitalize">{{translate('product_list')}}</span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/approved')?'active':''}}">
+                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/approved')?'active':''}}">
                                     <a class="nav-link " href="{{route('dropshipper.products.list',['type'=>'approved'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{translate('approved_product_list')}}</span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/new-request')?'active':''}}">
+                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/new-request')?'active':''}}">
                                     <a class="nav-link " href="{{route('dropshipper.products.list',['type'=>'new-request'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{translate('new_product_request')}}</span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/denied')?'active':''}}">
+                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/denied')?'active':''}}">
                                     <a class="nav-link " href="{{route('dropshipper.products.list',['type'=>'denied'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{translate('denied_product_request')}}</span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/products/'.Product::ADD[URI])||(Request::is('dropshipper/products/'.Product::UPDATE[URI].'/*') && request()->has('product-gallery')) ?'active':''}}">
+                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::ADD[URI])||(Request::is('dropshipper/products/'.Product::UPDATE[URI].'/*') && request()->has('product-gallery')) ?'active':''}}">
                                     <a class="nav-link " href="{{route('dropshipper.products.add')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span
@@ -320,7 +320,7 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item {{Request::is('dropshipper/products/'.Product::BULK_IMPORT[URI]) ? 'active':''}}">
+                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::BULK_IMPORT[URI]) ? 'active':''}}">
                                     <a class="nav-link " href="{{route('dropshipper.products.bulk-import')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">{{translate('bulk_import')}}</span>
