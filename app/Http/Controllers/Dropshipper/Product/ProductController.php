@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Dropshipper\Product;
-
 use App\Contracts\Repositories\AttributeRepositoryInterface;
 use App\Contracts\Repositories\AuthorRepositoryInterface;
 use App\Contracts\Repositories\BrandRepositoryInterface;
@@ -635,7 +634,13 @@ class ProductController extends BaseController
             'type' => '2',
 
         ];
-        $products = $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['translations'], dataLimit: getWebConfig(WebConfigKey::PAGINATION_LIMIT));
+
+
+    
+
+        $products =  App\Models\Product::where(['type'=>'2'])->get();
+        
+        // $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['translations'], dataLimit: getWebConfig(WebConfigKey::PAGINATION_LIMIT));
         
         $products->map(function ($product) {
             if ($product->product_type == 'physical' && count(json_decode($product->choice_options)) > 0 || count(json_decode($product->colors)) > 0) {
