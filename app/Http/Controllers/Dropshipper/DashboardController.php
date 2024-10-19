@@ -116,7 +116,7 @@ class DashboardController extends BaseController
             'collectedTotalTax' => $vendorWallet->total_tax_collected ?? 0,
         ];
         $withdrawalMethods = $this->withdrawalMethodRepo->getListWhere(filters:['is_active'=>1],dataLimit:'all');
-        return view(Dashboard::INDEX_SUPPLIER[VIEW],compact('dashboardData','vendorEarning','commissionEarn','withdrawalMethods','dateType','label'));
+        return view(Dashboard::INDEX_DROPSHIPPER[VIEW],compact('dashboardData','vendorEarning','commissionEarn','withdrawalMethods','dateType','label'));
     }
 
     /**
