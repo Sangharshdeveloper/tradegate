@@ -182,8 +182,6 @@ class ProductController extends BaseController
 
         $products = $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
        
-        dd($products,$filters);
-
         $sellers = $this->sellerRepo->getByStatusExcept(status: 'pending', relations: ['shop'], paginateBy: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
         $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
         $categories = $this->categoryRepo->getListWhere(filters: ['position' => 0], dataLimit: 'all');
