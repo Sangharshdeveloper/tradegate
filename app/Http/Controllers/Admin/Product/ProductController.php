@@ -120,7 +120,6 @@ class ProductController extends BaseController
         }
 
         $this->productSeoRepo->add(data: $service->getProductSEOData(request: $request, product: $savedProduct, action: 'add'));
-
         Toastr::success(translate('product_added_successfully'));
         return redirect()->route('admin.products.list', ['in_house']);
     }
@@ -169,10 +168,8 @@ class ProductController extends BaseController
     public function getListView(Request $request, string $type): View
     {
 
-      
-
         $filters = [
-            'added_by' => $type,
+            'added_by' => 'supplier',
             'request_status' => $request['status'],
             'seller_id' => $request['seller_id'],
             'brand_id' => $request['brand_id'],
@@ -181,9 +178,8 @@ class ProductController extends BaseController
             'sub_sub_category_id' => $request['sub_sub_category_id'],
         ];
        
-
         $products = $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
-        dd($products);
+
         $sellers = $this->sellerRepo->getByStatusExcept(status: 'pending', relations: ['shop'], paginateBy: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
         $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
         $categories = $this->categoryRepo->getListWhere(filters: ['position' => 0], dataLimit: 'all');
