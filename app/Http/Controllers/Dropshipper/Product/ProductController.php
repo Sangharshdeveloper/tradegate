@@ -104,6 +104,14 @@ class ProductController extends BaseController
             relations: ['translations','seoInfo'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
+
+        dd($this->productRepo->getListWhere(
+            orderBy: ['id' => 'desc'],
+            searchValue: $searchValue,
+            filters: $filters,
+            relations: ['translations','seoInfo'],
+            dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
+        ));
         $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
         $categories = $this->categoryRepo->getListWhere(filters: ['position' => 0], dataLimit: 'all');
         $subCategory = $this->categoryRepo->getFirstWhere(params: ['id' => $request['sub_category_id']]);
