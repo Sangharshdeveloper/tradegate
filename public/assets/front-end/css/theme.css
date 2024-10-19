@@ -49,6 +49,7 @@ html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+   
 }
 
 article,
@@ -73,6 +74,7 @@ body {
     color: black;
     text-align: left;
     background-color: #fff;
+     overflow: visible;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -17917,6 +17919,19 @@ html:not([dir="rtl"]) .cz-range-slider-ui.noUi-horizontal .noUi-handle {
     z-index: 10;
 }
 
+.cz-image-zoom-pane {
+    position: fixed; /* Fixed to position relative to the viewport */
+    z-index: 9999; /* Ensure it stays on top */
+    width: 40vw; /* Adjust width as needed */
+    height: 80vh; /* Adjust height as needed */
+    display: none; /* Hidden by default */
+    background-color: white; /* Optional for clarity */
+    border: 1px solid #ddd; /* Optional for styling */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Optional for effect */
+    overflow: hidden; /* Prevent content overflow */
+    background-size: 200% 200%; 
+}
+
 .cz-preview-item:hover {
     cursor: crosshair;
 }
@@ -19084,7 +19099,7 @@ html[dir="rtl"] .feature_header span {
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {

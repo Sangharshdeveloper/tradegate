@@ -76,7 +76,7 @@ a {
 
 .product-single-hover .single-product-details {
     position: relative;
-    min-height: 95px;
+    min-height: 65px;
     padding: 10px 10px 0 10px;
     border-radius: 0 0 5px 5px;
     transition: all ease 0.3s;
@@ -522,7 +522,7 @@ a {
     }
     .__slide-img {
         height: unset;
-        max-height: 420px;
+        max-height: 550px;
     }
     /* .p-xl-35 {
       padding: 35px !important;
@@ -8578,8 +8578,8 @@ input.form-control.fz-30 {
     background: white !important;
     display: block;
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: 90px;
+    height: 90px;
     transition: border-color 0.2s ease-in-out;
     border-radius: 0.3125rem;
     text-decoration: none !important;
