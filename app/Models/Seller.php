@@ -63,6 +63,7 @@ class Seller extends Authenticatable
         'free_delivery_status',
         'app_language',
         'type',
+        'added_by',
     ];
 
     protected $casts = [
