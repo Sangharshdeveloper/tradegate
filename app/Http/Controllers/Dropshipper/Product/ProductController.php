@@ -31,6 +31,7 @@ use App\Traits\FileManagerTrait;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use App\Models\Product as ProductModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
@@ -626,11 +627,11 @@ class ProductController extends BaseController
         $vendorId = auth('seller')->id();
         $searchValue = $request['searchValue'];
         $filters = [
-            // 'searchValue' => $searchValue,
-            // 'request_status' => 1,
-            'seller_id' => $vendorId,
-            // 'brand_id' => $request['brand_id'],
-            // 'category_id' => $request['category_id'],
+            'searchValue' => $searchValue,
+            'request_status' => 1,
+            // 'seller_id' => $vendorId,
+            'brand_id' => $request['brand_id'],
+            'category_id' => $request['category_id'],
             'type' => '2',
 
         ];
@@ -638,10 +639,8 @@ class ProductController extends BaseController
 
     
 
-        $products =  App\Models\Product::where(['type'=>'2'])->get();
-        
-        // $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['translations'], dataLimit: getWebConfig(WebConfigKey::PAGINATION_LIMIT));
-        
+        $products =  ProductModel::where($filters)->get();
+                
         $products->map(function ($product) {
             if ($product->product_type == 'physical' && count(json_decode($product->choice_options)) > 0 || count(json_decode($product->colors)) > 0) {
                 $colorName = [];
