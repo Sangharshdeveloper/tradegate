@@ -79,9 +79,9 @@ class ProductController extends BaseController
      */
     public function index(Request|null $request, string $type = null): View
     {
-        return $this->getListView(request: $request, type: ($type == 'vendor' ? 'supplier' : ($type == 'seller' ? 'seller' : 'in_house')));
+        return $this->getListView(request: $request, type: ($type == 'vendor' ? 'seller' : ($type == 'supplier' ? 'supplier' : 'in_house')));
 // 
-        // return $this->getListView(request: $request, type: ($type == 'vendor' ? 'supplier' ? 'seller' : 'in_house'));
+        // return $this->getListView(request: $request, type: ($type == 'vendor' ? 'seller' ? 'seller' : 'in_house'));
     }
 
     public function getAddView(): View
