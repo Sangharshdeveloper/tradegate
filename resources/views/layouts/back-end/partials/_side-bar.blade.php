@@ -551,9 +551,9 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                     </a>
                                 </li>
                                 @if (getWebConfig(name: 'product_wise_shipping_cost_approval')==1)
-                                <li class="nav-item {{Request::is('admin/supplier-products/'.Product::UPDATED_PRODUCT_LIST[URI])?'active':''}}">
+                                <li class="nav-item {{Request::is('admin/products/'.Product::UPDATED_PRODUCT_LIST[URI])?'active':''}}">
                                     <a class="nav-link text-capitalize" title="{{translate('product_update_requests')}}"
-                                        href="{{route('admin.supplier-products.updated-product-list')}}">
+                                        href="{{route('admin.products.updated-product-list')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{Str::limit(translate('product_update_requests'), 18, '...')}}
                                             <span class="badge badge-soft-info badge-pill ml-1">
@@ -563,10 +563,10 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                     </a>
                                 </li>
                                 @endif
-                                <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'/admin/warehouse-products/'.Product::LIST[URI].'/supplier?status=1')==1?'active':''}}">
+                                <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'/admin/products/'.Product::LIST[URI].'/supplier?status=1')==1?'active':''}}">
                                     <a class="nav-link"
                                         title="{{translate('approved_Products')}}"
-                                        href="{{route('admin.supplier-products.list',['supplier', 'status'=>'1'])}}">
+                                        href="{{route('admin.products.list',['supplier', 'status'=>'1'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">{{translate('approved_Products')}}
                                             <span class="badge badge-soft-success badge-pill ml-1">
@@ -578,7 +578,7 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                 <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'/admin/products/'.Product::LIST[URI].'/supplier?status=2')==1?'active':''}}">
                                     <a class="nav-link"
                                         title="{{translate('denied_Products')}}"
-                                        href="{{route('admin.supplier-products.list',['supplier', 'status'=>'2'])}}">
+                                        href="{{route('admin.products.list',['supplier', 'status'=>'2'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">{{translate('denied_Products')}}
                                             <span class="badge badge-soft-danger badge-pill ml-1">

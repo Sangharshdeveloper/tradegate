@@ -310,40 +310,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         });
     });
 
-    Route::group(['prefix' => 'supplier-products', 'as' => 'supplier-products.', 'middleware' => ['module:product_management']], function () {
-        Route::controller(SupplierController::class)->group(function () {
-            Route::get(Product::LIST[URI] . '/{type}', 'index')->name('list');
-            Route::get(Product::ADD[URI], 'getAddView')->name('add');
-            Route::post(Product::ADD[URI], 'add')->name('store');
-            Route::get(Product::VIEW[URI] . '/{addedBy}/{id}', 'getView')->name('view');
-            Route::post(Product::SKU_COMBINATION[URI], 'getSkuCombinationView')->name('sku-combination');
-            Route::post(Product::DIGITAL_VARIATION_COMBINATION[URI], 'getDigitalVariationCombinationView')->name('digital-variation-combination');
-            Route::post(Product::DIGITAL_VARIATION_FILE_DELETE[URI], 'deleteDigitalVariationFile')->name('digital-variation-file-delete');
-            Route::post(Product::FEATURED_STATUS[URI], 'updateFeaturedStatus')->name('featured-status');
-            Route::get(Product::GET_CATEGORIES[URI], 'getCategories')->name('get-categories');
-            Route::post(Product::UPDATE_STATUS[URI], 'updateStatus')->name('status-update');
-            Route::get(Product::BARCODE_VIEW[URI] . '/{id}', 'getBarcodeView')->name('barcode');
-            Route::get(Product::EXPORT_EXCEL[URI] . '/{type}', 'exportList')->name('export-excel');
-            Route::get(Product::STOCK_LIMIT[URI] . '/{type}', 'getStockLimitListView')->name('stock-limit-list');
-            Route::delete(Product::DELETE[URI] . '/{id}', 'delete')->name('delete');
-            Route::get(Product::UPDATE[URI] . '/{id}', 'getUpdateView')->name('update');
-            Route::post(Product::UPDATE[URI] . '/{id}', 'update');
-            Route::get(Product::DELETE_IMAGE[URI], 'deleteImage')->name('delete-image');
-            Route::get(Product::GET_VARIATIONS[URI], 'getVariations')->name('get-variations');
-            Route::post(Product::UPDATE_QUANTITY[URI], 'updateQuantity')->name('update-quantity');
-            Route::get(Product::BULK_IMPORT[URI], 'getBulkImportView')->name('bulk-import');
-            Route::post(Product::BULK_IMPORT[URI], 'importBulkProduct');
-            Route::get(Product::UPDATED_PRODUCT_LIST[URI], 'updatedProductList')->name('updated-product-list');
-            Route::post(Product::UPDATED_SHIPPING[URI], 'updatedShipping')->name('updated-shipping');
-            Route::post(Product::DENY[URI], 'deny')->name('deny');
-            Route::post(Product::APPROVE_STATUS[URI], 'approveStatus')->name('approve-status');
-            Route::get(Product::SEARCH[URI], 'getSearchedProductsView')->name('search-product');
-            Route::get(Product::MULTIPLE_PRODUCT_DETAILS[URI], 'getMultipleProductDetailsView')->name('multiple-product-details');
-            Route::get(Product::PRODUCT_GALLERY[URI], 'getProductGalleryView')->name('product-gallery');
-            Route::get(Product::STOCK_LIMIT_STATUS[URI] . '/{type}', 'getStockLimitStatus')->name('stock-limit-status');
-            Route::post(Product::DELETE_PREVIEW_FILE[URI], 'deletePreviewFile')->name('delete-preview-file');
-        });
-    });
 
     Route::group(['prefix' => 'orders', 'as' => 'orders.', 'middleware' => ['module:order_management']], function () {
         Route::controller(OrderController::class)->group(function () {
