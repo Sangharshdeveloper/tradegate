@@ -183,6 +183,8 @@
                             </tr>
                             </thead>
                             <tbody>
+
+                            
                             @foreach($products as $key=>$product)
                                 <tr>
                                     <th scope="row">{{ $products->firstItem()+$key}}</th>
