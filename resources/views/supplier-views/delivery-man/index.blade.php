@@ -10,7 +10,7 @@
                 {{translate('add_new_deliveryman')}}
             </h2>
         </div>
-        <form action="{{route('vendor.delivery-man.index')}}" method="post" enctype="multipart/form-data" id="add-delivery-man-form">
+        <form action="{{route('supplier.delivery-man.index')}}" method="post" enctype="multipart/form-data" id="add-delivery-man-form">
             @csrf
             <div class="card mb-3">
                 <div class="card-body">

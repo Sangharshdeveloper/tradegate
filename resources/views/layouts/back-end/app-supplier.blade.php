@@ -67,9 +67,9 @@
     <span id="onerror-chatting" data-onerror-chatting="{{dynamicAsset(path: 'public/assets/back-end/img/image-place-holder.png')}}"></span>
     <span id="onerror-user" data-onerror-user="{{dynamicAsset(path: 'public/assets/back-end/img/160x160/img1.jpg')}}"></span>
     <span id="get-root-path-for-toggle-modal-image" data-path="{{dynamicAsset(path: 'public/assets/back-end/img/modal')}}"></span>
-    <span id="get-customer-list-route" data-action="{{route('vendor.customer.list')}}"></span>
-    <span id="get-search-product-route" data-action="{{route('vendor.products.search-product')}}"></span>
-    <span id="get-orders-list-route" data-action="{{route('vendor.orders.list', ['status' => 'all'])}}"></span>
+    <span id="get-customer-list-route" data-action="{{route('supplier.customer.list')}}"></span>
+    <span id="get-search-product-route" data-action="{{route('supplier.products.search-product')}}"></span>
+    <span id="get-orders-list-route" data-action="{{route('supplier.orders.list', ['status' => 'all'])}}"></span>
     <span class="system-default-country-code" data-value="{{ getWebConfig(name: 'country_code') ?? 'us' }}"></span>
     <span id="message-select-word" data-text="{{ translate('select') }}"></span>
     <span id="message-yes-word" data-text="{{ translate('yes') }}"></span>
@@ -81,9 +81,9 @@
     <span id="message-are-you-sure-delete-this" data-text="{{ translate('are_you_sure_to_delete_this') }} ?"></span>
     <span id="message-you-will-not-be-able-to-revert-this"
           data-text="{{ translate('you_will_not_be_able_to_revert_this') }}"></span>
-    <span id="getChattingNewNotificationCheckRoute" data-route="{{ route('vendor.messages.new-notification') }}"></span>
+    <span id="getChattingNewNotificationCheckRoute" data-route="{{ route('supplier.messages.new-notification') }}"></span>
 
-    <span id="get-stock-limit-status" data-action="{{route('vendor.products.stock-limit-status')}}"></span>
+    <span id="get-stock-limit-status" data-action="{{route('supplier.products.stock-limit-status')}}"></span>
     <span id="get-product-stock-limit-title" data-title="{{translate('warning')}}"></span>
     <span id="get-product-stock-limit-image" data-warning-image="{{ dynamicAsset(path: 'public/assets/back-end/img/warning-2.png') }}"></span>
     <span id="get-product-stock-limit-message"
@@ -92,7 +92,7 @@
           data-message-for-one-product="{{translate('this_product_is_low_on_stock')}}">
     </span>
     <span id="get-product-stock-view"
-          data-stock-limit-page="{{route('vendor.products.stock-limit-list')}}"
+          data-stock-limit-page="{{route('supplier.products.stock-limit-list')}}"
     >
     </span>
 
@@ -146,7 +146,7 @@
                 }
             });
             $.post({
-                url: "{{route('vendor.notification.index')}}",
+                url: "{{route('supplier.notification.index')}}",
                 data: {
                     _token: '{{csrf_token()}}',
                     id: id,
