@@ -32,6 +32,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use App\Models\Product as ProductModel;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
@@ -628,20 +629,19 @@ class ProductController extends BaseController
         $searchValue = $request['searchValue'];
         $filters = [
             // 'searchValue' => $searchValue,
-            'status' => 1,
+            // 'request_status' => 1,
             // 'seller_id' => $vendorId,
-            'brand_id' => $request['brand_id'],
-            'category_id' => $request['category_id'],
-            // 'type' => '2',
-            'added_by' => 'supplier',
+            // 'brand_id' => $request['brand_id'],
+            // 'category_id' => $request['category_id'],
+           'added_by' =>'supplier',
 
         ];
 
 
     
 
-        $products =  ProductModel::where($filters)->get();
-                
+        $products =  $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['translations'], dataLimit: getWebConfig(WebConfigKey::PAGINATION_LIMIT));
+        
         $products->map(function ($product) {
             if ($product->product_type == 'physical' && count(json_decode($product->choice_options)) > 0 || count(json_decode($product->colors)) > 0) {
                 $colorName = [];
