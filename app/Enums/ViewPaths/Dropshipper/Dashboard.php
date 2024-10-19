@@ -58,16 +58,16 @@ enum Dashboard
     const INDEX_DROPSHIPPER = [
         URI => '/',
         VIEW => 'drophipper-views.dashboard.index',
-        ROUTE => 'drophipper.dashboard.index'
+        ROUTE => 'dropshipper.dashboard.index'
     ];
 
     const ORDER_STATUS_DROPSHIPPER = [
         URI => 'order-status',
-        VIEW => 'drophipper-views.partials._dashboard-order-status'
+        VIEW => 'dropshipper-views.partials._dashboard-order-status'
     ];
     const EARNING_STATISTICS_DROPSHIPPER = [
         URI => 'earning-statistics',
-        VIEW => 'drophipper-views.dashboard.partials.earning-statistics'
+        VIEW => 'dropshipper-views.dashboard.partials.earning-statistics'
     ];
     const WITHDRAW_REQUEST_DROPSHIPPER = [
         URI => 'withdraw-request',
