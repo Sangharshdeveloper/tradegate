@@ -13,7 +13,7 @@
             class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container navbar-bordered">
         <div class="navbar-nav-wrap">
             <div class="navbar-brand-wrapper d-none d-sm-block d-xl-none">
-                <a class="navbar-brand" href="{{route('vendor.dashboard.index')}}" aria-label="">
+                <a class="navbar-brand" href="{{route('supplier.dashboard.index')}}" aria-label="">
                     @if (isset($shop))
                         <img class="navbar-brand-logo"
                              src="{{getStorageImages(path: $shop->image_full_url,type:'backend-logo')}}"
@@ -200,7 +200,7 @@
                             <div id="messageDropdown"
                                  class="hs-unfold-content width--16rem dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account">
                                 <a class="dropdown-item position-relative"
-                                   href="{{route('vendor.messages.index', ['type' => 'customer'])}}">
+                                   href="{{route('supplier.messages.index', ['type' => 'customer'])}}">
                                     <span class="text-truncate pr-2"
                                           title="Settings">{{translate('customer')}}</span>
                                     @php($messageCustomer=\App\Models\Chatting::where(['seen_by_seller'=>0, 'seller_id'=>auth('seller')->id()])->whereNotNull(['user_id'])->count())
@@ -211,7 +211,7 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item position-relative"
-                                   href="{{route('vendor.messages.index', ['type' => 'delivery-man'])}}">
+                                   href="{{route('supplier.messages.index', ['type' => 'delivery-man'])}}">
                                     <span class="text-truncate pr-2"
                                           title="Settings">{{translate('delivery_man')}}</span>
                                     @php($messageDeliveryMan =\App\Models\Chatting::where(['seen_by_seller'=>0, 'seller_id'=>auth('seller')->id()])->whereNotNull(['delivery_man_id'])->count())
@@ -226,7 +226,7 @@
                     <li class="nav-item">
                         <div class="hs-unfold">
                             <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle"
-                               href="{{route('vendor.orders.list',['pending'])}}"
+                               href="{{route('supplier.orders.list',['pending'])}}"
                                title="{{translate('pending_Orders')}}" data-toggle="tooltip"
                                data-custom-class="header-icon-title">
                                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none"
@@ -293,7 +293,7 @@
                                 </div>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item"
-                                   href="{{route('vendor.profile.update',[auth('seller')->id()])}}">
+                                   href="{{route('supplier.profile.update',[auth('seller')->id()])}}">
                                     <span class="text-truncate pr-2" title="Settings">{{translate('settings')}}</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
@@ -379,7 +379,7 @@
                 </div>
                 <div class="bg-white p-1 rounded mt-2">
                     <a class="p-2  title-color"
-                       href="{{route('vendor.messages.index', ['type' => 'customer'])}}"
+                       href="{{route('supplier.messages.index', ['type' => 'customer'])}}"
                        title="{{translate('message')}}" data-toggle="tooltip" data-custom-class="header-icon-title">
                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5926_1152)">
@@ -402,7 +402,7 @@
                 </div>
                 <div class="bg-white p-1 rounded mt-2">
                     <a class="p-2 title-color"
-                       href="{{route('vendor.orders.list',['pending'])}}" title="{{translate('Shopping Cart')}}"
+                       href="{{route('supplier.orders.list',['pending'])}}" title="{{translate('Shopping Cart')}}"
                        data-toggle="tooltip" data-custom-class="header-icon-title">
                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5926_1157)">

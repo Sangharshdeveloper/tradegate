@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Supplier;
 
 use App\Contracts\Repositories\VendorRepositoryInterface;
 use App\Contracts\Repositories\ShopRepositoryInterface;
-use App\Enums\ViewPaths\Vendor\Shop;
-use App\Http\Requests\Vendor\ShopRequest;
-use App\Http\Requests\Vendor\ShopVacationRequest;
+use App\Enums\ViewPaths\Supplier\Shop;
+use App\Http\Requests\Supplier\ShopRequest;
+use App\Http\Requests\Supplier\ShopVacationRequest;
 use App\Http\Controllers\BaseController;
 use App\Services\ShopService;
-use App\Services\VendorService;
+use App\Services\SupplierService;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -25,7 +25,7 @@ class ShopController extends BaseController
         private readonly VendorRepositoryInterface $vendorRepo,
         private readonly ShopRepositoryInterface $shopRepo,
         private readonly ShopService $shopService,
-        private readonly VendorService $vendorService,
+        private readonly SupplierService $vendorService,
     )
     {
     }

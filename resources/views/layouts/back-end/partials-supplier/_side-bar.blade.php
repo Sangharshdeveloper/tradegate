@@ -11,6 +11,7 @@
     use App\Models\Shop;
     use App\Enums\ViewPaths\Supplier\Order as OrderEnum;
     $shop=Shop::where(['seller_id'=>auth('seller')->id()])->first();
+
 @endphp
 <div id="sidebarMain" class="d-none">
     <aside style="text-align: {{Session::get('direction') === "rtl" ? 'right' : 'left'}};"

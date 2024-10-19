@@ -16,7 +16,7 @@ use App\Contracts\Repositories\OrderStatusHistoryRepositoryInterface;
 use App\Contracts\Repositories\OrderTransactionRepositoryInterface;
 use App\Contracts\Repositories\VendorRepositoryInterface;
 use App\Enums\GlobalConstant;
-use App\Enums\ViewPaths\Vendor\Order;
+use App\Enums\ViewPaths\Supplier\Order;
 use App\Enums\WebConfigKey;
 use App\Events\OrderStatusEvent;
 use App\Exports\OrderExport;

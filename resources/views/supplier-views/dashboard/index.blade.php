@@ -1,4 +1,6 @@
 @extends('layouts.back-end.app-supplier')
+
+
 @section('title', translate('dashboard'))
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -14,7 +16,7 @@
                 </div>
 
                 <div>
-                    <a class="btn btn--primary" href="{{route('vendor.products.list',['type'=>'all'])}}">
+                    <a class="btn btn--primary" href="{{route('supplier.products.list',['type'=>'all'])}}">
                         <i class="tio-premium-outlined mr-1"></i> {{translate('products')}}
                     </a>
                 </div>

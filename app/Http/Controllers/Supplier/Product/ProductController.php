@@ -19,7 +19,7 @@ use App\Contracts\Repositories\PublishingHouseRepositoryInterface;
 use App\Contracts\Repositories\ReviewRepositoryInterface;
 use App\Contracts\Repositories\VendorRepositoryInterface;
 use App\Contracts\Repositories\WishlistRepositoryInterface;
-use App\Enums\ViewPaths\Vendor\Product;
+use App\Enums\ViewPaths\Supplier\Product;
 use App\Enums\WebConfigKey;
 use App\Exports\ProductListExport;
 use App\Http\Controllers\BaseController;

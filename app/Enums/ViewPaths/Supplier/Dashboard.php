@@ -32,7 +32,7 @@ enum Dashboard
     const INDEX_SUPPLIER = [
         URI => '/',
         VIEW => 'supplier-views.dashboard.index',
-        ROUTE => 'vendor.dashboard.index'
+        ROUTE => 'supplier.dashboard.index'
     ];
 
     const ORDER_STATUS_SUPPLIER = [
