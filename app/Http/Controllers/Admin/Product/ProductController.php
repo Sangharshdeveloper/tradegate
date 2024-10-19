@@ -168,6 +168,7 @@ class ProductController extends BaseController
 
     public function getListView(Request $request, string $type): View
     {
+
         $filters = [
             'added_by' => $type,
             'request_status' => $request['status'],
@@ -178,7 +179,11 @@ class ProductController extends BaseController
             'sub_sub_category_id' => $request['sub_sub_category_id'],
         ];
 
+
         $products = $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
+       
+        dd($products,$filters);
+
         $sellers = $this->sellerRepo->getByStatusExcept(status: 'pending', relations: ['shop'], paginateBy: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
         $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
         $categories = $this->categoryRepo->getListWhere(filters: ['position' => 0], dataLimit: 'all');
