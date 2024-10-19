@@ -34,7 +34,7 @@
     </style>
 </head>
 <body class="footer-offset">
-    @include('layouts.back-end.partials-dropshipper._front-settings')
+    @include('layouts.back-end.partials._front-settings')
     <div class="row">
         <div class="col-12 position-fixed z-9999 mt-10rem">
             <div id="loading" class="d--none">
