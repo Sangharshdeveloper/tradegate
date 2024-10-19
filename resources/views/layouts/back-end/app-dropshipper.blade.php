@@ -34,7 +34,7 @@
     </style>
 </head>
 <body class="footer-offset">
-    @include('layouts.back-end.partials._front-settings')
+    @include('layouts.back-end.partials-dropshipper._front-settings')
     <div class="row">
         <div class="col-12 position-fixed z-9999 mt-10rem">
             <div id="loading" class="d--none">
@@ -92,7 +92,7 @@
           data-message-for-one-product="{{translate('this_product_is_low_on_stock')}}">
     </span>
     <span id="get-product-stock-view"
-          data-stock-limit-page="{{route('vendor.products.stock-limit-list')}}"
+          data-stock-limit-page="{{route('dropshipper.products.stock-limit-list')}}"
     >
     </span>
 
