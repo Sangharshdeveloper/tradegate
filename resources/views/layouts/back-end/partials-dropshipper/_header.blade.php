@@ -1,5 +1,5 @@
 @php
-    use App\Models\Dropshipper;
+    use App\Models\Seller;
     use Illuminate\Support\Facades\Session;
     use Illuminate\Support\Str;
     use Illuminate\Support\Carbon;
@@ -7,7 +7,6 @@
     $shop= Shop::where(['seller_id'=>auth('seller')->id()])->first();
     $vendor= Seller::find(auth('seller')->id());
 
-    dd('hahahah');
 @endphp
 @php($direction = Session::get('direction'))
 <div id="headerMain" class="d-none">
