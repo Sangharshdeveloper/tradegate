@@ -101,7 +101,7 @@ enum Product
     ];
     const PRODUCT_GALLERY = [
         URI => 'product-gallery',
-        VIEW => 'supplier-views.product.product-gallery'
+        VIEW => 'dropshipper-views.product.product-gallery'
     ];
 
     const STOCK_LIMIT_STATUS = [
