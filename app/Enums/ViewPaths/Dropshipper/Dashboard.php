@@ -57,7 +57,7 @@ enum Dashboard
     //  Dropshipper Start
     const INDEX_DROPSHIPPER = [
         URI => '/',
-        VIEW => 'drophipper-views.dashboard.index',
+        VIEW => 'dropshipper-views.dashboard.index',
         ROUTE => 'dropshipper.dashboard.index'
     ];
 
