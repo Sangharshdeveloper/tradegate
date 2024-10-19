@@ -627,11 +627,11 @@ class ProductController extends BaseController
         $vendorId = auth('seller')->id();
         $searchValue = $request['searchValue'];
         $filters = [
-            'searchValue' => $searchValue,
-            'request_status' => 1,
-            // 'seller_id' => $vendorId,
-            'brand_id' => $request['brand_id'],
-            'category_id' => $request['category_id'],
+            // 'searchValue' => $searchValue,
+            // 'request_status' => 1,
+            // // 'seller_id' => $vendorId,
+            // 'brand_id' => $request['brand_id'],
+            // 'category_id' => $request['category_id'],
             'added_by' => 'supplier',
 
         ];
