@@ -627,7 +627,7 @@ class ProductController extends BaseController
         $vendorId = auth('seller')->id();
         $searchValue = $request['searchValue'];
         $filters = [
-             'added_by' => 'supplier',
+            'added_by' => 'supplier',
             'searchValue' => $searchValue,
             'request_status' => 1,
             //'seller_id' => $vendorId,
@@ -635,8 +635,7 @@ class ProductController extends BaseController
             'category_id' => $request['category_id'],
         ];
         $products = $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['translations'], dataLimit: getWebConfig(WebConfigKey::PAGINATION_LIMIT));
-       
-        dd(  $products);
+        
         $products->map(function ($product) {
             if ($product->product_type == 'physical' && count(json_decode($product->choice_options)) > 0 || count(json_decode($product->colors)) > 0) {
                 $colorName = [];
@@ -647,7 +646,7 @@ class ProductController extends BaseController
                 $product['colorsName'] = $colorName;
             }
         });
-
+       
         $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
 
         $categories = $this->categoryRepo->getListWhere(filters: ['position' => 0], dataLimit: 'all');
