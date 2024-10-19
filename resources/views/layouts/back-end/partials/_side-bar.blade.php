@@ -541,7 +541,7 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                 <li class="nav-item {{str_contains(url()->current().'?status='.request()->get('status'),'admin/products/'.\App\Enums\ViewPaths\Admin\Product::LIST[URI].'/supplier?status=0')==1?'active':''}}">
                                     <a class="nav-link"
                                         title="{{translate('new_Products_Requests')}}"
-                                        href="{{route('admin.supplier-products.list',['supplier', 'status'=>'0'])}}">
+                                        href="{{route('admin.products.list',['supplier', 'status'=>'0'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">{{translate('new_Products_Requests')}}
                                             <span class="badge badge-soft-danger badge-pill ml-1">
