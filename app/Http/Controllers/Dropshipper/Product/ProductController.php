@@ -632,7 +632,7 @@ class ProductController extends BaseController
             // // 'seller_id' => $vendorId,
             // 'brand_id' => $request['brand_id'],
             // 'category_id' => $request['category_id'],
-            'added_by' => 'supplier',
+            'type' => '2',
 
         ];
         $products = $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['translations'], dataLimit: getWebConfig(WebConfigKey::PAGINATION_LIMIT));
