@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-seller')
+@extends('layouts.back-end.app-dropshipper')
 
 @section('title', translate('shop_Edit'))
 @push('css_or_js')
