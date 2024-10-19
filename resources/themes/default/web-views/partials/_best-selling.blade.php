@@ -24,10 +24,12 @@
                                         <span class="for-discount-value p-1 pl-2 pr-2 font-bold fs-13">
                                             <span class="direction-ltr d-block">
                                                 @if ($bestSell->product->discount_type == 'percent')
-                                                    -{{round($bestSell->product->discount)}}%
-                                                @elseif($bestSell->product->discount_type =='flat')
-                                                    -{{ webCurrencyConverter(amount: $bestSell->product->discount) }}
-                                                @endif
+    {{ round($bestSell->product->discount) }}%
+@elseif($bestSell->product->discount_type == 'flat')
+    {{ webCurrencyConverter(amount: $bestSell->product->discount) }}
+@endif
+
+                                               
                                             </span>
                                         </span>
                                     </div>

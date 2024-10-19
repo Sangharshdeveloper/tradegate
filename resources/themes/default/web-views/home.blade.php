@@ -16,16 +16,18 @@
     <link rel="stylesheet" href="{{theme_asset(path: 'public/assets/front-end/css/home.css')}}"/>
     <link rel="stylesheet" href="{{ theme_asset(path: 'public/assets/front-end/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ theme_asset(path: 'public/assets/front-end/css/owl.theme.default.min.css') }}">
+    <meta name="facebook-domain-verification" content="rhio5ucv9kugcx5xemk4pvpfr7tevc" />
+
 @endpush
 
 @section('content')
-    <div class="__inline-61">
+    <div class="__inline-61" style="background-color:#e3e6e6">
         @php($decimalPointSettings = !empty(getWebConfig(name: 'decimal_point_settings')) ? getWebConfig(name: 'decimal_point_settings') : 0)
-
-        @include('web-views.partials._home-top-slider',['main_banner'=>$main_banner])
+    
+        @include('web-views.partials._home-top-slider',['products'=>$latest_products ,'latest_products'=>$latest_products,'decimal_point_settings'=>$decimalPointSettings])
 
         @if ($flashDeal['flashDeal'] && $flashDeal['flashDealProducts'] && count($flashDeal['flashDealProducts']) > 0)
-            @include('web-views.partials._product-on-banner', ['decimal_point_settings'=>$decimalPointSettings])
+          
         @endif
         @if ($flashDeal['flashDeal'] && $flashDeal['flashDealProducts'] && count($flashDeal['flashDealProducts']) > 0)
             @include('web-views.partials._flash-deal', ['decimal_point_settings'=>$decimalPointSettings])

@@ -315,6 +315,51 @@
                         <li class="nav-item dropdown d-none d-md-block {{request()->is('/')?'active':''}}">
                             <a class="nav-link" href="{{route('home')}}">{{ translate('home')}}</a>
                         </li>
+                        
+                        @php($categoryIndex=0)
+                                @foreach($categories as $category)
+                                    @php($categoryIndex++)
+                                    @if($categoryIndex < 4)
+                                        <li class="nav-item dropdown d-none d-md-block">
+
+                                            <a class="nav-link dropdown-toggle" <?php if ($category->childes->count() > 0) echo "" ?>
+                                               href="{{route('products',['category_id'=> $category['id'],'data_from'=>'category','page'=>1])}}">
+                                                <span>{{$category['name']}}</span>
+
+                                            </a>
+                                            @if ($category->childes->count() > 0)
+                                              
+                                            @endif
+
+                                            @if($category->childes->count()>0)
+                                                <ul class="text-align-direction dropdown-menu __dropdown-menu-sizing dropdown-menu-{{Session::get('direction') === "rtl" ? 'right' : 'left'}} scroll-bar">
+                                                    @foreach($category['childes'] as $subCategory)
+                                                        <li class="dropdown-item">
+                                                            <a href="{{route('products',['category_id'=> $subCategory['id'],'data_from'=>'category','page'=>1])}}">
+                                                                <span>{{$subCategory['name']}}</span>
+                                                            </a>
+
+                                                            @if($subCategory->childes->count()>0)
+                                                                <a class="header-subcategories-links"
+                                                                   data-toggle='dropdown'>
+                                                                    <i class="czi-arrow-{{Session::get('direction') === "rtl" ? 'left' : 'right'}} __inline-16"></i>
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    @foreach($subCategory['childes'] as $subSubCategory)
+                                                                        <li>
+                                                                            <a class="__inline-17"
+                                                                               href="{{route('products',['category_id'=> $subSubCategory['id'],'data_from'=>'category','page'=>1])}}">{{$subSubCategory['name']}}</a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endif
+                                @endforeach
 
                         @if(getWebConfig(name: 'product_brand'))
                             <li class="nav-item dropdown">

@@ -5,9 +5,9 @@
             <span class="for-discount-value p-1 pl-2 pr-2 font-bold fs-13">
                 <span class="direction-ltr d-block">
                     @if ($product->discount_type == 'percent')
-                        -{{round($product->discount,(!empty($decimal_point_settings) ? $decimal_point_settings: 0))}}%
+                        {{round($product->discount,(!empty($decimal_point_settings) ? $decimal_point_settings: 0))}}%
                     @elseif($product->discount_type =='flat')
-                        -{{ webCurrencyConverter(amount: $product->discount)}}
+                        {{ webCurrencyConverter(amount: $product->discount)}}
                     @endif
                 </span>
             </span>

@@ -23,11 +23,11 @@
                                     <div class="d-flex">
                                     <span class="for-discount-value p-1 pl-2 pr-2 font-bold fs-13">
                                         <span class="direction-ltr d-block">
-                                            @if ($top->product->discount_type == 'percent')
-                                                -{{ round($top->product->discount)}}%
-                                            @elseif($top->product->discount_type =='flat')
-                                                -{{ webCurrencyConverter(amount: $top->product->discount) }}
-                                            @endif
+                                         @if ($top->product->discount_type == 'percent')
+    {{ round($top->product->discount) }}%
+@elseif($top->product->discount_type == 'flat')
+    {{ webCurrencyConverter(amount: $top->product->discount) }}
+@endif
                                         </span>
                                     </span>
                                     </div>

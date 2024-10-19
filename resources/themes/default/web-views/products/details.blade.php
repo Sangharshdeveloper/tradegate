@@ -30,7 +30,7 @@
                                                                  src="{{ getStorageImages(path: $photo['image_name'], type: 'product') }}"
                                                                  data-zoom="{{ getStorageImages(path: $photo['image_name'], type: 'product')  }}"
                                                                  alt="{{ translate('product') }}" width="">
-                                                            <div class="cz-image-zoom-pane"></div>
+                                                           <div class="cz-image-zoom-pane" height="500px" width="500px"></div>
                                                         </div>
                                                     @else
                                                         <div
@@ -40,7 +40,7 @@
                                                                  src="{{ getStorageImages(path: $photo['image_name'], type: 'product') }}"
                                                                  data-zoom="{{ getStorageImages(path: $photo['image_name'], type: 'product') }}"
                                                                  alt="{{ translate('product') }}" width="">
-                                                            <div class="cz-image-zoom-pane"></div>
+                                                          <div class="cz-image-zoom-pane" height="500px" width="500px"></div>
                                                         </div>
                                                     @endif
                                                 @endforeach
@@ -53,7 +53,7 @@
                                                              src="{{ getStorageImages($photo, type: 'product') }}"
                                                              data-zoom="{{ getStorageImages(path: $photo, type: 'product') }}"
                                                              alt="{{ translate('product') }}" width="">
-                                                        <div class="cz-image-zoom-pane"></div>
+                                                      
                                                     </div>
                                                 @endforeach
                                             @endif
@@ -72,7 +72,10 @@
                                         </div>
                                     @endif
                                 </div>
-
+                                
+                            
+  <div class="cz-image-zoom-pane"></div>
+                                
                                 <div class="d-flex flex-column gap-3">
                                     <button type="button" data-product-id="{{$product['id']}}"
                                             class="btn __text-18px border wishList-pos-btn d-sm-none product-action-add-wishlist">
@@ -964,4 +967,38 @@
     <script src="{{ theme_asset(path: 'public/assets/front-end/js/product-details.js') }}"></script>
     <script type="text/javascript" async="async"
             src="https://platform-api.sharethis.com/js/sharethis.js#property=5f55f75bde227f0012147049&product=sticky-share-buttons"></script>
+        <script>
+     document.querySelectorAll('.product-preview-item').forEach(function (item) {
+    const zoomPane = document.querySelector('.cz-image-zoom-pane');
+
+    item.addEventListener('mouseenter', function () {
+        const zoomImageSrc = this.querySelector('.cz-image-zoom').getAttribute('data-zoom');
+
+        // Update the background image of the zoom pane to the current image's zoom source
+        zoomPane.style.backgroundImage = `url(${zoomImageSrc})`;
+        zoomPane.style.backgroundRepeat = 'no-repeat';
+        zoomPane.style.backgroundSize = '200% 200%'; // Zoom in both directions
+
+        // Get the position of the product image and place the zoom pane to the right of it
+        const imageRect = this.getBoundingClientRect();
+        zoomPane.style.top = imageRect.top + 'px';
+        zoomPane.style.left = (imageRect.right + 20) + 'px'; // Position it 20px to the right of the image
+        zoomPane.style.display = 'block';
+    });
+
+    item.addEventListener('mousemove', function (e) {
+        const imageRect = this.getBoundingClientRect();
+        const xPos = ((e.clientX - imageRect.left) / imageRect.width) * 100;
+        const yPos = ((e.clientY - imageRect.top) / imageRect.height) * 100;
+
+        // Update the background position to create the zoom effect in both directions
+        zoomPane.style.backgroundPosition = `${xPos}% ${yPos}%`;
+    });
+
+    item.addEventListener('mouseleave', function () {
+        zoomPane.style.display = 'none';
+    });
+});
+
+        </script>    
 @endpush
