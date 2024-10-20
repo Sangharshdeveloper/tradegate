@@ -924,6 +924,7 @@
                 <input type="hidden" id="color_image" value="{{ json_encode($product->color_images_full_url) }}">
                 <input type="hidden" id="images" value="{{ json_encode($product->images_full_url) }}">
                 <input type="hidden" id="product_id" name="product_id" value="{{ $product['id'] }}">
+                <input type="hidden" id="user_id" name="product_id" value="{{ $product['user_id'] }}">
                 <input type="hidden" id="remove_url" value="{{ route('dropshipper.products.delete-image') }}">
             </div>
 
