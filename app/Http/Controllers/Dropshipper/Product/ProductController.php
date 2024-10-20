@@ -359,7 +359,7 @@ class ProductController extends BaseController
             }
         }
 
-        $reviews = $this->reviewRepo->getListWhere(orderBy: ['created_at' => 'desc'], filters: ['product_id' => ['product_id' => $id], 'whereNull' => ['column' => 'delivery_man_id']], dataLimit: getWebConfig(name: 'pagination_limit'));
+        $reviews = $this->reviewRepo->getListWhere(orderBy: ['created_at' => 'desc'], filters: ['product_id' => ['product_id' => $id], 'whereNull' => ['column' => 'delivery_man_id'],'added_by' => 'dropshipper'], dataLimit: getWebConfig(name: 'pagination_limit'));
         return view(Product::VIEW[VIEW], compact('product', 'reviews', 'productActive', 'productColors', 'isActive'));
     }
 
