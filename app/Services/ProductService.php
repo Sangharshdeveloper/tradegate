@@ -388,7 +388,7 @@ class ProductService
         $digitalFileCombinations = $this->getDigitalVariationCombinations(arrays: $digitalFileOptions);
 
         return [
-            'original_seller_id' => $request['user_id'],
+            'original_seller_id' => $request['original_seller_id'],
             'original_product_id' => $request['product_id'],
             'added_by' => $addedBy,
             'user_id' => $addedBy == 'admin' ? auth('admin')->id() : auth('seller')->id(),
