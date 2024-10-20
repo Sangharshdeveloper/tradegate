@@ -122,7 +122,7 @@
                             </div>
                             <div class="col-lg-8 mt-3 mt-lg-0 d-flex flex-wrap gap-3 justify-content-lg-end">
 
-                                <div class="dropdown">
+                                <div class="dropdown" style="display: none;">
                                     <button type="button" class="btn btn-outline--primary" data-toggle="dropdown">
                                         <i class="tio-download-to"></i>
                                         {{ translate('export') }}
@@ -140,11 +140,11 @@
                                     </ul>
                                 </div>
                                 @if($type != 'new-request' )
-                                <a href="{{ route('vendor.products.stock-limit-list') }}" class="btn btn-info">
+                                <a href="{{ route('vendor.products.stock-limit-list') }}" style="display: none;" class="btn btn-info">
                                     <i class="tio-add-circle"></i>
                                     <span class="text">{{ translate('limited_Stocks') }}</span>
                                 </a>
-                                <a href="{{ route('vendor.products.add') }}" class="btn btn--primary">
+                                <a href="{{ route('vendor.products.add') }}" style="display: none;" class="btn btn--primary">
                                     <i class="tio-add"></i>
                                     <span class="text">{{ translate('add_new_product') }}</span>
                                 </a>
