@@ -56,13 +56,6 @@ use App\Http\Controllers\Payment_Methods\PaystackController;
 |
 */
 
-use Illuminate\Support\Facades\Artisan;
-
-Route::get('/generate-key', function () {
-    Artisan::call('key:generate');
-    return 'Application key has been generated successfully!';
-});
-
 Route::controller(WebController::class)->group(function () {
     Route::get('maintenance-mode', 'maintenance_mode')->name('maintenance-mode');
 });
