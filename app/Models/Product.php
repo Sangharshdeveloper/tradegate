@@ -56,6 +56,8 @@ use Illuminate\Support\Facades\DB;
  * @property string $meta_description
  * @property string $meta_image
  * @property string $from_warehouse
+ * @property int $original_seller_id
+ * @property int $original_product_id
  * @property int $is_shipping_cost_updated
  */
 class Product extends Model
@@ -115,6 +117,8 @@ class Product extends Model
         'is_shipping_cost_updated',
         'temp_shipping_cost',
         'from_warehouse',
+        'original_seller_id',
+        'original_product_id',
     ];
 
     /**
@@ -169,6 +173,8 @@ class Product extends Model
         'thumbnail_storage_type' => 'string',
         'digital_file_ready_storage_type' => 'string',
         'from_warehouse' => 'string',
+        'original_seller_id'=> 'int',
+        'original_product_id'=> 'int',
     ];
 
     protected $appends = ['is_shop_temporary_close', 'thumbnail_full_url', 'preview_file_full_url', 'color_images_full_url', 'meta_image_full_url', 'images_full_url', 'digital_file_ready_full_url'];
