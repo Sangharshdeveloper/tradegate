@@ -130,7 +130,7 @@ class ProductRepository implements ProductRepositoryInterface
     public function getListWhere(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
 
-
+       dd($filters);
         $query = $this->product->with($relations)->when(isset($filters['added_by']) && $this->isAddedByInHouse(addedBy: $filters['added_by']), function ($query) {
             return $query->where(['added_by' => 'admin', 'from_warehouse' => '1']);
         })->when(isset($filters['added_by']) && !$this->isAddedByInHouse($filters['added_by']), function ($query) use ($filters) {
@@ -169,31 +169,32 @@ class ProductRepository implements ProductRepositoryInterface
             });
         })->when(isset($filters['brand_id']) && $filters['brand_id'] != 'all', function ($query) use ($filters) {
             return $query->where(['brand_id' => $filters['brand_id']]);
-        })->when(isset($filters['added_by']) && $filters['added_by'] != 'seller', function ($query) use ($filters) {
-                return $query->where(['added_by' => $filters['added_by']]);
-            })
-            ->when(isset($filters['user_id']) && $filters['user_id'] != '', function ($query) use ($filters) {
-                return $query->where(['user_id' => $filters['user_id']]);
-            })
-            ->when(isset($filters['from_warehouse']) && $filters['from_warehouse'] != '0', function ($query) use ($filters) {
-                return $query->where(['from_warehouse' => $filters['from_warehouse']]);
-            })->when(isset($filters['category_id']) && $filters['category_id'] != 'all', function ($query) use ($filters) {
-                return $query->where(['category_id' => $filters['category_id']]);
-            })->when(isset($filters['sub_category_id']) && $filters['sub_category_id'] != 'all', function ($query) use ($filters) {
-                return $query->where(['sub_category_id' => $filters['sub_category_id']]);
-            })->when(isset($filters['sub_sub_category_id']) && $filters['sub_sub_category_id'] != 'all', function ($query) use ($filters) {
-                return $query->where(['sub_sub_category_id' => $filters['sub_sub_category_id']]);
-            })->when(isset($filters['is_shipping_cost_updated']), function ($query) use ($filters) {
-                return $query->where(['is_shipping_cost_updated' => $filters['is_shipping_cost_updated']]);
-            })->when(isset($filters['status']), function ($query) use ($filters) {
-                return $query->where(['status' => $filters['status']]);
-            })->when(isset($filters['code']), function ($query) use ($filters) {
-                return $query->where(['code' => $filters['code']]);
-            })->when(isset($filters['productIds']), function ($query) use ($filters) {
-                return $query->whereIn('id', $filters['productIds']);
-            })->when(!empty($orderBy), function ($query) use ($orderBy) {
-                $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
-            });
+        })->when(isset($filters['from_warehouse']) && $filters['from_warehouse'] != '0', function ($query) use ($filters) {
+            return $query->where(['from_warehouse' => $filters['from_warehouse']]);
+        })->when(isset($filters['category_id']) && $filters['category_id'] != 'all', function ($query) use ($filters) {
+            return $query->where(['category_id' => $filters['category_id']]);
+        })->when(isset($filters['sub_category_id']) && $filters['sub_category_id'] != 'all', function ($query) use ($filters) {
+            return $query->where(['sub_category_id' => $filters['sub_category_id']]);
+        })->when(isset($filters['sub_sub_category_id']) && $filters['sub_sub_category_id'] != 'all', function ($query) use ($filters) {
+            return $query->where(['sub_sub_category_id' => $filters['sub_sub_category_id']]);
+        })->when(isset($filters['is_shipping_cost_updated']), function ($query) use ($filters) {
+            return $query->where(['is_shipping_cost_updated' => $filters['is_shipping_cost_updated']]);
+        })->when(isset($filters['status']), function ($query) use ($filters) {
+            return $query->where(['status' => $filters['status']]);
+        })->when(isset($filters['code']), function ($query) use ($filters) {
+            return $query->where(['code' => $filters['code']]);
+        })->when(isset($filters['productIds']), function ($query) use ($filters) {
+            return $query->whereIn('id', $filters['productIds']);
+        })
+        ->when(isset($filters['added_by']) && $filters['added_by'] != 'seller', function ($query) use ($filters) {
+            return $query->where(['added_by' => $filters['added_by']]);
+        })
+        ->when(isset($filters['user_id']), function ($query) use ($filters) {
+            return $query->where(['user_id' => $filters['user_id']]);
+        })
+        ->when(!empty($orderBy), function ($query) use ($orderBy) {
+            $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
+        });
 
         $filters += ['searchValue' => $searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
