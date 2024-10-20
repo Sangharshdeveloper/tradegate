@@ -92,7 +92,7 @@ class ProductController extends BaseController
      
         $filters = [
             'added_by' => 'dropshipper',
-            'user_id' => 19,
+            // 'seller_id' => $vendorId,
             'brand_id' => $request['brand_id'],
             'category_id' => $request['category_id'],
             'sub_category_id' => $request['sub_category_id'],
@@ -103,12 +103,12 @@ class ProductController extends BaseController
         $products = $this->productRepo->getListWhere(
             orderBy: ['id' => 'desc'],
             searchValue: $searchValue,
-            filters: ['added_by' => 'dropshipper'],
+            filters: $filters,
             relations: ['translations','seoInfo'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
 
-        dd($vendorId, $products);
+   
 
       
         $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
