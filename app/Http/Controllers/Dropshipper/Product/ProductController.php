@@ -111,7 +111,7 @@ class ProductController extends BaseController
    
 
       
-        $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
+        $brands = $this->brandRepo->getListWhere(filters: ['status' => 9], dataLimit: 'all');
         $categories = $this->categoryRepo->getListWhere(filters: ['position' => 0], dataLimit: 'all');
         $subCategory = $this->categoryRepo->getFirstWhere(params: ['id' => $request['sub_category_id']]);
         $subSubCategory = $this->categoryRepo->getFirstWhere(params: ['id' => $request['sub_sub_category_id']]);
