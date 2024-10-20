@@ -88,6 +88,8 @@ class ProductController extends BaseController
     public function getListView(Request $request, $type): View
     {
         $vendorId = auth('seller')->id();
+
+        dd($vendorId);
         $filters = [
             'added_by' => 'dropshipper',
             'seller_id' => $vendorId,
