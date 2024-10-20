@@ -160,10 +160,12 @@ class ProductController extends BaseController
 
     public function getUpdateView(string|int $id): RedirectResponse|View
     {
+
+        // 'user_id' => auth('seller')->id(), 'added_by' => 'seller'
         $product = $this->productRepo->getFirstWhereWithoutGlobalScope(params: ['id' => $id, 'user_id' => auth('seller')->id(), 'added_by' => 'seller'], relations: ['translations', 'seoInfo', 'digitalProductAuthors', 'digitalProductPublishingHouse']);
         if (!$product) {
             Toastr::error(translate('invalid_product'));
-            return redirect()->route('vendor.products.list', ['type' => 'all']);
+            return redirect()->route('dropshipper.products.list', ['type' => 'all']);
         }
         $productAuthorIds = $this->productService->getProductAuthorsInfo(product: $product)['ids'];
         $productPublishingHouseIds = $this->productService->getProductPublishingHouseInfo(product: $product)['ids'];
@@ -334,9 +336,10 @@ class ProductController extends BaseController
         $vendorId = auth('seller')->id();
         $productActive = $this->productRepo->getFirstWhereActive(params: ['id' => $id, 'user_id' => $vendorId]);
         $relations = ['category', 'brand', 'reviews', 'rating', 'orderDetails', 'orderDelivered', 'translations','seoInfo'];
-        $product = $this->productRepo->getFirstWhereWithoutGlobalScope(params: ['id' => $id, 'user_id' => $vendorId], relations: $relations);
+        $product = $this->productRepo->getFirstWhereWithoutGlobalScope(params: ['id' => $id], relations: $relations);
+        // 'user_id' => $vendorId
         if (!$product) {
-            return redirect()->route('vendor.products.list', ['type' => 'all']);
+            return redirect()->route('dropshipper.products.list', ['type' => 'all']);
         }
         $isActive = $this->productRepo->getWebFirstWhereActive(params: ['id' => $id]);
         $product['priceSum'] = $product?->orderDelivered->sum('price');
