@@ -9,6 +9,11 @@
 @endpush
 
 @section('content')
+@php
+
+dd($product);
+
+@endphp
     <div class="content container-fluid">
         <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
             <h2 class="h1 mb-0 d-flex align-items-center gap-2">
