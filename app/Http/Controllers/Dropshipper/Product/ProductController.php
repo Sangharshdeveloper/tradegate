@@ -92,7 +92,7 @@ class ProductController extends BaseController
      
         $filters = [
             'added_by' => 'dropshipper',
-            'user_id' => $vendorId,
+            'user_id' => 19,
             'brand_id' => $request['brand_id'],
             'category_id' => $request['category_id'],
             'sub_category_id' => $request['sub_category_id'],
@@ -108,7 +108,7 @@ class ProductController extends BaseController
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
 
-        dd( $products);
+        dd($vendorId, $products);
 
       
         $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
