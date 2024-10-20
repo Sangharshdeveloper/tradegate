@@ -199,8 +199,6 @@ class ProductRepository implements ProductRepositoryInterface
             $query->orderBy(array_key_first($orderBy), array_values($orderBy)[0]);
         });
 
-        dd($query);
-
         $filters += ['searchValue' => $searchValue];
         return $dataLimit == 'all' ? $query->get() : $query->paginate($dataLimit)->appends($filters);
     }
