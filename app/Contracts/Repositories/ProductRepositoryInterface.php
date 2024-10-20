@@ -19,6 +19,9 @@ interface ProductRepositoryInterface extends RepositoryInterface
      */
     public function getFirstWhereActive(array $params, array $relations = []): ?Model;
 
+
+    public function getListWhere(array $orderBy=[], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator;
+
     /**
      * @param array $params
      * @param array $relations
