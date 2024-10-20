@@ -89,7 +89,7 @@ class ProductController extends BaseController
     {
         $vendorId = auth('seller')->id();
         $filters = [
-            'added_by' => 'supplier',
+            'added_by' => 'dropshipper',
             'seller_id' => $vendorId,
             'brand_id' => $request['brand_id'],
             'category_id' => $request['category_id'],
@@ -140,7 +140,7 @@ class ProductController extends BaseController
             return response()->json([], 200);
         }
 
-        $dataArray = $service->getAddProductData(request: $request, addedBy: 'supplier', fromWareHouse: '1');
+        $dataArray = $service->getAddProductData(request: $request, addedBy: 'dropshipper', fromWareHouse: '1');
         $savedProduct = $this->productRepo->add(data: $dataArray);
         $this->productRepo->addRelatedTags(request: $request, product: $savedProduct);
         $this->translationRepo->add(request: $request, model: 'App\Models\Product', id: $savedProduct->id);

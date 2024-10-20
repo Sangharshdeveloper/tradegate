@@ -72,8 +72,8 @@
                                     <div class="col-12">
                                         <div class="d-md-flex justify-content-md-between">
                                             <h4 class="text-capitalize">{{$product['name']}}</h4>
-                                            <a class="btn btn--primary btn-sm" href="{{route('vendor.products.update',['id'=>$product['id'],'product-gallery'=>1]) }}">
-                                                {{translate('use_this_product_info')}}
+                                            <a class="btn btn--primary btn-sm" href="{{route('dropshipper.products.update',['id'=>$product['id'],'product-gallery'=>1]) }}">
+                                                {{'Resell this product'}}
                                             </a>
                                         </div>
                                     </div>
@@ -205,5 +205,5 @@
 
         </div>
     </div>
-    <span id="get-product-gallery-route" data-action="{{route('vendor.products.product-gallery')}}" data-brand-id="{{request('brand_id')}}" data-category-id="{{request('category_id')}}" data-vendor-id="{{request('vendor_id')}}">
+    <span id="get-product-gallery-route" data-action="{{route('dropshipper.products.product-gallery')}}" data-brand-id="{{request('brand_id')}}" data-category-id="{{request('category_id')}}" data-vendor-id="{{request('vendor_id')}}">
 @endsection
