@@ -56,6 +56,7 @@ use App\Http\Controllers\Payment_Methods\PaystackController;
 |
 */
 
+
 Route::controller(WebController::class)->group(function () {
     Route::get('maintenance-mode', 'maintenance_mode')->name('maintenance-mode');
 });
