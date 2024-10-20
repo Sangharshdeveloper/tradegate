@@ -185,9 +185,7 @@ class ProductRepository implements ProductRepositoryInterface
         })->when(isset($filters['productIds']), function ($query) use ($filters) {
             return $query->whereIn('id', $filters['productIds']);
         })
-        ->when(isset($filters['added_by']) && $filters['added_by'] != 'seller', function ($query) use ($filters) {
-            return $query->where(['added_by' => $filters['added_by']]);
-        })
+      
         ->when(isset($filters['user_id']), function ($query) use ($filters) {
             return $query->where(['user_id' => $filters['user_id']]);
         })
