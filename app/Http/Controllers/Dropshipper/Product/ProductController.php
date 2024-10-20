@@ -163,6 +163,7 @@ class ProductController extends BaseController
 
         // 'user_id' => auth('seller')->id(), 'added_by' => 'seller'
         $product = $this->productRepo->getFirstWhereWithoutGlobalScope(params: ['id' => $id, 'user_id' => auth('seller')->id(), 'added_by' => 'seller'], relations: ['translations', 'seoInfo', 'digitalProductAuthors', 'digitalProductPublishingHouse']);
+        dd($product);
         if (!$product) {
             Toastr::error(translate('invalid_product'));
             return redirect()->route('dropshipper.products.list', ['type' => 'all']);

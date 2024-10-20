@@ -1,6 +1,6 @@
 @extends('layouts.back-end.app-dropshipper')
 
-@section('title', translate(request('product-gallery')==1 ?'product_Add' :'product_Edit'))
+@section('title', 'Resell Product')
 
 @push('css_or_js')
     <link href="{{ dynamicAsset(path: 'public/assets/back-end/css/tags-input.min.css') }}" rel="stylesheet">
@@ -13,7 +13,7 @@
         <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
             <h2 class="h1 mb-0 d-flex align-items-center gap-2">
                 <img src="{{ dynamicAsset(path: 'public/assets/back-end/img/inhouse-product-list.png') }}" alt="">
-                {{ translate(request('product-gallery')==1 ?'product_Add' :'product_Edit') }}
+                {{ 'Resell Product' }}
             </h2>
         </div>
 <!--  : route('dropshipper.products.update',$product->id) -->
