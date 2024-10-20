@@ -116,7 +116,7 @@ class DashboardController extends BaseController
             'collectedTotalTax' => $vendorWallet->total_tax_collected ?? 0,
         ];
         $withdrawalMethods = $this->withdrawalMethodRepo->getListWhere(filters:['is_active'=>1],dataLimit:'all');
-        return view(Dashboard::INDEX_DROPSHIPPER[VIEW],compact('dashboardData','vendorEarning','commissionEarn','withdrawalMethods','dateType','label'));
+        return view(Dashboard::INDEX[VIEW],compact('dashboardData','vendorEarning','commissionEarn','withdrawalMethods','dateType','label'));
     }
 
     /**
@@ -127,7 +127,7 @@ class DashboardController extends BaseController
     {
         $orderStatus = $this->getOrderStatusArray($type);
         return response()->json([
-            'view' => view(Dashboard::ORDER_STATUS_SUPPLIER[VIEW], compact('orderStatus'))->render()
+            'view' => view(Dashboard::ORDER_STATUS[VIEW], compact('orderStatus'))->render()
         ], 200);
     }
 
@@ -149,7 +149,7 @@ class DashboardController extends BaseController
         $commissionEarn = array_values($commissionEarn);
         $label = $dateTypeArray['keyRange'] ?? [];
         return response()->json([
-            'view' => view(Dashboard::EARNING_STATISTICS_SUPPLIER[VIEW], compact('vendorEarning','commissionEarn','label','dateType'))->render(),
+            'view' => view(Dashboard::EARNING_STATISTICS[VIEW], compact('vendorEarning','commissionEarn','label','dateType'))->render(),
         ]);
     }
 
