@@ -101,9 +101,9 @@ class ProductController extends BaseController
         ];
         $searchValue = $request['searchValue'];
         $products = $this->productRepo->getListWhere(
-            orderBy: ['id' => 'desc'],
-            searchValue: $searchValue,
-            filters: $filters,
+            // orderBy: ['id' => 'desc'],
+            // searchValue: $searchValue,
+            filters: ['added_by' => 'dropshipper'],
             relations: ['translations','seoInfo'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
