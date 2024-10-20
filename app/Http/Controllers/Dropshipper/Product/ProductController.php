@@ -103,7 +103,7 @@ class ProductController extends BaseController
         $products = $this->productRepo->getListWhere(
             // orderBy: ['id' => 'desc'],
             // searchValue: $searchValue,
-            filters: ['added_by' => 'dropshipper'],
+            filters: $filters,
             relations: ['translations','seoInfo'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
@@ -340,7 +340,7 @@ class ProductController extends BaseController
         $vendorId = auth('seller')->id();
         $productActive = $this->productRepo->getFirstWhereActive(params: ['id' => $id, 'user_id' => $vendorId]);
         $relations = ['category', 'brand', 'reviews', 'rating', 'orderDetails', 'orderDelivered', 'translations','seoInfo'];
-        $product = $this->productRepo->getFirstWhereWithoutGlobalScope(params: ['id' => $id], relations: $relations);
+        $product = $this->productRepo->getFirstWhereWithoutGlobalScope(params: ['id' => $id,'added_by' => 'dropshipper'], relations: $relations);
         // 'user_id' => $vendorId
         if (!$product) {
             return redirect()->route('dropshipper.products.list', ['type' => 'all']);
@@ -359,7 +359,7 @@ class ProductController extends BaseController
             }
         }
 
-        $reviews = $this->reviewRepo->getListWhere(orderBy: ['created_at' => 'desc'], filters: ['product_id' => ['product_id' => $id], 'whereNull' => ['column' => 'delivery_man_id'],'added_by' => 'dropshipper'], dataLimit: getWebConfig(name: 'pagination_limit'));
+        $reviews = $this->reviewRepo->getListWhere(orderBy: ['created_at' => 'desc'], filters: ['product_id' => ['product_id' => $id], 'whereNull' => ['column' => 'delivery_man_id']], dataLimit: getWebConfig(name: 'pagination_limit'));
         return view(Product::VIEW[VIEW], compact('product', 'reviews', 'productActive', 'productColors', 'isActive'));
     }
 
