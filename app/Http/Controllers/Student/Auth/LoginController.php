@@ -49,14 +49,14 @@ class LoginController extends Controller
         $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
         $recaptcha = getWebConfig(name: 'recaptcha');
         Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
-        return view(Auth::DROPSHIPPER_LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
+        return view(Auth::LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
     }
     public function getLoginViewDropshipper(): View
     {
         $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
         $recaptcha = getWebConfig(name: 'recaptcha');
         Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
-        return view(Auth::DROPSHIPPER_LOGOUT[VIEW], compact('recaptchaBuilder', 'recaptcha'));
+        return view(Auth::LOGOUT[VIEW], compact('recaptchaBuilder', 'recaptcha'));
     }
 
     public function getLoginViewSupplier(): View
@@ -64,7 +64,7 @@ class LoginController extends Controller
         $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
         $recaptcha = getWebConfig(name: 'recaptcha');
         Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
-        return view(Auth::DROPSHIPPER_LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
+        return view(Auth::LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
     }
 
     public function login(LoginRequest $request): JsonResponse

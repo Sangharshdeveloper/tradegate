@@ -67,6 +67,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                 Route::post(Auth::LOGIN[URI], 'loginDropshipper')->name('login');
                 Route::get(Auth::LOGOUT[URI], 'logoutDropshipper')->name('logout');
             });
+
             Route::group(['prefix' => 'forgot-password', 'as' => 'forgot-password.'], function () {
                 Route::controller(ForgotPasswordController::class)->group(function () {
                     Route::get(ForgotPassword::INDEX[URI], 'index')->name('index');
@@ -77,12 +78,14 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                     Route::post(ForgotPassword::RESET_PASSWORD[URI], 'resetPassword');
                 });
             });
+
             Route::group(['prefix' => 'registration', 'as' => 'registration.'], function () {
                 Route::controller(RegisterController::class)->group(function () {
                     Route::get(Auth::REGISTRATION[URI], 'index')->name('index');
                     Route::post(Auth::REGISTRATION[URI], 'add');
                 });
             });
+            
         });
         /* end authentication */
         Route::group(['middleware' => ['seller']], function () {
