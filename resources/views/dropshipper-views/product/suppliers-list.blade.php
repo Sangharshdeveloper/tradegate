@@ -18,13 +18,13 @@
                 @if(count($suppliers) > 0)
                     <div class="row mx-n2 __min-h-200px">
                         @foreach ($suppliers  as $key=>$seller)
-                        @php dd($suppliers) @endphp
+                        @php dd($seller->id) @endphp
 
                             @php($current_date = date('Y-m-d'))
                             @php($start_date = date('Y-m-d', strtotime($seller->vacation_start_date)))
                             @php($end_date = date('Y-m-d', strtotime($seller->vacation_end_date)))
                             <div class="col-lg-3 col-md-6 col-sm-12 px-2 pb-4 text-center">
-                                <a href="{{route('dropshipper.products.shop-gallery',['id' => $seller?->shop?->id])}}" class="others-store-card text-capitalize">
+                                <a href="{{route('dropshipper.products.shop-gallery',['id' => $seller?->shop?->id, 'seller_id' => $seller?->id ])}}" class="others-store-card text-capitalize">
                                     <div class="overflow-hidden other-store-banner">
                                         <img class="w-100 h-100 object-cover" alt="" src="{{ getStorageImages(path: $seller?->shop?->banner_full_url, type: 'shop-banner') }}">
                                     </div>
