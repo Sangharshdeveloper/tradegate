@@ -17,7 +17,7 @@
             </h2>
         </div>
 
-        <form class="product-form text-start" action="{{ route('vendor.products.add') }}"
+        <form class="product-form text-start" action="{{ route('supplier.products.add') }}"
               method="POST" enctype="multipart/form-data" id="product_form">
             @csrf
             <div class="card">
@@ -263,6 +263,22 @@
                                 <input type="number" min="0" step="0.01"
                                        placeholder="{{ translate('purchase_price') }}"
                                        value="{{ old('purchase_price') }}" name="purchase_price"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="d-flex gap-2 mb-2">
+                                    <label class="title-color mb-0">{{ translate('purchase_price') }}
+                                        ({{ getCurrencySymbol(currencyCode: getCurrencyCode()) '(For Students)' }})
+                                    </label>
+                                    <span class="input-label-secondary cursor-pointer" data-toggle="tooltip"
+                                          title="{{ translate('add_the_purchase_price_for_this_product') }}.">
+                                        <img src="{{ dynamicAsset(path: 'public/assets/back-end/img/info-circle.svg') }}" alt="">
+                                    </span>
+                                </div>
+                                <input type="number" min="0" step="0.01"
+                                       placeholder="{{ translate('purchase_price') }}"
+                                       value="{{ old('purchase_price_for_student') }}" name="purchase_price_for_student"
                                        class="form-control" required>
                             </div>
                         </div>

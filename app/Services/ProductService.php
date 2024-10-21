@@ -388,6 +388,7 @@ class ProductService
         $digitalFileCombinations = $this->getDigitalVariationCombinations(arrays: $digitalFileOptions);
 
         return [
+            'purchase_price_for_student' => $request['purchase_price_for_student'] ?? '0',
             'original_seller_id' => $request['original_seller_id'],
             'original_product_id' => $request['product_id'],
             'added_by' => $addedBy,

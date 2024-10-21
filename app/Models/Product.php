@@ -59,6 +59,7 @@ use Illuminate\Support\Facades\DB;
  * @property int $original_seller_id
  * @property int $original_product_id
  * @property int $is_shipping_cost_updated
+ * @property float $purchase_price_for_student
  */
 class Product extends Model
 {
@@ -119,6 +120,7 @@ class Product extends Model
         'from_warehouse',
         'original_seller_id',
         'original_product_id',
+        'purchase_price_for_student',
     ];
 
     /**
@@ -175,6 +177,7 @@ class Product extends Model
         'from_warehouse' => 'string',
         'original_seller_id'=> 'int',
         'original_product_id'=> 'int',
+        'purchase_price_for_student' => 'float'
     ];
 
     protected $appends = ['is_shop_temporary_close', 'thumbnail_full_url', 'preview_file_full_url', 'color_images_full_url', 'meta_image_full_url', 'images_full_url', 'digital_file_ready_full_url'];
