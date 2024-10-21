@@ -14,6 +14,11 @@ enum Product
         VIEW => 'dropshipper-views.product.list'
     ];
 
+    const SUPPLIER_LIST = [
+        URI => 'suppliers-list',
+        VIEW => 'dropshipper-views.product.suppliers-list'
+    ];
+
     const UPDATE = [
         URI => 'update',
         VIEW => 'dropshipper-views.product.edit'

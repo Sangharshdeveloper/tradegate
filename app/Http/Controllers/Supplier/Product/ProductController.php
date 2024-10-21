@@ -84,6 +84,11 @@ class ProductController extends BaseController
         return $this->getListView(request: $request, type: $type);
     }
 
+    public function suppliers(?Request $request, string|array $type = null): View|Collection|LengthAwarePaginator|null|callable|RedirectResponse
+    {
+        return $this->getListViewSuppliers(request: $request, type: $type);
+    }
+
     public function getListView(Request $request, $type): View
     {
         $vendorId = auth('seller')->id();

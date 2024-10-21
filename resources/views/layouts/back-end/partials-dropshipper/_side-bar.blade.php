@@ -316,7 +316,15 @@
                                     <a class="nav-link " href="{{route('dropshipper.products.product-gallery')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span
-                                            class="text-truncate text-capitalize">{{translate('product_gallery')}}</span>
+                                            class="text-truncate text-capitalize">Warehouse Products</span>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item {{Request::is('dropshipper/products/'.Product::SUPPLIER_LIST[URI])?'active':''}}">
+                                    <a class="nav-link " href="{{route('dropshipper.products.suppliers-list')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span
+                                            class="text-truncate text-capitalize">Suppliers Products</span>
                                     </a>
                                 </li>
 

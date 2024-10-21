@@ -14,6 +14,11 @@ enum Product
         VIEW => 'supplier-views.product.list'
     ];
 
+    const SUPLLIERS_LIST = [
+        URI => 'suppliers-product-list',
+        VIEW => 'supplier-views.product.suppliers-product-list'
+    ];
+
     const UPDATE = [
         URI => 'update',
         VIEW => 'supplier-views.product.edit'
