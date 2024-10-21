@@ -54,7 +54,9 @@
                     </div>
                 </div>
                 <div class="card-body">
+               
                     @foreach($products as $product)
+                    @php dd($product) @endphp
                         <div class="mb-3 refund-details-card--2 p-3">
                             <div class="d-flex gap-3 flex-wrap flex-md-nowrap justify-content-center justify-content-md-start">
                                 <div class="media flex-nowrap flex-column flex-sm-row gap-3">

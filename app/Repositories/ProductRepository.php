@@ -192,6 +192,9 @@ class ProductRepository implements ProductRepositoryInterface
         ->when(isset($filters['from_dropshipper']), function ($query) use ($filters) {
             return $query->where(['added_by' => 'dropshipper']);
         })
+        ->when(isset($filters['shop_id']), function ($query) use ($filters) {
+            return $query->where(['added_by' => 'dropshipper']);
+        })
         ->when(isset($filters['user_id']), function ($query) use ($filters) {
             return $query->where(['user_id' => $filters['user_id']]);
         })
