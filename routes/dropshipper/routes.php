@@ -157,7 +157,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                     Route::get(Product::BULK_IMPORT[URI], 'getBulkImportView')->name('bulk-import');
                     Route::post(Product::BULK_IMPORT[URI], 'importBulkProduct');
                     Route::get(Product::SEARCH[URI], 'getSearchedProductsView')->name('search-product');
-                    Route::get(Product::PRODUCT_GALLERY[URI], 'getProductGalleryView')->name('product-gallery');
+                    Route::get(Product::PRODUCT_GALLERY[URI], 'getJustProductGalleryView')->name('product-gallery');
                     Route::get(Product::STOCK_LIMIT_STATUS[URI], 'getStockLimitStatus')->name('stock-limit-status');
                     Route::post(Product::DELETE_PREVIEW_FILE[URI], 'deletePreviewFile')->name('delete-preview-file');
                 });

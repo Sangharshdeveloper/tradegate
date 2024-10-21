@@ -659,12 +659,46 @@ class ProductController extends BaseController
         $filters = [
             'shop_id' => $request['id'],
             'seller_id'=> $request['seller_id'],
+          
             // 'searchValue' => $searchValue,
             // 'request_status' => 1,
             // 'seller_id' => $vendorId,
             // 'brand_id' => $request['brand_id'],
             // 'category_id' => $request['category_id'],
         //    'added_by' =>'supplier',
+
+        ];
+
+
+    
+
+        $products =  $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['translations'], dataLimit: getWebConfig(WebConfigKey::PAGINATION_LIMIT));
+        
+        $products->map(function ($product) {
+            if ($product->product_type == 'physical' && count(json_decode($product->choice_options)) > 0 || count(json_decode($product->colors)) > 0) {
+                $colorName = [];
+                $colorsCollection = collect(json_decode($product->colors));
+                $colorsCollection->map(function ($color) use (&$colorName) {
+                    $colorName[] = $this->colorRepo->getFirstWhere(['code' => $color])->name;
+                });
+                $product['colorsName'] = $colorName;
+            }
+        });
+       
+        $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
+
+        $categories = $this->categoryRepo->getListWhere(filters: ['position' => 0], dataLimit: 'all');
+
+        return view(Product::PRODUCT_GALLERY[VIEW], compact('products', 'brands', 'categories', 'searchValue'));
+
+    }
+
+    public function getJustProductGalleryView(Request $request): View
+    {
+        $vendorId = auth('seller')->id();
+        $searchValue = $request['searchValue'];
+        $filters = [
+            'for_resell'=> '1',
 
         ];
 
@@ -710,6 +744,8 @@ class ProductController extends BaseController
             return response()->json(['status' => 'multiple_product', 'product_count' => $products->count()]);
         }
     }
+
+    
 
     public function deletePreviewFile(Request $request): JsonResponse
     {
