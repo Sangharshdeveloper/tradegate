@@ -269,7 +269,7 @@
                             <div class="form-group">
                                 <div class="d-flex gap-2 mb-2">
                                     <label class="title-color mb-0">{{ translate('purchase_price') }}
-                                        ({{ getCurrencySymbol(currencyCode: getCurrencyCode()) '(For Students)' }})
+                                        ({{ getCurrencySymbol(currencyCode: getCurrencyCode()) "|For Students|" }})
                                     </label>
                                     <span class="input-label-secondary cursor-pointer" data-toggle="tooltip"
                                           title="{{ translate('add_the_purchase_price_for_this_product') }}.">
@@ -277,7 +277,7 @@
                                     </span>
                                 </div>
                                 <input type="number" min="0" step="0.01"
-                                       placeholder="{{ translate('purchase_price') }}"
+                                       placeholder="Purchase price for student"
                                        value="{{ old('purchase_price_for_student') }}" name="purchase_price_for_student"
                                        class="form-control" required>
                             </div>
