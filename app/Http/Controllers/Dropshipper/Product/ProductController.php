@@ -658,12 +658,13 @@ class ProductController extends BaseController
         $searchValue = $request['searchValue'];
         $filters = [
             'shop_id' => $request['id'],
+            'seller_id'=> $request['seller_id'],
             // 'searchValue' => $searchValue,
             // 'request_status' => 1,
             // 'seller_id' => $vendorId,
             // 'brand_id' => $request['brand_id'],
             // 'category_id' => $request['category_id'],
-           'added_by' =>'supplier',
+        //    'added_by' =>'supplier',
 
         ];
 
