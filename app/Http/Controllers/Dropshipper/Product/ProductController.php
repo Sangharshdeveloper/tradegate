@@ -18,7 +18,6 @@ use App\Contracts\Repositories\PublishingHouseRepositoryInterface;
 use App\Contracts\Repositories\ReviewRepositoryInterface;
 use App\Contracts\Repositories\VendorRepositoryInterface;
 use App\Contracts\Repositories\WishlistRepositoryInterface;
-use App\Enums\ViewPaths\Admin\Dropshipper;
 use App\Enums\ViewPaths\Dropshipper\Product;
 use App\Enums\WebConfigKey;
 use App\Exports\ProductListExport;
@@ -103,7 +102,7 @@ class ProductController extends BaseController
             relations: ['orders', 'product'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
-        return view(Dropshipper::SUPPLIERS_LIST[VIEW], compact('suppliers', 'current_date'));
+        return view(Product::SUPPLIER_LIST[VIEW], compact('suppliers', 'current_date'));
     }
 
     
