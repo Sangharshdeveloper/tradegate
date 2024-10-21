@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dropshipper;
+namespace App\Http\Controllers\Student;
 
 use App\Contracts\Repositories\ChattingRepositoryInterface;
 use App\Contracts\Repositories\CustomerRepositoryInterface;

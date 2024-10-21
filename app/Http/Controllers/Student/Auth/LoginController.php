@@ -51,7 +51,7 @@ class LoginController extends Controller
         Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
         return view(Auth::LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
     }
-    public function getLoginViewDropshipper(): View
+    public function getLogOutViewStudent(): View
     {
         $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
         $recaptcha = getWebConfig(name: 'recaptcha');
@@ -59,7 +59,7 @@ class LoginController extends Controller
         return view(Auth::LOGOUT[VIEW], compact('recaptchaBuilder', 'recaptcha'));
     }
 
-    public function getLoginViewSupplier(): View
+    public function getLoginViewStudent(): View
     {
         $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
         $recaptcha = getWebConfig(name: 'recaptcha');
