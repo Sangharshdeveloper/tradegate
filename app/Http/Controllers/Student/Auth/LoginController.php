@@ -29,7 +29,7 @@ class LoginController extends Controller
 
     )
     {
-        $this->middleware('guest:seller', ['except' => ['logout']]);
+        $this->middleware('guest:student', ['except' => ['logout']]);
     }
 
     public function generateReCaptcha(): void
