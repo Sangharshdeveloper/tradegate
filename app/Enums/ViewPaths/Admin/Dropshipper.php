@@ -31,10 +31,17 @@ enum Dropshipper
         VIEW => 'dropshipper-views.dropshipper.suppliers-list'
     ];
 
+ 
+
 
     const PRODUCT_LIST = [
         URI => 'product-list',
         VIEW => 'admin-views.dropshipper.product-list'
+    ];
+
+    const SHOP_GALLERY = [
+        URI => 'shop-gallery',
+        VIEW => 'dropshipper-views.dropshipper.shop-gallery'
     ];
 
 
