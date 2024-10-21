@@ -1,5 +1,5 @@
 @php use Illuminate\Support\Str; @endphp
-@extends('layouts.back-end.app-dropshipper')
+@extends('layouts.back-end.app')
 
 @section('title', 'Suppliers List')
 

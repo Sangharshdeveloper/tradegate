@@ -28,7 +28,7 @@ enum Dropshipper
 
     const SUPPLIERS_LIST = [
         URI => 'product-list',
-        VIEW => 'admin-views.dropshipper.supplier-list'
+        VIEW => 'admin-views.dropshipper.suppliers-list'
     ];
 
 
