@@ -305,7 +305,7 @@
                                     </span>
                                 </div>
                                 <input type="number" min="0" step="0.01"
-                                       placeholder="{{ translate('unit_price') }}" name="purchase_price_for_student"
+                                       placeholder="Unit price for student" name="purchase_price_for_student"
                                        value="{{ old('purchase_price_for_student') }}" class="form-control" required>
                             </div>
                         <div class="col-md-6 col-lg-4 col-xl-3" id="minimum_order_qty">
