@@ -196,7 +196,7 @@ class ProductRepository implements ProductRepositoryInterface
             return $query->where(['user_id' => $filters['seller_id']]);
         })
         ->when(isset($filters['for_resell']), function ($query) use ($filters) {
-            return $query->where(['added_by' => $filters['admin']]);
+            return $query->where(['added_by' => 'admin']);
         })
         ->when(isset($filters['user_id']), function ($query) use ($filters) {
             return $query->where(['user_id' => $filters['user_id']]);
