@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="_token" content="{{ csrf_token() }}">
-    <title>{{'Dropshipper Login'}}</title>
+    <title>{{'Student Login'}}</title>
     <link rel="shortcut icon" href="{{ getStorageImages(path:getWebConfig(name: 'company_fav_icon')) }}">
     <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/google-fonts.css')}}">
     <link rel="stylesheet" href="{{dynamicAsset(path: 'public/assets/back-end/css/bootstrap.min.css')}}">
@@ -47,13 +47,13 @@
             <div class="col-md-7 col-lg-5">
                 <div class="card card-lg mb-5">
                     <div class="card-body">
-                        <form action="{{route('dropshipper.auth.login')}}" method="post" id="vendor-login-form">
+                        <form action="{{route('student.auth.login')}}" method="post" id="vendor-login-form">
                             @csrf
                             <div class="text-center">
                                 <div class="mb-5">
                                     <h1 class="display-4">{{translate('sign_in')}}</h1>
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">{{'Welcome back to dropshipper login'}}</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">{{'Welcome back to student login'}}</h1>
                                     </div>
                                 </div>
                             </div>
