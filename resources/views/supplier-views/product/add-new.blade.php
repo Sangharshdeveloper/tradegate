@@ -288,7 +288,10 @@
                             </div>
 
 
-                            <div class="form-group">
+                            
+                        </div>
+
+                        <div class="form-group">
                                 <div class="d-flex gap-2 mb-2">
                                     <label class="title-color mb-0">
                                         {{ translate('unit_price') }}
@@ -305,7 +308,6 @@
                                        placeholder="{{ translate('unit_price') }}" name="purchase_price_for_student"
                                        value="{{ old('purchase_price_for_student') }}" class="form-control" required>
                             </div>
-                        </div>
                         <div class="col-md-6 col-lg-4 col-xl-3" id="minimum_order_qty">
                             <div class="form-group">
                                 <div class="d-flex gap-2 mb-2">
