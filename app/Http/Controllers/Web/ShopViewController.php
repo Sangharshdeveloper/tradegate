@@ -42,7 +42,7 @@ class ShopViewController extends Controller
         $totalOrder = Order::when($sellerType == 'admin', function ($query) {
             return $query->where(['seller_is' => 'admin']);
         })->when($sellerType == 'seller', function ($query) use ($sellerId) {
-            return $query->where(['seller_is' => 'seller', 'seller_id' => $sellerId]);
+            return $query->where(['seller_is' => 'seller','seller_is' => 'dropshipper', 'seller_id' => $sellerId]);
         })->where('order_type', 'default_type')->count();
 
         $inhouseVacation = getWebConfig(name: 'vacation_add');
