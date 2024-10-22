@@ -247,7 +247,7 @@ class OrderController extends BaseController
         $vendorId = auth('seller')->id();
         $vendor = $this->vendorRepo->getFirstWhere(params: ['id' => $vendorId])['gst'];
 
-        $params = ['id' => $id, 'seller_id' => $vendorId, 'seller_is' => 'seller'];
+        $params = ['id' => $id, 'seller_id' => $vendorId, 'seller_is' => 'dropshipper'];
         $relations = ['details', 'customer', 'shipping', 'seller'];
         $order = $this->orderRepo->getFirstWhere(params: $params, relations: $relations);
         $invoiceSettings = json_decode(json: $this->businessSettingRepo->getFirstWhere(params: ['type' => 'invoice_settings'])?->value);
@@ -265,7 +265,7 @@ class OrderController extends BaseController
         $deliveryCountry = $this->deliveryCountryCodeRepo->getList(dataLimit: 'all');
         $countries = $countryRestrictStatus ? $service->getDeliveryCountryArray(deliveryCountryCodes: $deliveryCountry) : GlobalConstant::COUNTRIES;
         $zipCodes = $zipRestrictStatus ? $this->deliveryZipCodeRepo->getList(dataLimit: 'all') : 0;
-        $params = ['id' => $id, 'seller_id' => $vendorId, 'seller_is' => 'seller'];
+        $params = ['id' => $id, 'seller_id' => $vendorId, 'seller_is' => 'dropshipper'];
         $relations = ['deliveryMan', 'verificationImages', 'details', 'customer', 'shipping', 'offlinePayments'];
         $order = $this->orderRepo->getFirstWhere(params: $params, relations: $relations);
 
