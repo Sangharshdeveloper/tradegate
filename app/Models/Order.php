@@ -52,6 +52,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property bool $checked
  * @property string $shipping_type
  * @property string $delivery_type
+ * @property string $original_seller_id
  * @property string $delivery_service_name
  * @property string $third_party_delivery_tracking_id
  */
@@ -88,6 +89,7 @@ class Order extends Model
         'verification_status',
         'seller_id',
         'seller_is',
+        'original_seller_id',
         'shipping_address_data',
         'delivery_man_id',
         'deliveryman_charge',
@@ -148,6 +150,7 @@ class Order extends Model
         'checked' => 'boolean',
         'shipping_type' => 'string',
         'delivery_type' => 'string',
+        'original_seller_id' => 'int',
         'delivery_service_name' => 'string',
         'third_party_delivery_tracking_id' => 'string',
     ];

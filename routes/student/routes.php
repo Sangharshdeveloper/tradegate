@@ -58,7 +58,7 @@ use App\Http\Controllers\Student\OrderReportController;
 
 // Route::group(['middleware' => ['maintenance_mode']], function () {
 
-    Route::group(['prefix' => 'student', 'as' => 'student.'], function () {
+    Route::group(['prefix' => 'studentx', 'as' => 'studentx.'], function () {
         /* authentication */
         Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
             Route::controller(LoginController::class)->group(function () {
