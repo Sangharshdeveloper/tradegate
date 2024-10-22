@@ -170,13 +170,19 @@ class ProductManager
         $productListData = Product::active()->withSum('orderDetails', 'qty', function ($query) {
             $query->where('delivery_status', 'delivered');
         })
-            ->with(['seller.shop', 'category', 'reviews', 'rating', 'flashDealProducts.flashDeal',
+            ->with([
+                'seller.shop',
+                'category',
+                'reviews',
+                'rating',
+                'flashDealProducts.flashDeal',
                 'wishList' => function ($query) use ($user) {
                     return $query->where('customer_id', $user != 'offline' ? $user->id : '0');
                 },
                 'compareList' => function ($query) use ($user) {
                     return $query->where('user_id', $user != 'offline' ? $user->id : '0');
-                }])
+                }
+            ])
             ->withCount(['reviews', 'wishList' => function ($query) use ($user) {
                 $query->where('customer_id', $user != 'offline' ? $user->id : '0');
             }]);
@@ -228,13 +234,19 @@ class ProductManager
         $productListData = Product::active()->withSum('orderDetails', 'qty', function ($query) {
             $query->where('delivery_status', 'delivered');
         })
-            ->with(['seller.shop', 'category', 'reviews', 'rating', 'flashDealProducts.flashDeal',
+            ->with([
+                'seller.shop',
+                'category',
+                'reviews',
+                'rating',
+                'flashDealProducts.flashDeal',
                 'wishList' => function ($query) use ($user) {
                     return $query->where('customer_id', $user != 'offline' ? $user->id : '0');
                 },
                 'compareList' => function ($query) use ($user) {
                     return $query->where('user_id', $user != 'offline' ? $user->id : '0');
-                }])
+                }
+            ])
             ->withCount(['reviews', 'wishList' => function ($query) use ($user) {
                 $query->where('customer_id', $user != 'offline' ? $user->id : '0');
             }]);
@@ -664,7 +676,7 @@ class ProductManager
             ->withCount(['reviews', 'wishList' => function ($query) use ($user) {
                 $query->where('customer_id', $user != 'offline' ? $user->id : '0');
             }])
-            ->when(in_array($request['product_type'], ['physical', 'digital']), function ($query) use($request) {
+            ->when(in_array($request['product_type'], ['physical', 'digital']), function ($query) use ($request) {
                 return $query->where(['product_type' => $request['product_type']]);
             })
             ->when($seller_id == 0, function ($query) {
@@ -865,7 +877,6 @@ class ProductManager
                 $delivery_cost = $CategoryShippingCost ?
                     ($CategoryShippingCost->multiply_qty != 0 ? ($CategoryShippingCost->cost * $quantity) : $CategoryShippingCost->cost)
                     : 0;
-
             } elseif ($shipping_type->shipping_type == "product_wise") {
                 $delivery_cost = $product->multiply_qty != 0 ? ($product->shipping_cost * $quantity) : $product->shipping_cost;
             } elseif ($shipping_type->shipping_type == 'order_wise') {
@@ -1871,7 +1882,10 @@ class ProductManager
         $productSortBy = $request->get('sort_by');
         $productListData = Product::active()
             ->with([
-                'category', 'reviews', 'rating', 'seller.shop',
+                'category',
+                'reviews',
+                'rating',
+                'seller.shop',
                 'wishList' => function ($query) {
                     return $query->where('customer_id', Auth::guard('customer')->user()->id ?? 0);
                 },
@@ -1885,7 +1899,7 @@ class ProductManager
             ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID, $productAddedBy) {
                 return $query->where(['added_by' => $productAddedBy, 'user_id' => $productUserID]);
             })
-            ->when(in_array($request['product_type'], ['physical', 'digital']), function ($query) use($request) {
+            ->when(in_array($request['product_type'], ['physical', 'digital']), function ($query) use ($request) {
                 return $query->where(['product_type' => $request['product_type']]);
             })
             ->withCount(['reviews'])
@@ -1937,10 +1951,10 @@ class ProductManager
                         return $query->active();
                     })
                     ->withCount(['publishingHouseProducts' => function ($query) {
-                    return $query->whereHas('product', function ($query) {
-                        return $query->active();
-                    });
-                }])->get();
+                        return $query->whereHas('product', function ($query) {
+                            return $query->active();
+                        });
+                    }])->get();
 
                 $productIds = [];
                 $publishingHouseList->each(function ($publishingHouseGroup) use (&$productIds) {
@@ -2135,37 +2149,37 @@ class ProductManager
 
     public static function getAllProductsData($request, $productUserID = null, $productAddedBy = null): mixed
     {
-        // dd($request,$productUserID,$productAddedBy);
-        //
-        return Product::active()
-    ->with('rating')
-    ->withCount('reviews')
-    ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
-        return $query->where('added_by', $productAddedBy);
-    })
-    ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID) {
-        return $query->where('added_by', '!=', 'admin')
-                     ->where('user_id', $productUserID);
-    })
-    ->get();
-  $q = Product::active()
-  ->with('rating')
-  ->withCount('reviews')
-  ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
-      return $query->where('added_by', $productAddedBy);
-  })
-  ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID) {
-      return $query->where('added_by', '!=', 'admin')
-                   ->where('user_id', $productUserID);
-  })
-  ->get();
+        $q = Product::active()
+        ->with('rating')
+        ->withCount('reviews')
+        ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
+            return $query->where('added_by', $productAddedBy);
+        })
+        ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID) {
+            return $query->where('added_by', '!=', 'admin')
+                ->where('user_id', $productUserID);
+        })
+        ->get();
 
     dd($q);
+        return Product::active()
+            ->with('rating')
+            ->withCount('reviews')
+            ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
+                return $query->where('added_by', $productAddedBy);
+            })
+            ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID) {
+                return $query->where('added_by', '!=', 'admin')
+                    ->where('user_id', $productUserID);
+            })
+            ->get();
+      
+
         // return Product::active()->with('rating')->withCount('reviews')
         //     ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
         //         return $query->where(['added_by' => $productAddedBy]);
         //     })
-          
+
         //     ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID, $productAddedBy) {
         //         return $query->where([['added_by' != 'admin'], 'user_id' => $productUserID]);
         //     })->get();
