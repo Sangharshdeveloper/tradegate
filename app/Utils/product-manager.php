@@ -2139,8 +2139,9 @@ class ProductManager
             ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
                 return $query->where(['added_by' => $productAddedBy]);
             })
+          
             ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID, $productAddedBy) {
-                return $query->where(['added_by' => $productAddedBy, 'user_id' => $productUserID]);
+                return $query->where([['added_by' != 'admin'], 'user_id' => $productUserID]);
             })->get();
     }
 }

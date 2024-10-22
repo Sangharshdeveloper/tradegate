@@ -39,12 +39,14 @@ class ShopViewController extends Controller
     // For seller Shop
     public function getShopInfoArray($shopId, $shopProducts, $sellerType, $sellerId): array
     {
+       
         $totalOrder = Order::when($sellerType == 'admin', function ($query) {
             return $query->where(['seller_is' => 'admin']);
         })->when($sellerType == 'seller', function ($query) use ($sellerId) {
             return $query->where(['seller_is' => 'seller','seller_is' => 'dropshipper', 'seller_id' => $sellerId]);
         })->where('order_type', 'default_type')->count();
-
+      
+        
         $inhouseVacation = getWebConfig(name: 'vacation_add');
         $temporaryClose = getWebConfig(name: 'temporary_close');
 
