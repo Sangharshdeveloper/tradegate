@@ -64,7 +64,7 @@ class DashboardController extends BaseController
         $vendorId = auth('seller')->id();
         $topSell = $this->productRepo->getTopSellList(
             filters:[
-                'added_by'=>'seller',
+                'added_by'=>'supplier',
                 'seller_id'=>$vendorId,
                 'request_status' =>1
             ],
@@ -73,7 +73,7 @@ class DashboardController extends BaseController
         $topRatedProducts = $this->productRepo->getTopRatedList(
             filters: [
                 'user_id' => $vendorId,
-                'added_by' => 'seller',
+                'added_by' => 'supplier',
                 'request_status' => 1
             ],
             relations: ['reviews'],
@@ -84,7 +84,7 @@ class DashboardController extends BaseController
                 'seller_id' => $vendorId
             ],
             whereHasFilters: [
-                'seller_is' => 'seller',
+                'seller_is' => 'supplier',
                 'seller_id' => $vendorId
             ],
             relations: ['deliveredOrders'],
@@ -194,7 +194,7 @@ class DashboardController extends BaseController
         foreach ($status as $key) {
             $count = $this->orderRepo->getListWhereDate(
                 filters: [
-                    'seller_is' => 'seller',
+                    'seller_is' => 'supplier',
                     'seller_id' => $vendorId,
                     'order_status' => $key
                 ],
@@ -217,7 +217,7 @@ class DashboardController extends BaseController
         $vendorId = auth('seller')->id();
         $vendorEarnings = $this->orderTransactionRepo->getListWhereBetween(
             filters: [
-                'seller_is' => 'seller',
+                'seller_is' => 'supplier',
                 'seller_id' => $vendorId,
                 'status' => 'disburse',
             ],
@@ -241,7 +241,7 @@ class DashboardController extends BaseController
         $vendorId = auth('seller')->id();
         $commissionGiven = $this->orderTransactionRepo->getListWhereBetween(
             filters:  [
-                'seller_is'=>'seller',
+                'seller_is'=>'supplier',
                 'seller_id'=>$vendorId,
                 'status'=>'disburse',
             ],
