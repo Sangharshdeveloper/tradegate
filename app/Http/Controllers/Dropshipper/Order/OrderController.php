@@ -92,7 +92,6 @@ class OrderController extends BaseController
 
     public function getListView(object $request): View
     {
-       dd($request);
         $seller = auth('seller')->user();
         $vendorId = $seller['id'];
         $searchValue = $request['searchValue'];
@@ -119,6 +118,9 @@ class OrderController extends BaseController
             'seller_is' => 'dropshipper',
         ];
         $orders = $this->orderRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $searchValue, filters: $filters, relations: $relation, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
+        
+        
+        
         $sellers = $this->vendorRepo->getByStatusExcept(status: 'pending', relations: ['shop']);
 
    
