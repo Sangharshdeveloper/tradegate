@@ -51,30 +51,7 @@ class LoginController extends Controller
         Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
         return view(Auth::LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
     }
-    public function getLoginViewSupplier(): View
-    {
-        $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
-        $recaptcha = getWebConfig(name: 'recaptcha');
-        Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
-        return view(Auth::LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
-    }
-
-
-    public function getLogOutViewStudent(): View
-    {
-        $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
-        $recaptcha = getWebConfig(name: 'recaptcha');
-        Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
-        return view(Auth::LOGOUT[VIEW], compact('recaptchaBuilder', 'recaptcha'));
-    }
-
-    public function getLoginViewStudent(): View
-    {
-        $recaptchaBuilder = $this->generateDefaultReCaptcha(4);
-        $recaptcha = getWebConfig(name: 'recaptcha');
-        Session::put(SessionKey::VENDOR_RECAPTCHA_KEY, $recaptchaBuilder->getPhrase());
-        return view(Auth::LOGIN[VIEW], compact('recaptchaBuilder', 'recaptcha'));
-    }
+   
 
     public function login(LoginRequest $request): JsonResponse
     {
@@ -107,10 +84,10 @@ class LoginController extends Controller
         if ($passwordCheck && $vendor['status'] !== 'approved') {
             return response()->json(['status' => $vendor['status']]);
         }
-        if($vendor['type'] == '0'){
+        if($vendor['type'] == '3'){
             // return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
         }else{
-            return response()->json(['error'=>'This is not vendor !']);
+            return response()->json(['error'=>'This is not student !']);
 
         }
         if ($this->vendorService->isLoginSuccessful($request->email, $request->password, $request->remember)) {
