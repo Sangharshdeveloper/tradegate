@@ -79,8 +79,8 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
             });
             Route::group(['prefix' => 'registration', 'as' => 'registration.'], function () {
                 Route::controller(RegisterController::class)->group(function () {
-                    Route::get(Auth::DROPSHIPPER_REGISTRATION[URI], 'index')->name('index');
-                    Route::post(Auth::DROPSHIPPER_REGISTRATION[URI], 'add');
+                    Route::get(Auth::REGISTRATION[URI], 'index')->name('index');
+                    Route::post(Auth::REGISTRATION[URI], 'add');
                 });
             });
         });
