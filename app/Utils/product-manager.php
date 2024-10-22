@@ -2149,19 +2149,8 @@ class ProductManager
 
     public static function getAllProductsData($request, $productUserID = null, $productAddedBy = null): mixed
     {
-        $q = Product::active()
-        ->with('rating')
-        ->withCount('reviews')
-        ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
-            return $query->where('added_by', $productAddedBy);
-        })
-        ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID) {
-            return $query->where('added_by', '!=', 'admin')
-                ->where('user_id', $productUserID);
-        })
-        ->get();
+   
 
-    dd($q);
         return Product::active()
             ->with('rating')
             ->withCount('reviews')
