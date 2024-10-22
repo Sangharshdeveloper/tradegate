@@ -97,115 +97,11 @@ class LoginController extends Controller
             Toastr::info(translate('welcome_to_your_dashboard').'.');
             return response()->json([
                 'success' =>translate('login_successful') . '!',
-                'redirectRoute'=>route('vendor.dashboard.index'),
+                'redirectRoute'=>route('student.dashboard.index'),
             ]);
         }else{
             return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
 
-        }
-    }
-
-    public function loginSupplier(LoginRequest $request): JsonResponse
-    {
-        $recaptcha = getWebConfig(name: 'recaptcha');
-        if (isset($recaptcha) && $recaptcha['status'] == 1) {
-            $request->validate([
-                'g-recaptcha-response' => [
-                    function ($attribute, $value, $fail) {
-                        $secret_key = getWebConfig(name: 'recaptcha')['secret_key'];
-                        $response = $value;
-                        $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret_key . '&response=' . $response;
-                        $response = Http::get($url);
-                        $response = $response->json();
-                        if (!isset($response['success']) || !$response['success']) {
-                            $fail(translate('recaptcha_failed'));
-                        }
-                    },
-                ],
-            ]);
-        } else {
-            if ($recaptcha['status'] != 1 && strtolower($request->vendorRecaptchaKey) != strtolower(Session(SessionKey::VENDOR_RECAPTCHA_KEY))) {
-                return response()->json(['error'=>translate('captcha_failed').'!']);
-            }
-        }
-        $vendor = $this->vendorRepo->getFirstWhere(['identity' => $request['email']]);
-        if (!$vendor){
-            return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
-        }
-        $passwordCheck = Hash::check($request['password'],$vendor['password']);
-        if ($passwordCheck && $vendor['status'] !== 'approved' && $vendor['type'] == '1') {
-            return response()->json(['status' => $vendor['status']]);
-        }
-
-        if($vendor['type'] == '1'){
-            // return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
-        }else{
-            return response()->json(['error'=>'This is not supplier !']);
-        }
-        if ($this->vendorService->isLoginSuccessful($request->email, $request->password, $request->remember)) {
-            if ($this->vendorWalletRepo->getFirstWhere(params:['id'=>auth('seller')->id()]) === false) {
-                $this->vendorWalletRepo->add($this->vendorService->getInitialWalletData(vendorId:auth('seller')->id()));
-            }
-            Toastr::info(translate('welcome_to_your_dashboard').'.');
-            return response()->json([
-                'success' =>translate('login_successful') . '!',
-                'redirectRoute'=>route('supplier.dashboard.index'),
-            ]);
-        }else{
-            return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
-
-        }
-    }
-
-    public function loginDropshipper(LoginRequest $request): JsonResponse
-    {
-        $recaptcha = getWebConfig(name: 'recaptcha');
-        if (isset($recaptcha) && $recaptcha['status'] == 1) {
-            $request->validate([
-                'g-recaptcha-response' => [
-                    function ($attribute, $value, $fail) {
-                        $secret_key = getWebConfig(name: 'recaptcha')['secret_key'];
-                        $response = $value;
-                        $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret_key . '&response=' . $response;
-                        $response = Http::get($url);
-                        $response = $response->json();
-                        if (!isset($response['success']) || !$response['success']) {
-                            $fail(translate('recaptcha_failed'));
-                        }
-                    },
-                ],
-            ]);
-        } else {
-            if ($recaptcha['status'] != 1 && strtolower($request->vendorRecaptchaKey) != strtolower(Session(SessionKey::VENDOR_RECAPTCHA_KEY))) {
-                return response()->json(['error'=>translate('captcha_failed').'!']);
-            }
-        }
-        $vendor = $this->vendorRepo->getFirstWhere(['identity' => $request['email']]);
-        if (!$vendor){
-            return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
-        }
-        $passwordCheck = Hash::check($request['password'],$vendor['password']);
-        if ($passwordCheck && $vendor['status'] !== 'approved' && $vendor['type'] == '3') {
-            return response()->json(['status' => $vendor['status']]);
-        }
-
-        if($vendor['type'] == '2'){
-            // return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
-        }else{
-            return response()->json(['error'=>'This is not student !']);
-
-        }
-        if ($this->vendorService->isLoginSuccessful($request->email, $request->password, $request->remember)) {
-            if ($this->vendorWalletRepo->getFirstWhere(params:['id'=>auth('seller')->id()]) === false) {
-                $this->vendorWalletRepo->add($this->vendorService->getInitialWalletData(vendorId:auth('seller')->id()));
-            }
-            Toastr::info(translate('welcome_to_your_dashboard').'.');
-            return response()->json([
-                'success' =>translate('login_successful') . '!',
-                'redirectRoute'=>route('dropshipper.dashboard.index'),
-            ]);
-        }else{
-            return response()->json(['error'=>translate('credentials_doesnt_match').'!']);
         }
     }
 
@@ -213,20 +109,8 @@ class LoginController extends Controller
     {
         $this->vendorService->logout();
         Toastr::success(translate('logged_out_successfully').'.');
-        return redirect()->route('vendor.auth.login');
+        return redirect()->route('student.auth.login');
     }
 
-    public function logoutDropshipper(): RedirectResponse
-    {
-        $this->vendorService->logout();
-        Toastr::success(translate('logged_out_successfully').'.');
-        return redirect()->route('dropshipper.auth.login');
-    }
 
-    public function logoutSupplier(): RedirectResponse
-    {
-        $this->vendorService->logout();
-        Toastr::success(translate('logged_out_successfully').'.');
-        return redirect()->route('supplier.auth.login');
-    }
 }
