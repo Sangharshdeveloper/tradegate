@@ -92,6 +92,7 @@ class OrderController extends BaseController
 
     public function getListView(object $request): View
     {
+       dd($request);
         $seller = auth('seller')->user();
         $vendorId = $seller['id'];
         $searchValue = $request['searchValue'];
