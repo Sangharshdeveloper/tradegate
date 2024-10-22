@@ -1,73 +1,72 @@
 <?php
 
-use App\Enums\ViewPaths\Student\Auth;
-use App\Enums\ViewPaths\Student\Cart;
-use App\Enums\ViewPaths\Student\CategoryShippingCost;
-use App\Enums\ViewPaths\Student\Chatting;
-use App\Enums\ViewPaths\Student\Coupon;
-use App\Enums\ViewPaths\Student\Customer;
-use App\Enums\ViewPaths\Student\Dashboard;
-use App\Enums\ViewPaths\Student\DeliveryMan;
-use App\Enums\ViewPaths\Student\DeliveryManWallet;
-use App\Enums\ViewPaths\Student\DeliveryManWithdraw;
-use App\Enums\ViewPaths\Student\EmergencyContact;
-use App\Enums\ViewPaths\Student\ForgotPassword;
-use App\Enums\ViewPaths\Student\Notification;
-use App\Enums\ViewPaths\Student\POS;
-use App\Enums\ViewPaths\Student\POSOrder;
-use App\Enums\ViewPaths\Student\Product;
-use App\Enums\ViewPaths\Student\Profile;
-use App\Enums\ViewPaths\Student\Refund;
-use App\Enums\ViewPaths\Student\Review;
-use App\Enums\ViewPaths\Student\ShippingMethod;
-use App\Enums\ViewPaths\Student\ShippingType;
-use App\Enums\ViewPaths\Student\Shop;
-use App\Enums\ViewPaths\Student\Withdraw;
-use App\Http\Controllers\Student\Auth\ForgotPasswordController;
-use App\Http\Controllers\Student\Auth\LoginController;
-use App\Enums\ViewPaths\Student\Order;
-use App\Http\Controllers\Student\Auth\RegisterController;
-use App\Http\Controllers\Student\DashboardController;
-use App\Http\Controllers\Student\ChattingController;
-use App\Http\Controllers\Student\Coupon\CouponController;
-use App\Http\Controllers\Student\CustomerController;
-use App\Http\Controllers\Student\DeliveryMan\DeliveryManController;
-use App\Http\Controllers\Student\DeliveryMan\DeliveryManWalletController;
-use App\Http\Controllers\Student\DeliveryMan\DeliveryManWithdrawController;
-use App\Http\Controllers\Student\DeliveryMan\EmergencyContactController;
-use App\Http\Controllers\Student\NotificationController;
-use App\Http\Controllers\Student\POS\CartController;
-use App\Http\Controllers\Student\POS\POSController;
-use App\Http\Controllers\Student\POS\POSOrderController;
-use App\Http\Controllers\Student\Product\ProductController;
-use App\Http\Controllers\Student\ProfileController;
-use App\Http\Controllers\Student\RefundController;
-use App\Http\Controllers\Student\ReviewController;
-use App\Http\Controllers\Student\Shipping\CategoryShippingCostController;
-use App\Http\Controllers\Student\Shipping\ShippingMethodController;
-use App\Http\Controllers\Student\Shipping\ShippingTypeController;
-use App\Http\Controllers\Student\ShopController;
-use App\Http\Controllers\Student\SystemController;
-use App\Http\Controllers\Student\WithdrawController;
+use App\Enums\ViewPaths\Dropshipper\Auth;
+use App\Enums\ViewPaths\Dropshipper\Cart;
+use App\Enums\ViewPaths\Dropshipper\CategoryShippingCost;
+use App\Enums\ViewPaths\Dropshipper\Chatting;
+use App\Enums\ViewPaths\Dropshipper\Coupon;
+use App\Enums\ViewPaths\Dropshipper\Customer;
+use App\Enums\ViewPaths\Dropshipper\Dashboard;
+use App\Enums\ViewPaths\Dropshipper\DeliveryMan;
+use App\Enums\ViewPaths\Dropshipper\DeliveryManWallet;
+use App\Enums\ViewPaths\Dropshipper\DeliveryManWithdraw;
+use App\Enums\ViewPaths\Dropshipper\EmergencyContact;
+use App\Enums\ViewPaths\Dropshipper\ForgotPassword;
+use App\Enums\ViewPaths\Dropshipper\Notification;
+use App\Enums\ViewPaths\Dropshipper\POS;
+use App\Enums\ViewPaths\Dropshipper\POSOrder;
+use App\Enums\ViewPaths\Dropshipper\Product;
+use App\Enums\ViewPaths\Dropshipper\Profile;
+use App\Enums\ViewPaths\Dropshipper\Refund;
+use App\Enums\ViewPaths\Dropshipper\Review;
+use App\Enums\ViewPaths\Dropshipper\ShippingMethod;
+use App\Enums\ViewPaths\Dropshipper\ShippingType;
+use App\Enums\ViewPaths\Dropshipper\Shop;
+use App\Enums\ViewPaths\Dropshipper\Withdraw;
+use App\Http\Controllers\Dropshipper\Auth\ForgotPasswordController;
+use App\Http\Controllers\Dropshipper\Auth\LoginController;
+use App\Enums\ViewPaths\Dropshipper\Order;
+use App\Http\Controllers\Dropshipper\Auth\RegisterController;
+use App\Http\Controllers\Dropshipper\DashboardController;
+use App\Http\Controllers\Dropshipper\ChattingController;
+use App\Http\Controllers\Dropshipper\Coupon\CouponController;
+use App\Http\Controllers\Dropshipper\CustomerController;
+use App\Http\Controllers\Dropshipper\DeliveryMan\DeliveryManController;
+use App\Http\Controllers\Dropshipper\DeliveryMan\DeliveryManWalletController;
+use App\Http\Controllers\Dropshipper\DeliveryMan\DeliveryManWithdrawController;
+use App\Http\Controllers\Dropshipper\DeliveryMan\EmergencyContactController;
+use App\Http\Controllers\Dropshipper\NotificationController;
+use App\Http\Controllers\Dropshipper\POS\CartController;
+use App\Http\Controllers\Dropshipper\POS\POSController;
+use App\Http\Controllers\Dropshipper\POS\POSOrderController;
+use App\Http\Controllers\Dropshipper\Product\ProductController;
+use App\Http\Controllers\Dropshipper\ProfileController;
+use App\Http\Controllers\Dropshipper\RefundController;
+use App\Http\Controllers\Dropshipper\ReviewController;
+use App\Http\Controllers\Dropshipper\Shipping\CategoryShippingCostController;
+use App\Http\Controllers\Dropshipper\Shipping\ShippingMethodController;
+use App\Http\Controllers\Dropshipper\Shipping\ShippingTypeController;
+use App\Http\Controllers\Dropshipper\ShopController;
+use App\Http\Controllers\Dropshipper\SystemController;
+use App\Http\Controllers\Dropshipper\WithdrawController;
 use App\Http\Middleware\MaintenanceModeMiddleware;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Student\Order\OrderController;
-use App\Http\Controllers\Student\TransactionReportController;
-use App\Http\Controllers\Student\ProductReportController;
-use App\Http\Controllers\Student\OrderReportController;
+use App\Http\Controllers\Dropshipper\Order\OrderController;
+use App\Http\Controllers\Dropshipper\TransactionReportController;
+use App\Http\Controllers\Dropshipper\ProductReportController;
+use App\Http\Controllers\Dropshipper\OrderReportController;
 
 Route::group(['middleware' => ['maintenance_mode']], function () {
 
-    Route::group(['prefix' => 'student', 'as' => 'student.'], function () {
+    Route::group(['prefix' => 'dropshipper', 'as' => 'dropshipper.'], function () {
         /* authentication */
         Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
             Route::controller(LoginController::class)->group(function () {
-                Route::get(Auth::LOGIN[URI], 'getLoginView');
+                Route::get(Auth::DROPSHIPPER_LOGIN[URI], 'getLoginViewDropshipper');
                 Route::get(Auth::RECAPTURE[URI] . '/{tmp}', 'generateReCaptcha')->name('recaptcha');
-                Route::post(Auth::LOGIN[URI], 'login')->name('login');
-                Route::get(Auth::LOGOUT[URI], 'logout')->name('logout');
+                Route::post(Auth::DROPSHIPPER_LOGIN[URI], 'loginDropshipper')->name('login');
+                Route::get(Auth::DROPSHIPPER_LOGOUT[URI], 'logoutDropshipper')->name('logout');
             });
-
             Route::group(['prefix' => 'forgot-password', 'as' => 'forgot-password.'], function () {
                 Route::controller(ForgotPasswordController::class)->group(function () {
                     Route::get(ForgotPassword::INDEX[URI], 'index')->name('index');
@@ -78,14 +77,12 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                     Route::post(ForgotPassword::RESET_PASSWORD[URI], 'resetPassword');
                 });
             });
-
             Route::group(['prefix' => 'registration', 'as' => 'registration.'], function () {
                 Route::controller(RegisterController::class)->group(function () {
-                    Route::get(Auth::REGISTRATION[URI], 'index')->name('index');
-                    Route::post(Auth::REGISTRATION[URI], 'add');
+                    Route::get(Auth::DROPSHIPPER_REGISTRATION[URI], 'index')->name('index');
+                    Route::post(Auth::DROPSHIPPER_REGISTRATION[URI], 'add');
                 });
             });
-            
         });
         /* end authentication */
         Route::group(['middleware' => ['seller']], function () {
@@ -138,6 +135,9 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                 Route::controller(ProductController::class)->group(function () {
                     Route::get(Product::LIST[URI] . '/{type}', 'index')->name('list');
                     Route::get(Product::ADD[URI], 'getAddView')->name('add');
+                    Route::get(Product::SUPPLIER_LIST[URI], 'getListViewSupp')->name('suppliers-list');
+
+                    Route::get(Product::SHOP_GALLERY[URI], 'getProductGalleryView')->name('shop-gallery');
                     Route::post(Product::ADD[URI], 'add');
                     Route::get(Product::GET_CATEGORIES[URI], 'getCategories')->name('get-categories');
                     Route::post(Product::SKU_COMBINATION[URI], 'getSkuCombinationView')->name('sku-combination');
@@ -157,7 +157,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                     Route::get(Product::BULK_IMPORT[URI], 'getBulkImportView')->name('bulk-import');
                     Route::post(Product::BULK_IMPORT[URI], 'importBulkProduct');
                     Route::get(Product::SEARCH[URI], 'getSearchedProductsView')->name('search-product');
-                    Route::get(Product::PRODUCT_GALLERY[URI], 'getProductGalleryView')->name('product-gallery');
+                    Route::get(Product::PRODUCT_GALLERY[URI], 'getJustProductGalleryView')->name('product-gallery');
                     Route::get(Product::STOCK_LIMIT_STATUS[URI], 'getStockLimitStatus')->name('stock-limit-status');
                     Route::post(Product::DELETE_PREVIEW_FILE[URI], 'deletePreviewFile')->name('delete-preview-file');
                 });
@@ -335,7 +335,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
                     Route::get('order-report-pdf', 'exportOrderReportInPDF')->name('order-report-pdf');
                 });
 
-                Route::any('set-date', 'App\Http\Controllers\Student\ReportController@set_date')->name('set-date');
+                Route::any('set-date', 'App\Http\Controllers\Dropshipper\ReportController@set_date')->name('set-date');
             });
 
             Route::group(['prefix' => 'transaction', 'as' => 'transaction.'], function () {
