@@ -56,6 +56,11 @@ return [
             'provider' => 'sellers',
         ],
 
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'sellers',
+        ],
+
         'customer' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -90,6 +95,11 @@ return [
             'model' => \App\Models\Admin::class,
         ],
 
+        'student' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Seller::class,
+        ],
+
         'sellers' => [
             'driver' => 'eloquent',
             'model' => \App\Models\Seller::class,
@@ -119,6 +129,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'student' => [
+            'provider' => 'sellers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
