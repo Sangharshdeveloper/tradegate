@@ -53,8 +53,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapBetaVendorRoutes();
         $this->mapBetaSupplierRoutes();
         $this->mapBetaDropshipperRoutes();
-        $this->mapBetaWebRoutes();
         $this->mapBetaStudentRoutes();
+        $this->mapBetaWebRoutes();
     }
 
     /**

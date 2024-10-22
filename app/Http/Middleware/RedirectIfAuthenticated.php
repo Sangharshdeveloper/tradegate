@@ -24,11 +24,6 @@ class RedirectIfAuthenticated
                     return redirect()->route('admin.dashboard.index');
                 }
                 break;
-            case 'student':
-                if (Auth::guard($guard)->check()) {
-                    return redirect()->route('student.dashboard.index');
-                }
-                break;
             case 'seller':
                 if (Auth::guard($guard)->check()) {
                     return redirect()->route('vendor.dashboard.index');
