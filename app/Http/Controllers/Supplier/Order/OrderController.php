@@ -114,10 +114,10 @@ class OrderController extends BaseController
             'delivery_man_id' => $request['delivery_man_id'],
             'customer_id' => $request['customer_id'],
             'seller_id' => $vendorId,
-            'seller_is' => 'seller',
+            'seller_is' => 'supplier',
         ];
 
-        dd($filters);
+     
         $orders = $this->orderRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $searchValue, filters: $filters, relations: $relation, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
       
          
