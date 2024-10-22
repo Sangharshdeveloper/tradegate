@@ -2136,13 +2136,25 @@ class ProductManager
     public static function getAllProductsData($request, $productUserID = null, $productAddedBy = null): mixed
     {
         // dd($request,$productUserID,$productAddedBy);
-        return Product::active()->with('rating')->withCount('reviews')
-            ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
-                return $query->where(['added_by' => $productAddedBy]);
-            })
+        //
+        return Product::active()
+    ->with('rating')
+    ->withCount('reviews')
+    ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
+        return $query->where('added_by', $productAddedBy);
+    })
+    ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID) {
+        return $query->where('added_by', '!=', 'admin')
+                     ->where('user_id', $productUserID);
+    })
+    ->get();
+        // return Product::active()->with('rating')->withCount('reviews')
+        //     ->when($productAddedBy == 'admin', function ($query) use ($productAddedBy) {
+        //         return $query->where(['added_by' => $productAddedBy]);
+        //     })
           
-            ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID, $productAddedBy) {
-                return $query->where([['added_by' != 'admin'], 'user_id' => $productUserID]);
-            })->get();
+        //     ->when($productUserID && $productAddedBy == 'seller', function ($query) use ($productUserID, $productAddedBy) {
+        //         return $query->where([['added_by' != 'admin'], 'user_id' => $productUserID]);
+        //     })->get();
     }
 }
