@@ -58,7 +58,7 @@ use App\Http\Controllers\Dropshipper\OrderReportController;
 
 Route::group(['middleware' => ['maintenance_mode']], function () {
 
-    Route::group(['prefix' => 'dropshipper', 'as' => 'dropshipper.'], function () {
+    Route::group(['prefix' => 'student', 'as' => 'student.'], function () {
         /* authentication */
         Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
             Route::controller(LoginController::class)->group(function () {
