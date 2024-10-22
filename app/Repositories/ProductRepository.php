@@ -166,7 +166,13 @@ class ProductRepository implements ProductRepositoryInterface
             return $query->when(isset($filters['request_status']) && $filters['request_status'] != 'all', function ($query) use ($filters) {
                 $query->where(['request_status' => $filters['request_status']]);
             });
-        })->when(isset($filters['brand_id']) && $filters['brand_id'] != 'all', function ($query) use ($filters) {
+            
+
+        })
+        ->when(isset($filters['seller_is']) && $filters['seller_is'] == 'dropshipper', function ($query) use ($filters) {
+            return $query->where('seller_is', 'dropshipper');
+        })
+        ->when(isset($filters['brand_id']) && $filters['brand_id'] != 'all', function ($query) use ($filters) {
             return $query->where(['brand_id' => $filters['brand_id']]);
         })->when(isset($filters['from_warehouse']) && $filters['from_warehouse'] != '0', function ($query) use ($filters) {
             return $query->where(['from_warehouse' => $filters['from_warehouse']]);
