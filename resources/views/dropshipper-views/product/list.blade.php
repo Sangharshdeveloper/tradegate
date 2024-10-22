@@ -82,7 +82,7 @@
                         </div>
                         <div class="col-12">
                             <div class="d-flex gap-3 justify-content-end">
-                                <a href="{{ route('vendor.products.list', ['type'=>request('type')]) }}"
+                                <a href="{{ route('dropshipper.products.list', ['type'=>request('type')]) }}"
                                    class="btn btn-secondary px-5">
                                     {{ translate('reset') }}
                                 </a>
@@ -131,7 +131,7 @@
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <li>
                                             <a class="dropdown-item"
-                                               href="{{ route('vendor.products.export-excel', ['type'=>$type,'brand_id'=>request('brand_id'),'category_id'=>request('category_id'),'sub_category_id'=>request('sub_category_id'),'sub_sub_category_id'=>request('sub_sub_category_id'),'searchValue'=>request('searchValue')]) }}">
+                                               href="{{ route('dropshipper.products.export-excel', ['type'=>$type,'brand_id'=>request('brand_id'),'category_id'=>request('category_id'),'sub_category_id'=>request('sub_category_id'),'sub_sub_category_id'=>request('sub_sub_category_id'),'searchValue'=>request('searchValue')]) }}">
                                                 <img width="14" src="{{ dynamicAsset(path: 'public/assets/back-end/img/excel.png') }}"
                                                      alt="">
                                                 {{ translate('excel') }}
@@ -140,11 +140,11 @@
                                     </ul>
                                 </div>
                                 @if($type != 'new-request' )
-                                <a href="{{ route('vendor.products.stock-limit-list') }}" style="display: none;" class="btn btn-info">
+                                <a href="{{ route('dropshipper.products.stock-limit-list') }}" style="display: none;" class="btn btn-info">
                                     <i class="tio-add-circle"></i>
                                     <span class="text">{{ translate('limited_Stocks') }}</span>
                                 </a>
-                                <a href="{{ route('vendor.products.add') }}" style="display: none;" class="btn btn--primary">
+                                <a href="{{ route('dropshipper.products.add') }}" style="display: none;" class="btn btn--primary">
                                     <i class="tio-add"></i>
                                     <span class="text">{{ translate('add_new_product') }}</span>
                                 </a>
@@ -174,7 +174,7 @@
                                 <tr>
                                     <th scope="row">{{ $products->firstItem()+$key}}</th>
                                     <td>
-                                        <a href="{{ route('vendor.products.view', [$product['id']]) }}"
+                                        <a href="{{ route('dropshipper.products.view', [$product['id']]) }}"
                                            class="media align-items-center gap-2">
                                             <img src="{{ getStorageImages(path:$product->thumbnail_full_url,type:'backend-product')}}"
                                                  class="avatar border object-fit-cover" alt="">
@@ -201,7 +201,7 @@
                                     @if($type != 'new-request' )
                                         <td class="text-center">
                                             @php($productName = str_replace("'",'`',$product['name']))
-                                            <form action="{{ route('vendor.products.status-update') }}" method="post" data-from="product-status"
+                                            <form action="{{ route('dropshipper.products.status-update') }}" method="post" data-from="product-status"
                                                   id="product-status{{ $product['id']}}-form" class="admin-product-status-form">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $product['id']}}">
@@ -228,17 +228,17 @@
                                             @if($type != 'new-request' )
                                                 <a class="btn btn-outline-info btn-sm square-btn"
                                                    title="{{ translate('barcode') }}"
-                                                   href="{{ route('vendor.products.barcode', [$product['id']]) }}">
+                                                   href="{{ route('dropshipper.products.barcode', [$product['id']]) }}">
                                                     <i class="tio-barcode"></i>
                                                 </a>
                                                 <a class="btn btn-outline-info btn-sm square-btn" title="{{ translate('view') }}"
-                                                   href="{{ route('vendor.products.view', [$product['id']]) }}">
+                                                   href="{{ route('dropshipper.products.view', [$product['id']]) }}">
                                                     <i class="tio-invisible"></i>
                                                 </a>
                                             @endif
                                             <a class="btn btn-outline--primary btn-sm square-btn"
                                                title="{{ translate('edit') }}"
-                                               href="{{ route('vendor.products.update',[$product['id']]) }}">
+                                               href="{{ route('dropshipper.products.update',[$product['id']]) }}">
                                                 <i class="tio-edit"></i>
                                             </a>
                                             <span class="btn btn-outline-danger btn-sm square-btn delete-data"
@@ -247,7 +247,7 @@
                                                 <i class="tio-delete"></i>
                                             </span>
                                         </div>
-                                        <form action="{{ route('vendor.products.delete',[$product['id']]) }}"
+                                        <form action="{{ route('dropshipper.products.delete',[$product['id']]) }}"
                                               method="post" id="product-{{ $product['id']}}">
                                             @csrf @method('delete')
                                         </form>
