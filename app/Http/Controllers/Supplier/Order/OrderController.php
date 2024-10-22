@@ -116,7 +116,11 @@ class OrderController extends BaseController
             'seller_id' => $vendorId,
             'seller_is' => 'seller',
         ];
+
+        dd($filters);
         $orders = $this->orderRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $searchValue, filters: $filters, relations: $relation, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
+      
+         
         $sellers = $this->vendorRepo->getByStatusExcept(status: 'pending', relations: ['shop']);
 
         $customer = "all";
