@@ -56,7 +56,7 @@ use App\Http\Controllers\Student\TransactionReportController;
 use App\Http\Controllers\Student\ProductReportController;
 use App\Http\Controllers\Student\OrderReportController;
 
-Route::group(['middleware' => ['maintenance_mode']], function () {
+// Route::group(['middleware' => ['maintenance_mode']], function () {
 
     Route::group(['prefix' => 'student', 'as' => 'student.'], function () {
         /* authentication */
@@ -353,4 +353,4 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
         });
     });
 
-});
+// });
