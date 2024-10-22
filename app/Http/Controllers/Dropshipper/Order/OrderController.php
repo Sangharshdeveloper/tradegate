@@ -115,11 +115,12 @@ class OrderController extends BaseController
             'delivery_man_id' => $request['delivery_man_id'],
             'customer_id' => $request['customer_id'],
             'seller_id' => $vendorId,
-            // 'seller_is' => 'seller',
+            'seller_is' => 'dropshipper',
         ];
         $orders = $this->orderRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $searchValue, filters: $filters, relations: $relation, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
         $sellers = $this->vendorRepo->getByStatusExcept(status: 'pending', relations: ['shop']);
 
+        dd($orders);
         $customer = "all";
         if (isset($request['customer_id']) && $request['customer_id'] != 'all' && !is_null($request->customer_id) && $request->has('customer_id')) {
             $customer = $this->customerRepo->getFirstWhere(params: ['id' => $request['customer_id']]);
