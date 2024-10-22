@@ -62,7 +62,7 @@ Route::group(['middleware' => ['maintenance_mode']], function () {
         /* authentication */
         Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
             Route::controller(LoginController::class)->group(function () {
-                Route::get(Auth::LOGIN[URI], 'getLoginViewSupplier');
+                Route::get(Auth::LOGOUT[URI], 'getLoginViewSupplier');
                 Route::get(Auth::RECAPTURE[URI] . '/{tmp}', 'generateReCaptcha')->name('recaptcha');
                 Route::post(Auth::LOGIN[URI], 'loginDropshipper')->name('login');
                 Route::get(Auth::LOGOUT[URI], 'logoutDropshipper')->name('logout');
