@@ -8,7 +8,7 @@ enum Auth
 
     const LOGIN = [
         URI => 'login',
-        VIEW => 'supplier-views.auth.login',
+        VIEW => 'student-views.auth.login',
     ];
 
     const LOGOUT = [
