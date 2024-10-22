@@ -42,9 +42,7 @@ class DashboardController extends BaseController
         private readonly WithdrawRequestRepositoryInterface $withdrawRequestRepo,
         private readonly WithdrawRequestService $withdrawRequestService,
         private readonly DashboardService $dashboardService,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @param Request|null $request
@@ -59,14 +57,14 @@ class DashboardController extends BaseController
     /**
      * @return View
      */
-    public function getView():View
+    public function getView(): View
     {
         $vendorId = auth('seller')->id();
         $topSell = $this->productRepo->getTopSellList(
-            filters:[
-                'added_by'=>'seller',
-                'seller_id'=>$vendorId,
-                'request_status' =>1
+            filters: [
+                'added_by' => 'seller',
+                'seller_id' => $vendorId,
+                'request_status' => 1
             ],
             relations: ['orderDetails']
         )->take(DASHBOARD_TOP_SELL_DATA_LIMIT);
@@ -92,18 +90,18 @@ class DashboardController extends BaseController
 
         $from = now()->startOfYear()->format('Y-m-d');
         $to = now()->endOfYear()->format('Y-m-d');
-        $range = range(1,12);
+        $range = range(1, 12);
         $vendorEarning = $this->getVendorEarning(from: $from, to: $to, range: $range, type: 'month');
-        $commissionEarn = $this->getAdminCommission(from: $from ,to: $to,range: $range,type:'month');
+        $commissionEarn = $this->getAdminCommission(from: $from, to: $to, range: $range, type: 'month');
         $vendorWallet = $this->vendorWalletRepo->getFirstWhere(params: ['seller_id' => $vendorId]);
         $label = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         $dateType = 'yearEarn';
         $dashboardData = [
             'orderStatus' => $this->getOrderStatusArray(type: 'overall'),
-                'customers'=> $this->customerRepo->getList(dataLimit: 'all')->count(),
-            'products'=> $this->productRepo->getListWhere(filters: ['seller_id'=>$vendorId,'added_by'=>'seller'])->count(),
-            'orders'=> $this->orderRepo->getListWhere(filters: ['seller_id'=>$vendorId,'seller_is'=>'seller'])->count(),
-            'brands'=> $this->brandRepo->getListWhere(dataLimit: 'all')->count(),
+            'customers' => $this->customerRepo->getList(dataLimit: 'all')->count(),
+            'products' => $this->productRepo->getListWhere(filters: ['seller_id' => $vendorId, 'added_by' => 'seller'])->count(),
+            'orders' => $this->orderRepo->getListWhere(filters: ['seller_id' => $vendorId, 'seller_is' => 'seller'])->count(),
+            'brands' => $this->brandRepo->getListWhere(dataLimit: 'all')->count(),
             'topSell' => $topSell,
             'topRatedProducts' => $topRatedProducts,
             'topRatedDeliveryMan' => $topRatedDeliveryMan,
@@ -115,15 +113,15 @@ class DashboardController extends BaseController
             'collectedCash' => $vendorWallet->collected_cash ?? 0,
             'collectedTotalTax' => $vendorWallet->total_tax_collected ?? 0,
         ];
-        $withdrawalMethods = $this->withdrawalMethodRepo->getListWhere(filters:['is_active'=>1],dataLimit:'all');
-        return view(Dashboard::INDEX[VIEW],compact('dashboardData','vendorEarning','commissionEarn','withdrawalMethods','dateType','label'));
+        $withdrawalMethods = $this->withdrawalMethodRepo->getListWhere(filters: ['is_active' => 1], dataLimit: 'all');
+        return view(Dashboard::INDEX[VIEW], compact('dashboardData', 'vendorEarning', 'commissionEarn', 'withdrawalMethods', 'dateType', 'label'));
     }
 
     /**
      * @param string $type
      * @return JsonResponse
      */
-    public function getOrderStatus(string $type):JsonResponse
+    public function getOrderStatus(string $type): JsonResponse
     {
         $orderStatus = $this->getOrderStatusArray($type);
         return response()->json([
@@ -135,7 +133,7 @@ class DashboardController extends BaseController
      * @param Request $request
      * @return JsonResponse
      */
-    public function getEarningStatistics(Request $request):JsonResponse
+    public function getEarningStatistics(Request $request): JsonResponse
     {
         $dateType = $request['type'];
         $dateTypeArray = $this->dashboardService->getDateTypeData(dateType: $dateType);
@@ -149,7 +147,7 @@ class DashboardController extends BaseController
         $commissionEarn = array_values($commissionEarn);
         $label = $dateTypeArray['keyRange'] ?? [];
         return response()->json([
-            'view' => view(Dashboard::EARNING_STATISTICS[VIEW], compact('vendorEarning','commissionEarn','label','dateType'))->render(),
+            'view' => view(Dashboard::EARNING_STATISTICS[VIEW], compact('vendorEarning', 'commissionEarn', 'label', 'dateType'))->render(),
         ]);
     }
 
@@ -157,27 +155,27 @@ class DashboardController extends BaseController
      * @param WithdrawRequest $request
      * @return RedirectResponse
      */
-    public function getWithdrawRequest(WithdrawRequest $request):RedirectResponse
+    public function getWithdrawRequest(WithdrawRequest $request): RedirectResponse
     {
         $vendorId = auth('seller')->id();
-        $withdrawMethod = $this->withdrawalMethodRepo->getFirstWhere(params:['id'=>$request['withdraw_method']]);
-        $wallet = $this->vendorWalletRepo->getFirstWhere(params:['seller_id'=> auth('seller')->id()]);
+        $withdrawMethod = $this->withdrawalMethodRepo->getFirstWhere(params: ['id' => $request['withdraw_method']]);
+        $wallet = $this->vendorWalletRepo->getFirstWhere(params: ['seller_id' => auth('seller')->id()]);
         if (($wallet['total_earning']) >= currencyConverter($request['amount']) && $request['amount'] > 1) {
             $this->withdrawRequestRepo->add($this->withdrawRequestService->getWithdrawRequestData(
-                withdrawMethod:$withdrawMethod,
-                request:$request,
+                withdrawMethod: $withdrawMethod,
+                request: $request,
                 addedBy: 'vendor',
                 vendorId: $vendorId
             ));
             $totalEarning = $wallet['total_earning'] - currencyConverter($request['amount']);
             $pendingWithdraw = $wallet['pending_withdraw'] + currencyConverter($request['amount']);
             $this->vendorWalletRepo->update(
-                id:$wallet['id'],
-                data: $this->vendorWalletService->getVendorWalletData(totalEarning:$totalEarning,pendingWithdraw:$pendingWithdraw)
+                id: $wallet['id'],
+                data: $this->vendorWalletService->getVendorWalletData(totalEarning: $totalEarning, pendingWithdraw: $pendingWithdraw)
             );
             Toastr::success(translate('withdraw_request_has_been_sent'));
-        }else{
-            Toastr::error(translate('invalid_request').'!');
+        } else {
+            Toastr::error(translate('invalid_request') . '!');
         }
         return redirect()->back();
     }
@@ -186,7 +184,7 @@ class DashboardController extends BaseController
      * @param string $type
      * @return array
      */
-    protected function getOrderStatusArray(string $type) :array
+    protected function getOrderStatusArray(string $type): array
     {
         $vendorId = auth('seller')->id();
         $status = OrderStatus::LIST;
@@ -224,7 +222,7 @@ class DashboardController extends BaseController
             selectColumn: 'seller_amount',
             whereBetween: 'created_at',
             whereBetweenFilters: [$from, $to],
-            groupBy:  $type,
+            groupBy: $type,
         );
         return $this->dashboardService->getDateWiseAmount(range: $range, type: $type, amountArray: $vendorEarnings);
     }
@@ -236,30 +234,30 @@ class DashboardController extends BaseController
      * @param string $type
      * @return array
      */
-    protected function getAdminCommission(string|Carbon $from, string|Carbon $to, array $range, string $type ):array
+    protected function getAdminCommission(string|Carbon $from, string|Carbon $to, array $range, string $type): array
     {;
         $vendorId = auth('seller')->id();
         $commissionGiven = $this->orderTransactionRepo->getListWhereBetween(
-            filters:  [
-                'seller_is'=>'seller',
-                'seller_id'=>$vendorId,
-                'status'=>'disburse',
+            filters: [
+                'seller_is' => 'seller',
+                'seller_id' => $vendorId,
+                'status' => 'disburse',
             ],
-            selectColumn:  'admin_commission',
+            selectColumn: 'admin_commission',
             whereBetween: 'created_at',
             whereBetweenFilters: [$from, $to],
-            groupBy:  $type,
+            groupBy: $type,
         );
-        return $this->dashboardService->getDateWiseAmount(range: $range,type: $type,amountArray: $commissionGiven);;
+        return $this->dashboardService->getDateWiseAmount(range: $range, type: $type, amountArray: $commissionGiven);;
     }
 
     /**
      * @param Request $request
      * @return JsonResponse
      */
-    public function getMethodList(Request $request):JsonResponse
+    public function getMethodList(Request $request): JsonResponse
     {
-        $method = $this->withdrawalMethodRepo->getFirstWhere(params:['id'=> $request['method_id'],'is_active'=>1]);
-        return response()->json(['content'=>$method], 200);
+        $method = $this->withdrawalMethodRepo->getFirstWhere(params: ['id' => $request['method_id'], 'is_active' => 1]);
+        return response()->json(['content' => $method], 200);
     }
 }

@@ -105,6 +105,7 @@ class OrderController extends BaseController
         $sellerPos = getWebConfig(name: 'seller_pos');
 
         $relation = ['customer', 'shipping', 'shippingAddress', 'deliveryMan', 'billingAddress'];
+        
         $filters = [
             'order_status' => $status,
             'order_type' => $request['filter'],
@@ -114,7 +115,7 @@ class OrderController extends BaseController
             'delivery_man_id' => $request['delivery_man_id'],
             'customer_id' => $request['customer_id'],
             'seller_id' => $vendorId,
-            'seller_is' => 'seller',
+            // 'seller_is' => 'seller',
         ];
         $orders = $this->orderRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $searchValue, filters: $filters, relations: $relation, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
         $sellers = $this->vendorRepo->getByStatusExcept(status: 'pending', relations: ['shop']);
