@@ -42,8 +42,8 @@ class OrderRepository implements OrderRepositoryInterface
     public function getFirstWhere(array $params, array $relations = []): ?Model
     {
 
-        
 
+     dd($params['seller_id']);
         if ($params['seller_is'] == 'supplier') {
             // Add the additional condition to the query
             return $this->order->with($relations)
