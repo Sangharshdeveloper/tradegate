@@ -43,7 +43,7 @@ class OrderRepository implements OrderRepositoryInterface
     {
 
 
-     dd($params['seller_id']);
+     dd($params['seller_is']);
         if ($params['seller_is'] == 'supplier') {
             // Add the additional condition to the query
             return $this->order->with($relations)
