@@ -55,7 +55,7 @@ class OrderRepository implements OrderRepositoryInterface
     public function getListWhere(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
 
-      
+        // select * from `orders` where `seller_is` = 'seller' and `seller_is` = 'dropshipper' and `seller_id` = 13 and `checked` = 0
 
 
         $query = $this->order->with($relations)
@@ -66,9 +66,7 @@ class OrderRepository implements OrderRepositoryInterface
                 return $query->where('seller_is', 'dropshipper');
             })
 
-            ->when(isset($filters['seller_is']) && $filters['seller_is'] == 'supplier', function ($query) use ($filters) {
-                return $query->where('seller_is', 'dropshipper');
-            })
+        
             
             ->when(isset($filters['seller_id']) && $filters['seller_id'] != 'all', function ($query) use ($filters) {
                 return $query->where('seller_id', $filters['seller_id']);
@@ -104,7 +102,7 @@ class OrderRepository implements OrderRepositoryInterface
                     ->when($filters['filter'] == 'default_type', function ($query) {
                         return $query->where('order_type', 'default_type');
                     })
-                    ->when($filters['filter'] == 'admin' || $filters['filter'] == 'seller', function ($query) use ($filters) {
+                    ->when($filters['filter'] == 'admin' || $filters['filter'] == 'seller'|| $filters['seller_is'] == 'supplier', function ($query) use ($filters) {
                         return $query->whereHas('details', function ($query) use ($filters) {
                             return $query->whereHas('product', function ($query) use ($filters) {
                                 return $query->where('added_by', $filters['filter']);
@@ -202,7 +200,7 @@ class OrderRepository implements OrderRepositoryInterface
                     ->when($filters['filter'] == 'default_type', function ($query) {
                         return $query->where('order_type', 'default_type');
                     })
-                    ->when($filters['filter'] == 'admin' || $filters['filter'] == 'seller', function ($query) use ($filters) {
+                    ->when($filters['filter'] == 'admin' || $filters['filter'] == 'seller' , function ($query) use ($filters) {
                         return $query->whereHas('details', function ($query) use ($filters) {
                             return $query->whereHas('product', function ($query) use ($filters) {
                                 return $query->where('added_by', $filters['filter']);

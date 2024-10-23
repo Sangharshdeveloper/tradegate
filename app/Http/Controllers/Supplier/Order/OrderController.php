@@ -117,6 +117,7 @@ class OrderController extends BaseController
             'customer_id' => $request['customer_id'],
             'seller_id' => $vendorId,
             'seller_is' => 'supplier',
+            
         ];
 
      
