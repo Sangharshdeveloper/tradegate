@@ -42,8 +42,19 @@ class OrderRepository implements OrderRepositoryInterface
     public function getFirstWhere(array $params, array $relations = []): ?Model
     {
 
-        dd($relations,$params);
-        return $this->order->with($relations)->where($params)->first();
+        if ($params['seller_is'] === 'supplier') {
+            // Add the additional condition to the query
+            return $this->order->with($relations)
+                ->where($params)
+                ->where('original_seller_id', $params['seller_id'])
+                ->first();
+        } else {
+            return $this->order->with($relations)
+                ->where($params)
+                ->first();
+        }
+        // dd($relations,$params);
+        // return $this->order->with($relations)->where($params)->first();
     }
 
     public function getList(array $orderBy = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator

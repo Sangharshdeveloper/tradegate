@@ -269,7 +269,7 @@ class OrderController extends BaseController
         $deliveryCountry = $this->deliveryCountryCodeRepo->getList(dataLimit: 'all');
         $countries = $countryRestrictStatus ? $service->getDeliveryCountryArray(deliveryCountryCodes: $deliveryCountry) : GlobalConstant::COUNTRIES;
         $zipCodes = $zipRestrictStatus ? $this->deliveryZipCodeRepo->getList(dataLimit: 'all') : 0;
-        $params = ['id' => $id, 'seller_id' => $vendorId, 'seller_is' => 'seller'];
+        $params = ['id' => $id, 'seller_id' => $vendorId, 'seller_is' => 'supplier'];
         $relations = ['deliveryMan', 'verificationImages', 'details', 'customer', 'shipping', 'offlinePayments'];
         $order = $this->orderRepo->getFirstWhere(params: $params, relations: $relations);
 
