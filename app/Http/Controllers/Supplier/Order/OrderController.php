@@ -95,7 +95,7 @@ class OrderController extends BaseController
 
       
         $seller = auth('seller')->user();
-        $vendorId = $seller['id'];
+        $vendorId = 21;
         $searchValue = $request['searchValue'];
         $filter = $request['filter'];
         $dateType = $request['date_type'];
