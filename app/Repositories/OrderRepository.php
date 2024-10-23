@@ -57,7 +57,7 @@ class OrderRepository implements OrderRepositoryInterface
 
         // select * from `orders` where `seller_is` = 'seller' and `seller_is` = 'dropshipper' and `seller_id` = 13 and `checked` = 0
 
-
+         dd( $filters);
         $query = $this->order->with($relations)
             ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'all', function ($query) use ($filters) {
                 return $query->where('seller_is', $filters['seller_is']);
