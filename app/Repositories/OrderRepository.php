@@ -62,7 +62,7 @@ class OrderRepository implements OrderRepositoryInterface
             ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'all' && $filters['seller_is'] != 'supplier' , function ($query) use ($filters) {
                 return $query->where('seller_is', $filters['seller_is']);
             })
-            ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'all' && $filters['seller_is'] != 'supplier', function ($query) use ($filters) {
+            ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'all' && $filters['seller_is'] == 'supplier' || $filters['seller_is'] == 'dropshipper', function ($query) use ($filters) {
                 return $query->where('seller_is', 'dropshipper');
             })
               
