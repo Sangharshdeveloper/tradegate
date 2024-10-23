@@ -289,7 +289,7 @@ class OrderController extends BaseController
             'id' => [$order['id']],
         ];
         $linkedOrders = $this->orderRepo->getListWhereNotIn(filters: ['order_group_id' => $order['order_group_id']], whereNotIn: $whereNotIn, dataLimit: 'all');
-        $totalDelivered = $this->orderRepo->getListWhere(filters: ['seller_id' => $order['seller_id'], 'order_status' => 'delivered', 'order_type' => 'default_type'], dataLimit: 'all')->count();
+        $totalDelivered = $this->orderRepo->getListWhere(filters: ['seller_id' => $order['seller_id'],'seller_is' => 'supplier', 'order_status' => 'delivered', 'order_type' => 'default_type'], dataLimit: 'all')->count();
         $shippingMethod = getWebConfig(name: 'shipping_method');
 
         $sellerId = 0;
