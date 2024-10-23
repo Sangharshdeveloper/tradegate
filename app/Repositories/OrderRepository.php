@@ -49,7 +49,7 @@ class OrderRepository implements OrderRepositoryInterface
         $query->where('id', $params['id']);
     
         // Check if seller_is is supplier
-        if (isset($params['seller_is']) && $params['seller_is'] === 'supplier') {
+        if (isset($params['seller_is']) && $params['seller_is'] === 'dropshipper') {
             // Only add the original_seller_id condition for suppliers
             $query->where('original_seller_id', $params['seller_id']);
         } else {
@@ -61,7 +61,7 @@ class OrderRepository implements OrderRepositoryInterface
     
         // Always include seller_is condition
         if (isset($params['seller_is'])) {
-            $query->where('seller_is', $params['seller_is']);
+            $query->where('seller_is', 'dropshipper');
         }
 
 
