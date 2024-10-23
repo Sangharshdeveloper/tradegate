@@ -41,6 +41,8 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function getFirstWhere(array $params, array $relations = []): ?Model
     {
+
+        dd($relations,$params);
         return $this->order->with($relations)->where($params)->first();
     }
 

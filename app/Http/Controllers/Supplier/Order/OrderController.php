@@ -283,7 +283,7 @@ class OrderController extends BaseController
         }
 
 
-        dd($order);
+       
         $whereNotIn = [
             'order_group_id' => ['def-order-group'],
             'id' => [$order['id']],
