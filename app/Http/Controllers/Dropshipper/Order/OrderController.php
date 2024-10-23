@@ -11,7 +11,7 @@ use App\Contracts\Repositories\DeliveryManWalletRepositoryInterface;
 use App\Contracts\Repositories\DeliveryZipCodeRepositoryInterface;
 use App\Contracts\Repositories\LoyaltyPointTransactionRepositoryInterface;
 use App\Contracts\Repositories\OrderDetailRepositoryInterface;
-use App\Contracts\Repositories\OrderRepositoryInterface;
+use App\Contracts\Repositories\SupplierOrderRepositoryInterface;
 use App\Contracts\Repositories\OrderStatusHistoryRepositoryInterface;
 use App\Contracts\Repositories\OrderTransactionRepositoryInterface;
 use App\Contracts\Repositories\VendorRepositoryInterface;
@@ -56,7 +56,7 @@ class OrderController extends BaseController
     }
 
     public function __construct(
-        private readonly OrderRepositoryInterface                   $orderRepo,
+        private readonly SupplierOrderRepositoryInterface                   $orderRepo,
         private readonly CustomerRepositoryInterface                $customerRepo,
         private readonly VendorRepositoryInterface                  $vendorRepo,
         private readonly DeliveryManRepositoryInterface             $deliveryManRepo,
@@ -71,9 +71,7 @@ class OrderController extends BaseController
         private readonly LoyaltyPointTransactionRepositoryInterface $loyaltyPointTransactionRepo,
         private readonly BusinessSettingRepositoryInterface              $businessSettingRepo,
 
-    )
-    {
-    }
+    ) {}
 
     /**
      * @param Request|null $request
@@ -105,7 +103,7 @@ class OrderController extends BaseController
         $sellerPos = getWebConfig(name: 'seller_pos');
 
         $relation = ['customer', 'shipping', 'shippingAddress', 'deliveryMan', 'billingAddress'];
-        
+
         $filters = [
             'order_status' => $status,
             'order_type' => $request['filter'],
@@ -118,12 +116,12 @@ class OrderController extends BaseController
             'seller_is' => 'dropshipper',
         ];
         $orders = $this->orderRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $searchValue, filters: $filters, relations: $relation, dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT));
-        
-        
-        
+
+
+
         $sellers = $this->vendorRepo->getByStatusExcept(status: 'pending', relations: ['shop']);
 
-   
+
         $customer = "all";
         if (isset($request['customer_id']) && $request['customer_id'] != 'all' && !is_null($request->customer_id) && $request->has('customer_id')) {
             $customer = $this->customerRepo->getFirstWhere(params: ['id' => $request['customer_id']]);
@@ -135,7 +133,8 @@ class OrderController extends BaseController
         return view(Order::LIST[VIEW], compact(
             'orders',
             'searchValue',
-            'from', 'to',
+            'from',
+            'to',
             'filter',
             'sellers',
             'customer',
@@ -166,7 +165,7 @@ class OrderController extends BaseController
             'seller_is' => 'dropshipper',
         ];
 
-        $orders = $this->orderRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['customer','seller.shop'], dataLimit: 'all');
+        $orders = $this->orderRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['customer', 'seller.shop'], dataLimit: 'all');
 
         /** order status count  */
         $status_array = [
@@ -189,7 +188,6 @@ class OrderController extends BaseController
                 $order['total_discount'] += $details->discount;
                 $order['total_tax'] += $details->tax_model == 'exclude' ? $details->tax : 0;
             });
-
         });
         /** order status count  */
 
@@ -226,7 +224,7 @@ class OrderController extends BaseController
             'from' => $from,
             'to' => $to,
             'date_type' => $date_type,
-            'defaultCurrencyCode'=>getCurrencyCode(),
+            'defaultCurrencyCode' => getCurrencyCode(),
         ];
         return Excel::download(new OrderExport($data), 'Orders.xlsx');
     }
@@ -253,7 +251,8 @@ class OrderController extends BaseController
         $relations = ['details', 'customer', 'shipping', 'seller'];
         $order = $this->orderRepo->getFirstWhere(params: $params, relations: $relations);
         $invoiceSettings = json_decode(json: $this->businessSettingRepo->getFirstWhere(params: ['type' => 'invoice_settings'])?->value);
-        $mpdf_view = PdfView::make(Order::GENERATE_INVOICE[VIEW],
+        $mpdf_view = PdfView::make(
+            Order::GENERATE_INVOICE[VIEW],
             compact('order', 'vendor', 'companyPhone', 'companyEmail', 'companyName', 'companyWebLogo', 'invoiceSettings')
         );
         $this->generatePdf(view: $mpdf_view, filePrefix: 'order_invoice_', filePostfix: $order['id'], pdfType: 'invoice');
@@ -300,9 +299,19 @@ class OrderController extends BaseController
         $isOrderOnlyDigital = $orderService->getCheckIsOrderOnlyDigital(order: $order);
         if ($order['order_type'] == 'default_type') {
             $orderCount = $this->orderRepo->getListWhereCount(filters: ['customer_id' => $order['customer_id']]);
-            return view(Order::VIEW[VIEW], compact('order', 'linkedOrders',
-                'deliveryMen', 'totalDelivered', 'physicalProduct', 'isOrderOnlyDigital',
-                'countryRestrictStatus', 'zipRestrictStatus', 'countries', 'zipCodes', 'orderCount'));
+            return view(Order::VIEW[VIEW], compact(
+                'order',
+                'linkedOrders',
+                'deliveryMen',
+                'totalDelivered',
+                'physicalProduct',
+                'isOrderOnlyDigital',
+                'countryRestrictStatus',
+                'zipRestrictStatus',
+                'countries',
+                'zipCodes',
+                'orderCount'
+            ));
         } else {
             $orderCount = $this->orderRepo->getListWhereCount(filters: ['customer_id' => $order['customer_id'], 'order_type' => 'POS']);
             return view(Order::VIEW_POS[VIEW], compact('order', 'orderCount'));
@@ -314,8 +323,7 @@ class OrderController extends BaseController
         DeliveryManTransactionService $deliveryManTransactionService,
         DeliveryManWalletService      $deliveryManWalletService,
         OrderStatusHistoryService     $orderStatusHistoryService,
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $order = $this->orderRepo->getFirstWhere(params: ['id' => $request['id']], relations: ['customer', 'seller.shop', 'deliveryMan']);
 
         if (!$order['is_guest'] && !isset($order['customer'])) {
@@ -362,7 +370,8 @@ class OrderController extends BaseController
                     user_id: $referredByUser['id'],
                     amount: floatval($refEarningExchangeRate),
                     transactionType: 'add_fund_by_admin',
-                    reference: 'earned_by_referral');
+                    reference: 'earned_by_referral'
+                );
             }
         }
 
@@ -437,7 +446,7 @@ class OrderController extends BaseController
             $this->orderRepo->update(id: $request['order_id'], data: $updateData);
         }
 
-        if ($order->delivery_type=='self_delivery' && $order->delivery_man_id) {
+        if ($order->delivery_type == 'self_delivery' && $order->delivery_man_id) {
             OrderStatusEvent::dispatch('order_edit_message', 'delivery_man', $order);
         }
 
@@ -448,8 +457,8 @@ class OrderController extends BaseController
     public function updatePaymentStatus(Request $request): JsonResponse
     {
         $order = $this->orderRepo->getFirstWhere(params: ['id' => $request['id']]);
-        if ($order['payment_status'] == 'paid'){
-            return response()->json(['error'=>translate('when_payment_status_paid_then_you_can`t_change_payment_status_paid_to_unpaid').'.']);
+        if ($order['payment_status'] == 'paid') {
+            return response()->json(['error' => translate('when_payment_status_paid_then_you_can`t_change_payment_status_paid_to_unpaid') . '.']);
         }
 
         if ($order['is_guest'] == '0' && !isset($order['customer'])) {
@@ -530,6 +539,4 @@ class OrderController extends BaseController
         }
         return back();
     }
-
-
 }
