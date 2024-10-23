@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Contracts\Repositories\OrderRepositoryInterface;
+use App\Contracts\Repositories\SupplierOrderRepositoryInterface;
 use App\Models\AdminWallet;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
-class OrderRepository implements OrderRepositoryInterface
+class SupplierOrderRepository implements SupplierOrderRepositoryInterface
 {
 
     public function __construct(
@@ -41,7 +41,34 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function getFirstWhere(array $params, array $relations = []): ?Model
     {
-        return $this->order->with($relations)->where($params)->first();
+
+
+        $query = $this->order->with($relations);
+
+        // Always apply the ID condition
+        $query->where('id', $params['id']);
+    
+        // Check if seller_is is supplier
+        if (isset($params['seller_is']) && $params['seller_is'] == 'supplier') {
+            // Only add the original_seller_id condition for suppliers
+           return $query->where(['original_seller_id'=> $params['seller_id'],'seller_is' => 'dropshipper' ])->first();
+        } else {
+            // For other seller types, include seller_id
+            if (isset($params['seller_id'])) {
+                $query->where('seller_id', $params['seller_id']);
+            }
+        }
+    
+        // Always include seller_is condition
+        if (isset($params['seller_is'])) {
+            $query->where('seller_is', $params['seller_is']);
+        }
+
+
+        return $query->first();
+
+        // dd($relations,$params);
+        // return $this->order->with($relations)->where($params)->first();
     }
 
     public function getList(array $orderBy = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
@@ -54,22 +81,23 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function getListWhere(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
+        // select * from `orders` where `seller_is` = 'seller' and `seller_is` = 'dropshipper' and `seller_id` = 13 and `original_seller_id` = 13 and `checked` = 0
+        // select * from `orders` where `seller_is` = 'seller' and `seller_is` = 'dropshipper' and `seller_id` = 13 and `original_seller_id` = 13 and `checked` = 0
 
 
         $query = $this->order->with($relations)
-            ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'all', function ($query) use ($filters) {
+            ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'all' && $filters['seller_is'] != 'supplier' , function ($query) use ($filters) {
                 return $query->where('seller_is', $filters['seller_is']);
             })
-            ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'all', function ($query) use ($filters) {
+            ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'all' && $filters['seller_is'] == 'supplier' || $filters['seller_is'] == 'dropshipper', function ($query) use ($filters) {
                 return $query->where('seller_is', 'dropshipper');
             })
-
-            ->when(isset($filters['seller_is']) && $filters['seller_is'] != 'supplier', function ($query) use ($filters) {
-                return $query->where('seller_is', 'supplier');
-            })
-            
-            ->when(isset($filters['seller_id']) && $filters['seller_id'] != 'all', function ($query) use ($filters) {
+              
+            ->when(isset($filters['seller_id']) && $filters['seller_id'] != 'all' && $filters['seller_is'] != 'supplier' , function ($query) use ($filters) {
                 return $query->where('seller_id', $filters['seller_id']);
+            })
+            ->when(isset($filters['seller_id']) && $filters['seller_id'] != 'all' && $filters['seller_is'] != 'supplier', function ($query) use ($filters) {
+                return $query->where('original_seller_id', $filters['seller_id']);
             })
             ->when(isset($filters['order_type']) && $filters['order_type'] != 'all', function ($query) use ($filters) {
                 return $query->where('order_type', $filters['order_type']);
@@ -200,7 +228,7 @@ class OrderRepository implements OrderRepositoryInterface
                     ->when($filters['filter'] == 'default_type', function ($query) {
                         return $query->where('order_type', 'default_type');
                     })
-                    ->when($filters['filter'] == 'admin' || $filters['filter'] == 'seller', function ($query) use ($filters) {
+                    ->when($filters['filter'] == 'admin' || $filters['filter'] == 'seller' , function ($query) use ($filters) {
                         return $query->whereHas('details', function ($query) use ($filters) {
                             return $query->whereHas('product', function ($query) use ($filters) {
                                 return $query->where('added_by', $filters['filter']);

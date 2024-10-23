@@ -11,7 +11,8 @@ use App\Contracts\Repositories\DeliveryManWalletRepositoryInterface;
 use App\Contracts\Repositories\DeliveryZipCodeRepositoryInterface;
 use App\Contracts\Repositories\LoyaltyPointTransactionRepositoryInterface;
 use App\Contracts\Repositories\OrderDetailRepositoryInterface;
-use App\Contracts\Repositories\OrderRepositoryInterface;
+use App\Contracts\Repositories\SupplierOrderRepositoryInterface;
+
 use App\Contracts\Repositories\OrderStatusHistoryRepositoryInterface;
 use App\Contracts\Repositories\OrderTransactionRepositoryInterface;
 use App\Contracts\Repositories\VendorRepositoryInterface;
@@ -56,7 +57,7 @@ class OrderController extends BaseController
     }
 
     public function __construct(
-        private readonly OrderRepositoryInterface                   $orderRepo,
+        private readonly SupplierOrderRepositoryInterface          $orderRepo,
         private readonly CustomerRepositoryInterface                $customerRepo,
         private readonly VendorRepositoryInterface                  $vendorRepo,
         private readonly DeliveryManRepositoryInterface             $deliveryManRepo,
