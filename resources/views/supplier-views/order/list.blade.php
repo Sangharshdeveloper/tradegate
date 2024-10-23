@@ -28,7 +28,7 @@
 
         <div class="card mb-3">
             <div class="card-body">
-                <form action="{{route('vendor.orders.list',['status'=>request('status')])}}" id="form-data"
+                <form action="{{route('supplier.orders.list',['status'=>request('status')])}}" id="form-data"
                       method="GET">
                     <div class="row gx-2">
                         <div class="col-12">
@@ -105,7 +105,7 @@
                         </div>
                         <div class="col-12">
                             <div class="d-flex gap-3 justify-content-end">
-                                <a href="{{route('vendor.orders.list',['status'=>request('status')])}}"
+                                <a href="{{route('supplier.orders.list',['status'=>request('status')])}}"
                                    class="btn btn-secondary px-5">
                                     {{translate('reset')}}
                                 </a>
@@ -154,7 +154,7 @@
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
                                         <a class="dropdown-item"
-                                           href="{{ route('vendor.orders.export-excel', ['delivery_man_id' => request('delivery_man_id'), 'status' => $status, 'from' => $from, 'to' => $to, 'filter' => $filter, 'searchValue' => $searchValue,'seller_id'=>$vendorId,'customer_id'=>$customerId, 'date_type'=>$dateType]) }}">
+                                           href="{{ route('supplier.orders.export-excel', ['delivery_man_id' => request('delivery_man_id'), 'status' => $status, 'from' => $from, 'to' => $to, 'filter' => $filter, 'searchValue' => $searchValue,'seller_id'=>$vendorId,'customer_id'=>$customerId, 'date_type'=>$dateType]) }}">
                                             <img width="14" src="{{dynamicAsset(path: 'public/assets/back-end/img/excel.png')}}" alt="">
                                             {{translate('excel')}}
                                         </a>
@@ -190,7 +190,7 @@
                                 </td>
                                 <td>
                                     <a class="title-color hover-c1"
-                                       href="{{route('vendor.orders.details',$order['id'])}}">{{$order['id']}} {!! $order->order_type == 'POS' ? '<span class="text--primary">(POS)</span>' : '' !!}</a>
+                                       href="{{route('supplier.orders.details',$order['id'])}}">{{$order['id']}} {!! $order->order_type == 'POS' ? '<span class="text--primary">(POS)</span>' : '' !!}</a>
                                 </td>
                                 <td>
                                     <div>{{date('d M Y',strtotime($order['created_at']))}}</div>
@@ -260,13 +260,13 @@
                                     <div class="d-flex justify-content-center gap-2">
                                         <a class="btn btn-outline--primary btn-sm square-btn"
                                            title="{{translate('view')}}"
-                                           href="{{route('vendor.orders.details',[$order['id']])}}">
+                                           href="{{route('supplier.orders.details',[$order['id']])}}">
                                             <i class="tio-invisible"></i>
 
                                         </a>
                                         <a class="btn btn-outline-info btn-sm square-btn" target="_blank"
                                            title="{{translate('invoice')}}"
-                                           href="{{route('vendor.orders.generate-invoice',[$order['id']])}}">
+                                           href="{{route('supplier.orders.generate-invoice',[$order['id']])}}">
                                             <i class="tio-download"></i>
                                         </a>
                                     </div>
@@ -291,7 +291,7 @@
     </div>
 
     <span id="message-date-range-text" data-text="{{ translate("invalid_date_range") }}"></span>
-    <span id="js-data-example-ajax-url" data-url="{{ route('vendor.orders.customers') }}"></span>
+    <span id="js-data-example-ajax-url" data-url="{{ route('supplier.orders.customers') }}"></span>
 @endsection
 
 @push('script')
