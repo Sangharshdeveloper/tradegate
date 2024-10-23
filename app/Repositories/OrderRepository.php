@@ -55,7 +55,7 @@ class OrderRepository implements OrderRepositoryInterface
     public function getListWhere(array $orderBy = [], string $searchValue = null, array $filters = [], array $relations = [], int|string $dataLimit = DEFAULT_DATA_LIMIT, int $offset = null): Collection|LengthAwarePaginator
     {
 
-        dd($filters);
+      
 
 
         $query = $this->order->with($relations)
@@ -67,7 +67,7 @@ class OrderRepository implements OrderRepositoryInterface
             })
 
             ->when(isset($filters['seller_is']) && $filters['seller_is'] == 'supplier', function ($query) use ($filters) {
-                return $query->where('seller_is', 'supplier');
+                return $query->where('seller_is', 'dropshipper');
             })
             
             ->when(isset($filters['seller_id']) && $filters['seller_id'] != 'all', function ($query) use ($filters) {
