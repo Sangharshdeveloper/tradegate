@@ -43,17 +43,30 @@ class OrderRepository implements OrderRepositoryInterface
     {
 
 
-        if ($params['seller_is'] == 'supplier') {
-            // Add the additional condition to the query
-            return $this->order->with($relations)
-                ->where($params)
-                ->where('original_seller_id', $params['seller_id'])
-                ->first();
+        $query = $this->order->with($relations);
+
+        // Always apply the ID condition
+        $query->where('id', $params['id']);
+    
+        // Check if seller_is is supplier
+        if (isset($params['seller_is']) && $params['seller_is'] === 'supplier') {
+            // Only add the original_seller_id condition for suppliers
+            $query->where('original_seller_id', $params['seller_id']);
         } else {
-            return $this->order->with($relations)
-                ->where($params)
-                ->first();
+            // For other seller types, include seller_id
+            if (isset($params['seller_id'])) {
+                $query->where('seller_id', $params['seller_id']);
+            }
         }
+    
+        // Always include seller_is condition
+        if (isset($params['seller_is'])) {
+            $query->where('seller_is', $params['seller_is']);
+        }
+
+
+        return $query->first();
+
         // dd($relations,$params);
         // return $this->order->with($relations)->where($params)->first();
     }
