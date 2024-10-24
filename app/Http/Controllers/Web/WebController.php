@@ -249,12 +249,10 @@ class WebController extends Controller
                     });
                 })->withCount(['orders']);
             })
-            ->with('seller',function ($query){
-                $query->where('type', '!=', 1); // Add the filter for seller type
-
-            })
             ->get()
             ->each(function ($shop) {
+
+                dd($shop);
 
              $shop->orders_count = $shop->seller->orders_count;
 
