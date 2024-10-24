@@ -943,7 +943,7 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
 
                         <!-- Suppliers Start -->
 
-                        <li class="navbar-vertical-aside-has-menu {{ Request::is('admin/vendors*') || Request::is('admin/vendors/withdraw-method/*') || (Request::is('admin/orders/details/*') && request()->has('vendor-order-list')) ? 'active' : '' }}">
+                        <li class="navbar-vertical-aside-has-menu {{ Request::is('admin/suppliers*') || Request::is('admin/suppliers/withdraw-method/*') || (Request::is('admin/orders/details/*') && request()->has('suppliers-order-list')) ? 'active' : '' }}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
                                 href="javascript:" title="{{translate('vendors')}}">
                                 <i class="tio-users-switch nav-icon"></i>
@@ -974,6 +974,41 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                         </li>
 
                         <!-- Suppliers End -->
+
+
+                         <!-- Student Start -->
+
+                         <li class="navbar-vertical-aside-has-menu {{ Request::is('admin/students*') || Request::is('admin/students/withdraw-method/*') || (Request::is('admin/orders/details/*') && request()->has('students-order-list')) ? 'active' : '' }}">
+                            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
+                                href="javascript:" title="Students">
+                                <i class="tio-users-switch nav-icon"></i>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{'Suppliers'}}</span>
+                            </a>
+                            <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
+                                style="display: {{Request::is('admin/students*') || (Request::is('admin/orders/details/*') && request()->has('vendor-order-list'))?'block':'none'}}">
+                                <li class="nav-item {{Request::is('admin/students/'.Student::ADD[URI])?'active':''}}">
+                                    <a class="nav-link" title="{{translate('add_New_Vendor')}}"
+                                        href="{{route('admin.students.add')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">
+                                            {{'Add new Student'}}
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item {{Request::is('admin/students/'.Supplier::LIST[URI]) ||Request::is('admin/students/'.Student::VIEW[URI].'*') ?'active':''}}">
+                                    <a class="nav-link" title="Students list"
+                                        href="{{route('admin.students.students-list')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span class="text-truncate">
+                                            {{'Students list'}}
+                                        </span>
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        <!-- Student End -->
 
                          <!-- Dropshipper Start -->
 
