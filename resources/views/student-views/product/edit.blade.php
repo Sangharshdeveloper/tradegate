@@ -10,9 +10,6 @@
 
 @section('content')
 @php
-
- dd($product);
-
 @endphp
     <div class="content container-fluid">
         <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
@@ -310,9 +307,9 @@
                                 </div>
 
                                 <input type="number" min="0" step="0.01"
-                                       placeholder="{{ translate('unit_price') }}"
+                                       placeholder="{{ translate('unit_price') }} Normal price = usdToDefaultCurrency($product['unit_price'])"
                                        name="unit_price" class="form-control"
-                                       value={{ usdToDefaultCurrency($product['unit_price']) }} required>
+                                       value={{ usdToDefaultCurrency($product['purchase_price_for_student']) }} required>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4 col-xl-3" id="minimum_order_qty">
