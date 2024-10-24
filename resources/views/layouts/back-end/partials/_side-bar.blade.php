@@ -983,7 +983,7 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
                                 href="javascript:" title="Students">
                                 <i class="tio-users-switch nav-icon"></i>
-                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{'Suppliers'}}</span>
+                                <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{'Student'}}</span>
                             </a>
                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
                                 style="display: {{Request::is('admin/students*') || (Request::is('admin/orders/details/*') && request()->has('vendor-order-list'))?'block':'none'}}">
