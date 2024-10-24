@@ -41,6 +41,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use App\Contracts\Repositories\SupplierRepositoryInterface;
 
 class ProductController extends BaseController
 {
