@@ -609,6 +609,41 @@ class ProductController extends BaseController
         return back();
     }
 
+    
+    public function getJustProductGalleryView(Request $request): View
+    {
+        $vendorId = auth('seller')->id();
+        $searchValue = $request['searchValue'];
+        $filters = [
+            'for_resell'=> '1',
+
+        ];
+
+
+    
+
+        $products =  $this->productRepo->getListWhere(orderBy: ['id' => 'desc'], searchValue: $request['searchValue'], filters: $filters, relations: ['translations'], dataLimit: getWebConfig(WebConfigKey::PAGINATION_LIMIT));
+        
+        $products->map(function ($product) {
+            if ($product->product_type == 'physical' && count(json_decode($product->choice_options)) > 0 || count(json_decode($product->colors)) > 0) {
+                $colorName = [];
+                $colorsCollection = collect(json_decode($product->colors));
+                $colorsCollection->map(function ($color) use (&$colorName) {
+                    $colorName[] = $this->colorRepo->getFirstWhere(['code' => $color])->name;
+                });
+                $product['colorsName'] = $colorName;
+            }
+        });
+       
+        $brands = $this->brandRepo->getListWhere(filters: ['status' => 1], dataLimit: 'all');
+
+        $categories = $this->categoryRepo->getListWhere(filters: ['position' => 0], dataLimit: 'all');
+
+        return view(Product::PRODUCT_GALLERY[VIEW], compact('products', 'brands', 'categories', 'searchValue'));
+
+    }
+
+
     public function getSearchedProductsView(Request $request): JsonResponse
     {
         $searchValue = $request['searchValue'] ?? null;
