@@ -1,14 +1,14 @@
 @php use Illuminate\Support\Str; @endphp
 @extends('layouts.back-end.app')
 
-@section('title', 'Dropshippers List')
+@section('title', 'Student List')
 
 @section('content')
     <div class="content container-fluid">
         <div class="mb-4">
             <h2 class="h1 mb-0 text-capitalize d-flex align-items-center gap-2">
                 <img src="{{dynamicAsset(path: 'public/assets/back-end/img/add-new-seller.png')}}" alt="">
-                {{'Dropshippers List'}}
+                {{'Student List'}}
                 <span class="badge badge-soft-dark radius-50 fz-12">{{ $suppliers->total() }}</span>
             </h2>
         </div>
@@ -48,7 +48,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <a href="{{route('admin.dropshippers.add')}}" type="button" class="btn btn--primary text-nowrap">
+                                <a href="{{route('admin.students.add')}}" type="button" class="btn btn--primary text-nowrap">
                                     <i class="tio-add"></i>
                                     {{'Add New Dropshipper'}}
                                 </a>
@@ -96,7 +96,7 @@
                                     <td>
                                         <a title="{{translate('view')}}"
                                            class="title-color"
-                                           href="{{route('admin.vendors.view',$seller->id)}}">
+                                           href="{{route('admin.students.view',$seller->id)}}">
                                             {{$seller->f_name}} {{$seller->l_name}}
                                         </a>
                                     </td>
@@ -116,16 +116,16 @@
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{route('admin.vendors.order-list',[$seller['id']])}}"
+                                        <a href="{{route('admin.students.order-list',[$seller['id']])}}"
                                             class="btn text-info bg-soft-info font-weight-bold px-3 py-1 fz-12 mb-0">
-                                            {{$seller->orders->where('seller_is','seller')->where('order_type','default_type')->count()}}
+                                            {{$seller->orders->where('seller_is','student')->where('order_type','default_type')->count()}}
                                         </a>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
                                             <a title="{{translate('view')}}"
                                                 class="btn btn-outline-info btn-sm square-btn"
-                                                href="{{route('admin.dropshippers.view',$seller->id)}}">
+                                                href="{{route('admin.students.view',$seller->id)}}">
                                                 <i class="tio-invisible"></i>
                                             </a>
                                         </div>

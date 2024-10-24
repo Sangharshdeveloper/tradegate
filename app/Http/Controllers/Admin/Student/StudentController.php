@@ -26,8 +26,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\SupplierAddRequest;
 use App\Repositories\DropshipperRepository;
 use App\Services\ShopService;
-use App\Services\SupplierService;
-use App\Services\VendorService;
+use App\Services\StudentService;
 use App\Traits\CommonTrait;
 use App\Traits\EmailTemplateTrait;
 use App\Traits\PaginatorTrait;
@@ -62,7 +61,7 @@ class StudentController extends BaseController
         private readonly WithdrawRequestRepositoryInterface  $withdrawRequestRepo,
         private readonly VendorWalletRepositoryInterface     $vendorWalletRepo,
         private readonly ShopRepositoryInterface             $shopRepo,
-        private readonly SupplierService                      $supplierService,
+        private readonly StudentService                      $supplierService,
         private readonly ShopService                         $shopService,
     ) {}
 
@@ -132,8 +131,8 @@ class StudentController extends BaseController
                 $data = [
                     'vendorName' => $vendor['f_name'],
                     'status' => 'approved',
-                    'subject' => translate('Vendor_Registration_Approved'),
-                    'title' => translate('Vendor_Registration_Approved'),
+                    'subject' => 'Student registration approved',
+                    'title' => 'Student registration approved',
                     'userType' => 'student',
                     'templateName' => 'registration-approved',
                 ];
@@ -141,8 +140,8 @@ class StudentController extends BaseController
                 $data = [
                     'vendorName' => $vendor['f_name'],
                     'status' => 'denied',
-                    'subject' => translate('Vendor_Registration_Denied'),
-                    'title' => translate('Vendor_Registration_Denied'),
+                    'subject' => 'Student registration approved Denied',
+                    'title' => 'Student registration approved Denied',
                     'userType' => 'student',
                     'templateName' => 'registration-denied',
                 ];
@@ -152,8 +151,8 @@ class StudentController extends BaseController
                 $data = [
                     'vendorName' => $vendor['f_name'],
                     'status' => 'suspended',
-                    'subject' => translate('Account_Suspended'),
-                    'title' => translate('Account_Suspended'),
+                    'subject' => 'Account Suspended',
+                    'title' => 'Account_Suspended',
                     'userType' => 'student',
                     'templateName' => 'account-suspended',
                 ];
@@ -161,8 +160,8 @@ class StudentController extends BaseController
                 $data = [
                     'vendorName' => $vendor['f_name'],
                     'status' => 'approved',
-                    'subject' => translate('Account_Activate'),
-                    'title' => translate('Account_Activate'),
+                    'subject' => 'Account Activate',
+                    'title' =>  'Account_Activate',
                     'userType' => 'student',
                     'templateName' => 'account-activation',
                 ];
