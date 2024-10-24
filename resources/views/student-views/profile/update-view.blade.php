@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-dropshipper')
+@extends('layouts.back-end.app-student')
 
 @section('title', translate('profile_Settings'))
 @push('css_or_js')

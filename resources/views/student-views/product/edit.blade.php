@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-dropshipper')
+@extends('layouts.back-end.app-student')
 
 @section('title', 'Resell Product')
 
@@ -20,8 +20,8 @@
                 {{ 'Resell Product' }}
             </h2>
         </div>
-<!--  : route('dropshipper.products.update',$product->id) -->
-        <form class="product-form text-start" action="{{route('dropshipper.products.add')}}" method="post"
+<!--  : route('student.products.update',$product->id) -->
+        <form class="product-form text-start" action="{{route('student.products.add')}}" method="post"
               enctype="multipart/form-data" id="product_form">
             @csrf
 
@@ -731,7 +731,7 @@
                                                             </button>
                                                         @else
                                                         <a class="delete_file_input_css btn btn-outline-danger btn-sm square-btn"
-                                                           href="{{ route('dropshipper.products.delete-image',['id'=>$product['id'],'name'=>$photo['key']]) }}">
+                                                           href="{{ route('student.products.delete-image',['id'=>$product['id'],'name'=>$photo['key']]) }}">
                                                             <i class="tio-delete"></i>
                                                         </a>
                                                         @endif
@@ -771,7 +771,7 @@
                                                                     </button>
                                                                 @else
                                                                 <a class="delete_file_input_css btn btn-outline-danger btn-sm square-btn"
-                                                                   href="{{ route('dropshipper.products.delete-image',['id'=>$product['id'],'name'=>$photo['image_name']['key'],'color'=>'null']) }}">
+                                                                   href="{{ route('student.products.delete-image',['id'=>$product['id'],'name'=>$photo['image_name']['key'],'color'=>'null']) }}">
                                                                     <i class="tio-delete"></i>
                                                                 </a>
                                                                 @endif
@@ -809,7 +809,7 @@
                                                                 </button>
                                                             @else
                                                                 <a class="delete_file_input_css btn btn-outline-danger btn-sm square-btn"
-                                                                   href="{{ route('dropshipper.products.delete-image',['id'=>$product['id'],'name'=>$photo['key']]) }}">
+                                                                   href="{{ route('student.products.delete-image',['id'=>$product['id'],'name'=>$photo['key']]) }}">
                                                                     <i class="tio-delete"></i>
                                                                 </a>
                                                             @endif
@@ -907,7 +907,7 @@
 
                                     @if ($product->preview_file_full_url['path'])
                                         <span class="btn btn-outline-danger btn-sm square-btn collapse show zip-remove-btn delete_preview_file_input"
-                                              data-route="{{ route('dropshipper.products.delete-preview-file') }}">
+                                              data-route="{{ route('student.products.delete-preview-file') }}">
                                             <i class="tio-delete"></i>
                                         </span>
                                     @else
@@ -929,7 +929,7 @@
                 <input type="hidden" id="images" value="{{ json_encode($product->images_full_url) }}">
                 <input type="hidden" id="product_id" name="product_id" value="{{ $product['id'] }}">
                 <input type="hidden" id="original_seller_id" name="original_seller_id" value="{{ $product['user_id'] }}">
-                <input type="hidden" id="remove_url" value="{{ route('dropshipper.products.delete-image') }}">
+                <input type="hidden" id="remove_url" value="{{ route('student.products.delete-image') }}">
             </div>
 
             <div class="card mt-3 rest-part">
@@ -1075,9 +1075,9 @@
         </form>
     </div>
 
-    <span id="route-vendor-products-sku-combination" data-url="{{ route('dropshipper.products.sku-combination') }}"></span>
-    <span id="route-vendor-products-digital-variation-combination" data-url="{{ route('dropshipper.products.digital-variation-combination') }}"></span>
-    <span id="route-vendor-products-digital-variation-file-delete" data-url="{{ route('dropshipper.products.digital-variation-file-delete') }}"></span>
+    <span id="route-vendor-products-sku-combination" data-url="{{ route('student.products.sku-combination') }}"></span>
+    <span id="route-vendor-products-digital-variation-combination" data-url="{{ route('student.products.digital-variation-combination') }}"></span>
+    <span id="route-vendor-products-digital-variation-file-delete" data-url="{{ route('student.products.digital-variation-file-delete') }}"></span>
     <span id="image-path-of-product-upload-icon" data-path="{{ dynamicAsset(path: 'public/assets/back-end/img/icons/product-upload-icon.svg') }}"></span>
     <span id="image-path-of-product-upload-icon-two" data-path="{{ dynamicAsset(path: 'public/assets/back-end/img/400x400/img2.jpg') }}"></span>
     <span id="message-enter-choice-values" data-text="{{ translate('enter_choice_values') }}"></span>
@@ -1347,8 +1347,8 @@
                 let category = $("#category_id").val();
                 let sub_category = $("#sub-category-select").attr("data-id");
                 let sub_sub_category = $("#sub-sub-category-select").attr("data-id");
-                getRequestFunctionality('{{ route('dropshipper.products.get-categories') }}?parent_id=' + category + '&sub_category=' + sub_category, 'sub-category-select', 'select');
-                getRequestFunctionality('{{ route('dropshipper.products.get-categories') }}?parent_id=' + sub_category + '&sub_category=' + sub_sub_category, 'sub-sub-category-select', 'select');
+                getRequestFunctionality('{{ route('student.products.get-categories') }}?parent_id=' + category + '&sub_category=' + sub_category, 'sub-category-select', 'select');
+                getRequestFunctionality('{{ route('student.products.get-categories') }}?parent_id=' + sub_category + '&sub_category=' + sub_sub_category, 'sub-sub-category-select', 'select');
             }, 100)
         });
 

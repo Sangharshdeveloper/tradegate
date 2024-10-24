@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-dropshipper')
+@extends('layouts.back-end.app-student')
 
 @section('title', $product->name . ' '.translate('barcode').' ' . date('Y/m/d'))
 

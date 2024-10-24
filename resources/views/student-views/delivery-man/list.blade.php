@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-dropshipper')
+@extends('layouts.back-end.app-student')
 @section('title',translate('deliveryman_List'))
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">

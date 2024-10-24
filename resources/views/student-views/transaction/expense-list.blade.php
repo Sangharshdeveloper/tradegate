@@ -1,4 +1,4 @@
-@extends('layouts.back-end.app-dropshipper')
+@extends('layouts.back-end.app-student')
 @section('title', translate('expense_Transactions'))
 @section('content')
     <div class="content container-fluid ">
