@@ -120,7 +120,7 @@ class WarehouseProductController extends BaseController
         $this->productSeoRepo->add(data: $service->getProductSEOData(request: $request, product: $savedProduct, action: 'add'));
 
         Toastr::success(translate('product_added_successfully'));
-        return redirect()->route('admin.products.list', ['in_house']);
+        return redirect()->route('admin.warehouse-products.list', ['ware-house']);
     }
 
     public function updateProductAuthorAndPublishingHouse(object|array $request, object|array $product): void
