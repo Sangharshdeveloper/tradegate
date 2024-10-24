@@ -103,16 +103,16 @@ class StudentController extends BaseController
         $data = [
             'vendorName' => $request['f_name'],
             'status' => 'pending',
-            'subject' => 'Dropshipper Registration Successfully Completed',
-            'title' => 'Dropshipper Registration Successfully Completed',
-            'userType' => 'dropshipper',
+            'subject' => 'Student Registration Successfully Completed',
+            'title' => 'Student Registration Successfully Completed',
+            'userType' => 'student',
             'type' => '2',
             'templateName' => 'registration',
         ];
         event(new VendorRegistrationEvent(email: $request['email'], data: $data));
 
         
-        return response()->json(['message' => 'Dropshipper added successfully']);
+        return response()->json(['message' => 'Student added successfully']);
     }
 
     public function updateStatus(Request $request): RedirectResponse
@@ -134,7 +134,7 @@ class StudentController extends BaseController
                     'status' => 'approved',
                     'subject' => translate('Vendor_Registration_Approved'),
                     'title' => translate('Vendor_Registration_Approved'),
-                    'userType' => 'vendor',
+                    'userType' => 'student',
                     'templateName' => 'registration-approved',
                 ];
             } elseif ($request['status'] == "rejected") {
@@ -143,7 +143,7 @@ class StudentController extends BaseController
                     'status' => 'denied',
                     'subject' => translate('Vendor_Registration_Denied'),
                     'title' => translate('Vendor_Registration_Denied'),
-                    'userType' => 'vendor',
+                    'userType' => 'student',
                     'templateName' => 'registration-denied',
                 ];
             }
@@ -154,7 +154,7 @@ class StudentController extends BaseController
                     'status' => 'suspended',
                     'subject' => translate('Account_Suspended'),
                     'title' => translate('Account_Suspended'),
-                    'userType' => 'vendor',
+                    'userType' => 'student',
                     'templateName' => 'account-suspended',
                 ];
             } else {
@@ -163,7 +163,7 @@ class StudentController extends BaseController
                     'status' => 'approved',
                     'subject' => translate('Account_Activate'),
                     'title' => translate('Account_Activate'),
-                    'userType' => 'vendor',
+                    'userType' => 'student',
                     'templateName' => 'account-activation',
                 ];
             }
@@ -589,7 +589,7 @@ class StudentController extends BaseController
 
             $this->withdrawRequestRepo->update(id: $id, data: $withdrawData);
             Toastr::success(translate('Vendor_Payment_has_been_approved_successfully'));
-            return redirect()->route('admin.vendors.withdraw_list');
+            return redirect()->route('admin.stsudent.withdraw_list');
         }
 
         $this->vendorWalletRepo->getFirstWhere(params: ['seller_id' => $withdraw['seller_id']])->increment('total_earning', $withdraw['amount']);
@@ -597,6 +597,6 @@ class StudentController extends BaseController
         $this->withdrawRequestRepo->update(id: $id, data: $withdrawData);
 
         Toastr::info(translate('Vendor_Payment_request_has_been_Denied_successfully'));
-        return redirect()->route('admin.vendors.withdraw_list');
+        return redirect()->route('admin.students.withdraw_list');
     }
 }
