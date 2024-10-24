@@ -15,7 +15,7 @@ use App\Contracts\Repositories\SupplierRepositoryInterface;
 use App\Contracts\Repositories\VendorWalletRepositoryInterface;
 use App\Contracts\Repositories\WithdrawRequestRepositoryInterface;
 use App\Enums\ExportFileNames\Admin\Vendor as VendorExport;
-use App\Enums\ViewPaths\Admin\Dropshipper;
+use App\Enums\ViewPaths\Admin\Student;
 use App\Enums\WebConfigKey;
 use App\Events\VendorRegistrationEvent;
 use App\Events\WithdrawStatusUpdateEvent;
@@ -87,12 +87,12 @@ class StudentController extends BaseController
             relations: ['orders', 'product'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
-        return view(Dropshipper::LIST[VIEW], compact('suppliers', 'current_date'));
+        return view(Student::LIST[VIEW], compact('suppliers', 'current_date'));
     }
 
     public function getAddView(Request $request): View
     {
-        return view(Dropshipper::ADD[VIEW]);
+        return view(Student::ADD[VIEW]);
     }
 
     public function add(SupplierAddRequest $request): JsonResponse
@@ -201,7 +201,7 @@ class StudentController extends BaseController
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT),
         );
         $seller = $this->supplierRepo->getFirstWhere(params: ['id' => $seller_id]);
-        return view(Dropshipper::ORDER_LIST[VIEW], compact('orders', 'seller'));
+        return view(Student::ORDER_LIST[VIEW], compact('orders', 'seller'));
     }
 
     public function exportOrderList(Request $request, $vendorId): BinaryFileResponse
@@ -242,7 +242,7 @@ class StudentController extends BaseController
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
         $seller = $this->supplierRepo->getFirstWhere(params: ['id' => $seller_id]);
-        return view(Dropshipper::PRODUCT_LIST[VIEW], compact('products', 'seller'));
+        return view(Student::PRODUCT_LIST[VIEW], compact('products', 'seller'));
     }
 
     public function updateSalesCommission(Request $request, $id): RedirectResponse
@@ -299,7 +299,7 @@ class StudentController extends BaseController
         } else {
             $orderCount = $this->orderRepo->getListWhereCount(filters: ['customer_id' => $order['customer_id'], 'order_type' => 'POS']);
         }
-        return view(Dropshipper::ORDER_DETAILS[VIEW], compact(
+        return view(Student::ORDER_DETAILS[VIEW], compact(
             'order',
             'seller_id',
             'delivery_men',
@@ -375,7 +375,7 @@ class StudentController extends BaseController
             return $this->getReviewListTabView(request: $request, seller: $seller);
         }
 
-        return view(Dropshipper::VIEW[VIEW], [
+        return view(Student::VIEW[VIEW], [
             'seller' => $seller,
             'current_date' => date('Y-m-d'),
         ]);
@@ -402,7 +402,7 @@ class StudentController extends BaseController
             dataLimit: 'all',
         )->count();
 
-        return view(Dropshipper::VIEW_ORDER[VIEW], compact('seller', 'orders', 'pendingOrder', 'deliveredOrder'));
+        return view(Student::VIEW_ORDER[VIEW], compact('seller', 'orders', 'pendingOrder', 'deliveredOrder'));
     }
 
     public function getProductListTabView(Request $request, $seller): View
@@ -414,12 +414,12 @@ class StudentController extends BaseController
             relations: ['translations'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
         );
-        return view(Dropshipper::VIEW_PRODUCT[VIEW], compact('seller', 'products'));
+        return view(Student::VIEW_PRODUCT[VIEW], compact('seller', 'products'));
     }
 
     public function getSettingListTabView(Request $request, $seller, $id): View
     {
-        return view(Dropshipper::VIEW_SETTING[VIEW], compact('seller'));
+        return view(Student::VIEW_SETTING[VIEW], compact('seller'));
     }
 
     public function updateSetting(Request $request, $id): RedirectResponse
@@ -465,7 +465,7 @@ class StudentController extends BaseController
             relations: ['order.customer'],
             dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT),
         );
-        return view(Dropshipper::VIEW_TRANSACTION[VIEW], compact('seller', 'transactions'));
+        return view(Student::VIEW_TRANSACTION[VIEW], compact('seller', 'transactions'));
     }
 
     public function getReviewListTabView(Request $request, $seller): View
@@ -495,7 +495,7 @@ class StudentController extends BaseController
                 dataLimit: getWebConfig(name: 'pagination_limit')
             );
         }
-        return view(Dropshipper::VIEW_REVIEW[VIEW], [
+        return view(Student::VIEW_REVIEW[VIEW], [
             'seller' => $seller,
             'reviews' => $reviews,
         ]);
@@ -507,7 +507,7 @@ class StudentController extends BaseController
         if ($withdrawRequest) {
             $withdrawalMethod = is_array($withdrawRequest['withdrawal_method_fields']) ? $withdrawRequest['withdrawal_method_fields'] : json_decode($withdrawRequest['withdrawal_method_fields']);
             $direction = session('direction');
-            return view(Dropshipper::WITHDRAW_VIEW[VIEW], compact('withdrawRequest', 'withdrawalMethod', 'direction'));
+            return view(Student::WITHDRAW_VIEW[VIEW], compact('withdrawRequest', 'withdrawalMethod', 'direction'));
         }
         Toastr::error(translate('withdraw_request_not_found'));
         return back();
@@ -523,7 +523,7 @@ class StudentController extends BaseController
             relations: ['seller'],
             dataLimit: getWebConfig(name: 'pagination_limit')
         );
-        return view(Dropshipper::WITHDRAW_LIST[VIEW], compact('withdrawRequests'));
+        return view(Student::WITHDRAW_LIST[VIEW], compact('withdrawRequests'));
     }
 
     public function exportWithdrawList(Request $request): BinaryFileResponse
