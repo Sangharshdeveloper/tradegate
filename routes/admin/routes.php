@@ -466,7 +466,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
      Route::group(['prefix' => 'suppliers', 'as' => 'suppliers.', 'middleware' => ['module:user_section']], function () {
         Route::controller(SupplierController::class)->group(function () {
-            Route::get(Supplier::LIST[URI], 'index')->name('suppliers-list');
+            Route::get(Supplier::LIST[URI], 'index')->name('list');
             Route::get(Supplier::ADD[URI], 'getAddView')->name('add');
             Route::POST(Supplier::ADD[URI], 'add');
             Route::get(Supplier::ORDER_LIST[URI] . '/{supplier_id}', 'getOrderListView')->name('order-list');
