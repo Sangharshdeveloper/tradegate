@@ -242,8 +242,9 @@ class WebController extends Controller
                 });
             })
             ->with('seller', function ($query) {
-                dd($query);
-                $query->with('product', function ($query) {
+                $query->
+                
+                with('product', function ($query) {
                     $query->active()->with('reviews', function ($query) {
                         $query->active();
                     });

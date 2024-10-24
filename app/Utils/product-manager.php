@@ -1607,6 +1607,9 @@ class ProductManager
                 $query = $query->sortBy('temporary_close');
             }
 
+            $query->where('type', '!=', 1); // Add the filter for seller type
+
+
             return $query;
         }
         return $query;
@@ -1653,6 +1656,7 @@ class ProductManager
             } elseif ($vendorsSortBy['temporary_close_sorting'] == 'desc') {
                 $query = $query->sortBy('temporary_close');
             }
+            $query->where('type', '!=', 1); // Add the filter for seller type
 
             return $query;
         }
