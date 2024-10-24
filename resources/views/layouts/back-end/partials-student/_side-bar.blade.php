@@ -18,7 +18,7 @@
         <div class="navbar-vertical-container">
             <div class="navbar-vertical-footer-offset pb-0">
                 <div class="navbar-brand-wrapper justify-content-between side-logo">
-                    <a class="navbar-brand" href="{{route('dropshipper.dashboard.index')}}" aria-label="Front">
+                    <a class="navbar-brand" href="{{route('student.dashboard.index')}}" aria-label="Front">
                         @if (isset($shop))
                             <img class="navbar-brand-logo-mini for-seller-logo"
                                  src="{{getStorageImages(path:$shop->image_full_url,type:'backend-logo')}}" alt="{{translate('logo')}}">
@@ -49,9 +49,9 @@
                         </div>
                     </div>
                     <ul class="navbar-nav navbar-nav-lg nav-tabs">
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/dashboard*')?'show':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/dashboard*')?'show':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                               href="{{route('dropshipper.dashboard.index')}}">
+                               href="{{route('student.dashboard.index')}}">
                                 <i class="tio-home-vs-1-outlined nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
                                     {{translate('dashboard')}}
@@ -62,9 +62,9 @@
                         @php($sellerId = $seller['id'])
                         @php($sellerPOS=getWebConfig('seller_pos'))
                         @if ($sellerPOS == 1 && $seller['pos_status'] == 1)
-                            <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/pos*')?'active':''}}">
+                            <li class="navbar-vertical-aside-has-menu {{Request::is('student/pos*')?'active':''}}">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                   href="{{route('dropshipper.pos.index')}}">
+                                   href="{{route('student.pos.index')}}">
                                     <i class="tio-shopping nav-icon"></i>
                                     <span
                                         class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{translate('POS')}}</span>
@@ -76,7 +76,7 @@
                             <small class="nav-subtitle">{{translate('order_management')}}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/orders*')?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/orders*')?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:">
                                 <i class="tio-shopping-cart nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
@@ -84,9 +84,9 @@
                                 </span>
                             </a>
                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                style="display: {{Request::is('dropshipper/order*')?'block':'none'}}">
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/all')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['all'])}}" title="">
+                                style="display: {{Request::is('student/order*')?'block':'none'}}">
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/all')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['all'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                             {{translate('all')}}
@@ -97,8 +97,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/pending')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['pending'])}}" title="">
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/pending')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['pending'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                             {{translate('pending')}}
@@ -109,8 +109,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/confirmed')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['confirmed'])}}" title="">
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/confirmed')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['confirmed'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                             {{translate('confirmed')}}
@@ -122,8 +122,8 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/processing')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['processing'])}}" title="">
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/processing')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['processing'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                             {{translate('packaging')}}
@@ -135,8 +135,8 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/out_for_delivery')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['out_for_delivery'])}}"
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/out_for_delivery')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['out_for_delivery'])}}"
                                        title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">
@@ -148,8 +148,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/delivered')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['delivered'])}}" title="">
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/delivered')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['delivered'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                             {{translate('delivered')}}
@@ -160,8 +160,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/returned')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['returned'])}}" title="">
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/returned')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['returned'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                             {{translate('returned')}}
@@ -172,8 +172,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/failed')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['failed'])}}" title="">
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/failed')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['failed'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                             {{translate('failed To Deliver')}}
@@ -184,8 +184,8 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/orders/'.OrderEnum::LIST[URI].'/canceled')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.orders.list',['canceled'])}}" title="">
+                                <li class="nav-item {{Request::is('student/orders/'.OrderEnum::LIST[URI].'/canceled')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.orders.list',['canceled'])}}" title="">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                             {{translate('canceled')}}
@@ -199,7 +199,7 @@
                             </ul>
                         </li>
 
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/refund*')?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/refund*')?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
                                href="javascript:">
                                 <i class="tio-receipt-outlined nav-icon"></i>
@@ -208,10 +208,10 @@
                                 </span>
                             </a>
                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                style="display: {{Request::is('dropshipper/refund*')?'block':'none'}}">
-                                <li class="nav-item {{Request::is('dropshipper/refund/'.Refund::INDEX[URI].'/pending')?'active':''}}">
+                                style="display: {{Request::is('student/refund*')?'block':'none'}}">
+                                <li class="nav-item {{Request::is('student/refund/'.Refund::INDEX[URI].'/pending')?'active':''}}">
                                     <a class="nav-link"
-                                       href="{{route('dropshipper.refund.index',['pending'])}}">
+                                       href="{{route('student.refund.index',['pending'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                           {{translate('pending')}}
@@ -224,9 +224,9 @@
                                     </a>
                                 </li>
 
-                                <li class="nav-item {{Request::is('dropshipper/refund/'.Refund::INDEX[URI].'/approved')?'active':''}}">
+                                <li class="nav-item {{Request::is('student/refund/'.Refund::INDEX[URI].'/approved')?'active':''}}">
                                     <a class="nav-link"
-                                       href="{{route('dropshipper.refund.index',['approved'])}}">
+                                       href="{{route('student.refund.index',['approved'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                            {{translate('approved')}}
@@ -238,9 +238,9 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/refund/'.Refund::INDEX[URI].'/refunded')?'active':''}}">
+                                <li class="nav-item {{Request::is('student/refund/'.Refund::INDEX[URI].'/refunded')?'active':''}}">
                                     <a class="nav-link"
-                                       href="{{route('dropshipper.refund.index',['refunded'])}}">
+                                       href="{{route('student.refund.index',['refunded'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                            {{translate('refunded')}}
@@ -252,9 +252,9 @@
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/refund/'.Refund::INDEX[URI].'/rejected')?'active':''}}">
+                                <li class="nav-item {{Request::is('student/refund/'.Refund::INDEX[URI].'/rejected')?'active':''}}">
                                     <a class="nav-link"
-                                       href="{{route('dropshipper.refund.index',['rejected'])}}">
+                                       href="{{route('student.refund.index',['rejected'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">
                                            {{translate('rejected')}}
@@ -272,7 +272,7 @@
                             <small class="nav-subtitle">{{translate('product_management')}}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{(Request::is('dropshipper/product*'))?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{(Request::is('student/product*'))?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:">
                                 <i class="tio-premium-outlined nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
@@ -280,57 +280,57 @@
                                 </span>
                             </a>
                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                style="display: {{(Request::is('dropshipper/products*'))?'block':''}}">
-                                <li class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/all')|| Request::is('dropshipper/products/'.Product::UPDATE[URI].'*')||   Request::is('dropshipper/products/'.Product::VIEW[URI].'*') || Request::is('dropshipper/products/'.Product::STOCK_LIMIT[URI])?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.products.list',['type'=>'all'])}}">
+                                style="display: {{(Request::is('student/products*'))?'block':''}}">
+                                <li class="nav-item {{Request::is('student/products/'.Product::LIST[URI].'/all')|| Request::is('student/products/'.Product::UPDATE[URI].'*')||   Request::is('student/products/'.Product::VIEW[URI].'*') || Request::is('student/products/'.Product::STOCK_LIMIT[URI])?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.products.list',['type'=>'all'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{translate('product_list')}}</span>
                                     </a>
                                 </li>
-                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/approved')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.products.list',['type'=>'approved'])}}">
+                                <li style="display: none;" class="nav-item {{Request::is('student/products/'.Product::LIST[URI].'/approved')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.products.list',['type'=>'approved'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{translate('approved_product_list')}}</span>
                                     </a>
                                 </li>
-                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/new-request')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.products.list',['type'=>'new-request'])}}">
+                                <li style="display: none;" class="nav-item {{Request::is('student/products/'.Product::LIST[URI].'/new-request')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.products.list',['type'=>'new-request'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{translate('new_product_request')}}</span>
                                     </a>
                                 </li>
-                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::LIST[URI].'/denied')?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.products.list',['type'=>'denied'])}}">
+                                <li style="display: none;" class="nav-item {{Request::is('student/products/'.Product::LIST[URI].'/denied')?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.products.list',['type'=>'denied'])}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate text-capitalize">{{translate('denied_product_request')}}</span>
                                     </a>
                                 </li>
-                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::ADD[URI])||(Request::is('dropshipper/products/'.Product::UPDATE[URI].'/*') && request()->has('product-gallery')) ?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.products.add')}}">
+                                <li style="display: none;" class="nav-item {{Request::is('student/products/'.Product::ADD[URI])||(Request::is('student/products/'.Product::UPDATE[URI].'/*') && request()->has('product-gallery')) ?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.products.add')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span
                                             class="text-truncate text-capitalize">{{translate('add_new_product')}}</span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('dropshipper/products/'.Product::PRODUCT_GALLERY[URI])?'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.products.product-gallery')}}">
+                                <li class="nav-item {{Request::is('student/products/'.Product::PRODUCT_GALLERY[URI])?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.products.product-gallery')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span
                                             class="text-truncate text-capitalize">{{translate('product_gallery')}}</span>
                                     </a>
                                 </li>
 
-                                <li style="display: none;" class="nav-item {{Request::is('dropshipper/products/'.Product::BULK_IMPORT[URI]) ? 'active':''}}">
-                                    <a class="nav-link " href="{{route('dropshipper.products.bulk-import')}}">
+                                <li style="display: none;" class="nav-item {{Request::is('student/products/'.Product::BULK_IMPORT[URI]) ? 'active':''}}">
+                                    <a class="nav-link " href="{{route('student.products.bulk-import')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span class="text-truncate">{{translate('bulk_import')}}</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/reviews/'.Review::INDEX[URI].'*')?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/reviews/'.Review::INDEX[URI].'*')?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                               href="{{route('dropshipper.reviews.index')}}">
+                               href="{{route('student.reviews.index')}}">
                                 <i class="tio-star nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
                                     {{translate('product_Reviews')}}
@@ -341,9 +341,9 @@
                             <small class="nav-subtitle">{{translate('promotion_management')}}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/coupon*')?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/coupon*')?'active':''}}">
                             <a class="nav-link"
-                               href="{{route('dropshipper.coupon.index')}}" title="{{translate('coupons')}}">
+                               href="{{route('student.coupon.index')}}" title="{{translate('coupons')}}">
                                 <i class="tio-users-switch nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{translate('coupons')}}</span>
@@ -353,22 +353,22 @@
                             <small class="nav-subtitle">{{translate('help_&_support')}}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/messages*')?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/messages*')?'active':''}}">
                             <a class="nav-link"
-                               href="{{route('dropshipper.messages.index', ['type' => 'customer'])}}">
+                               href="{{route('student.messages.index', ['type' => 'customer'])}}">
                                 <i class="tio-chat nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
                                         {{translate('inbox')}}
                                     </span>
                             </a>
                         </li>
-                        <li class="nav-item {{(Request::is('dropshipper/transaction/order-list')) ? 'scroll-here':''}}">
+                        <li class="nav-item {{(Request::is('student/transaction/order-list')) ? 'scroll-here':''}}">
                             <small class="nav-subtitle">{{translate('reports_&_analytics')}}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{(Request::is('dropshipper/transaction/order-list') || Request::is('dropshipper/transaction/expense-list') || Request::is('dropshipper/transaction/order-history-log*'))?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{(Request::is('student/transaction/order-list') || Request::is('student/transaction/expense-list') || Request::is('student/transaction/order-history-log*'))?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                               href="{{route('dropshipper.transaction.order-list')}}"
+                               href="{{route('student.transaction.order-list')}}"
                                title="{{translate('transactions_Report')}}">
                                 <i class="tio-chart-bar-3 nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate text-capitalize">
@@ -376,9 +376,9 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{ (Request::is('dropshipper/report/all-product') ||Request::is('dropshipper/report/stock-product-report')) ?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{ (Request::is('student/report/all-product') ||Request::is('student/report/stock-product-report')) ?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link text-capitalize"
-                               href="{{route('dropshipper.report.all-product')}}" title="{{translate('product_report')}}">
+                               href="{{route('student.report.all-product')}}" title="{{translate('product_report')}}">
                                 <i class="tio-chart-bar-4 nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
                                     <span class="position-relative text-capitalize">
@@ -387,9 +387,9 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/report/order-report')?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/report/order-report')?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link text-capitalize"
-                               href="{{route('dropshipper.report.order-report')}}"
+                               href="{{route('student.report.order-report')}}"
                                title="{{translate('order_report')}}">
                                 <i class="tio-chart-bar-1 nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
@@ -397,15 +397,15 @@
                             </span>
                             </a>
                         </li>
-                        <li class="nav-item {{( Request::is('dropshipper/business-settings*'))?'scroll-here':''}}">
+                        <li class="nav-item {{( Request::is('student/business-settings*'))?'scroll-here':''}}">
                             <small class="nav-subtitle" title="">{{translate('business_section')}}</small>
                             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                         </li>
                         @php($shippingMethod = getWebConfig('shipping_method'))
                         @if($shippingMethod=='sellerwise_shipping')
-                            <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/business-settings/shipping-method*')?'active':''}}">
+                            <li class="navbar-vertical-aside-has-menu {{Request::is('student/business-settings/shipping-method*')?'active':''}}">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link"
-                                   href="{{route('dropshipper.business-settings.shipping-method.index')}}">
+                                   href="{{route('student.business-settings.shipping-method.index')}}">
                                     <i class="tio-settings nav-icon"></i>
                                     <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate text-capitalize text-capitalize">
                                         {{translate('shipping_methods')}}
@@ -413,27 +413,27 @@
                                 </a>
                             </li>
                         @endif
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/business-settings/withdraw*')?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/business-settings/withdraw*')?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                               href="{{route('dropshipper.business-settings.withdraw.index')}}">
+                               href="{{route('student.business-settings.withdraw.index')}}">
                                 <i class="tio-wallet-outlined nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate text-capitalize">
                                         {{translate('withdraws')}}
                                 </span>
                             </a>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/profile/'.Profile::INDEX[URI]) || Request::is('dropshipper/profile/'.Profile::BANK_INFO_UPDATE[URI]) ?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/profile/'.Profile::INDEX[URI]) || Request::is('student/profile/'.Profile::BANK_INFO_UPDATE[URI]) ?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                               href="{{route('dropshipper.profile.index')}}">
+                               href="{{route('student.profile.index')}}">
                                 <i class="tio-shop nav-icon"></i>
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate text-capitalize">
                                     {{translate('bank_Information')}}
                                 </span>
                             </a>
                         </li>
-                        <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/shop*')?'active':''}}">
+                        <li class="navbar-vertical-aside-has-menu {{Request::is('student/shop*')?'active':''}}">
                             <a class="js-navbar-vertical-aside-menu-link nav-link"
-                               href="{{route('dropshipper.shop.index')}}">
+                               href="{{route('student.shop.index')}}">
                                 <i class="tio-home nav-icon"></i>
                                 <span
                                     class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate text-capitalize">
@@ -443,11 +443,11 @@
                         </li>
                         @php( $shippingMethod = getWebConfig('shipping_method'))
                         @if($shippingMethod=='sellerwise_shipping')
-                            <li class="nav-item {{Request::is('dropshipper/delivery-man*')?'scroll-here':''}}">
+                            <li class="nav-item {{Request::is('student/delivery-man*')?'scroll-here':''}}">
                                 <small class="nav-subtitle">{{translate('delivery_man_management')}}</small>
                                 <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                             </li>
-                            <li class="navbar-vertical-aside-has-menu {{Request::is('dropshipper/delivery-man*')?'active':''}}">
+                            <li class="navbar-vertical-aside-has-menu {{Request::is('student/delivery-man*')?'active':''}}">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle"
                                    href="javascript:">
                                     <i class="tio-user nav-icon"></i>
@@ -456,30 +456,30 @@
                                 </span>
                                 </a>
                                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                    style="display: {{Request::is('dropshipper/delivery-man*')?'block':'none'}}">
-                                    <li class="nav-item {{Request::is('dropshipper/delivery-man/'.DeliveryMan::INDEX[URI])?'active':''}}">
-                                        <a class="nav-link " href="{{route('dropshipper.delivery-man.index')}}">
+                                    style="display: {{Request::is('student/delivery-man*')?'block':'none'}}">
+                                    <li class="nav-item {{Request::is('student/delivery-man/'.DeliveryMan::INDEX[URI])?'active':''}}">
+                                        <a class="nav-link " href="{{route('student.delivery-man.index')}}">
                                             <span class="tio-circle nav-indicator-icon"></span>
                                             <span class="text-truncate text-capitalize">{{translate('add_new')}}</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item {{ Request::is('dropshipper/delivery-man/'.DeliveryMan::LIST[URI]) || Request::is('dropshipper/delivery-man/'.DeliveryMan::UPDATE[URI])  ||Request::is('dropshipper/delivery-man/'.DeliveryMan::RATING[URI].'/*') ||  Request::is('dropshipper/delivery-man/wallet*') ? 'active':''}}">
-                                        <a class="nav-link" href="{{route('dropshipper.delivery-man.list')}}">
+                                    <li class="nav-item {{ Request::is('student/delivery-man/'.DeliveryMan::LIST[URI]) || Request::is('student/delivery-man/'.DeliveryMan::UPDATE[URI])  ||Request::is('student/delivery-man/'.DeliveryMan::RATING[URI].'/*') ||  Request::is('student/delivery-man/wallet*') ? 'active':''}}">
+                                        <a class="nav-link" href="{{route('student.delivery-man.list')}}">
                                             <span class="tio-circle nav-indicator-icon"></span>
                                             <span class="text-truncate">{{translate('list')}}</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item {{Request::is('dropshipper/delivery-man/withdraw/*')?'active':''}}">
-                                        <a class="nav-link " href="{{route('dropshipper.delivery-man.withdraw.index')}}"
+                                    <li class="nav-item {{Request::is('student/delivery-man/withdraw/*')?'active':''}}">
+                                        <a class="nav-link " href="{{route('student.delivery-man.withdraw.index')}}"
                                            title="{{translate('withdraws')}}">
                                             <span class="tio-circle nav-indicator-icon"></span>
                                             <span class="text-truncate">{{translate('withdraws')}}</span>
                                         </a>
                                     </li>
 
-                                    <li class="nav-item {{Request::is('dropshipper/delivery-man/emergency-contact/*') ? 'active' : ''}}">
+                                    <li class="nav-item {{Request::is('student/delivery-man/emergency-contact/*') ? 'active' : ''}}">
                                         <a class="nav-link "
-                                           href="{{route('dropshipper.delivery-man.emergency-contact.index')}}"
+                                           href="{{route('student.delivery-man.emergency-contact.index')}}"
                                            title="{{translate('withdraws')}}">
                                             <span class="tio-circle nav-indicator-icon"></span>
                                             <span
