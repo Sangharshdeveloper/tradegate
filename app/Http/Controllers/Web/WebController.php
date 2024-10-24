@@ -243,6 +243,9 @@ class WebController extends Controller
                     }
                 });
             })
+            ->whereHas('seller', function ($query) {
+                $query->where('type', '!=', 1); // Filter sellers where type is not 1
+            })
             ->with('seller', function ($query) {
                 $query->
                 with('product', function ($query) {
