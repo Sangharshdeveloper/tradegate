@@ -95,8 +95,10 @@ use App\Http\Controllers\Admin\Warehouse\WarehouseProductController;
 use App\Http\Controllers\Admin\ProductReportController;
 use App\Http\Controllers\Admin\Vendor\VendorController;
 use App\Http\Controllers\Admin\Supplier\SupplierController;
+use App\Http\Controllers\Admin\Student\StudentController;
 use App\Http\Controllers\Admin\Dropshipper\DropshipperController;
 use App\Enums\ViewPaths\Admin\StorageConnectionSettings;
+use App\Enums\ViewPaths\Admin\Student;
 use App\Enums\ViewPaths\Admin\VendorRegistrationSetting;
 use App\Http\Controllers\Admin\EmailTemplatesController;
 use App\Http\Controllers\Admin\Product\ReviewController;
@@ -486,6 +488,34 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     });    
    
     // Suppliers Route Data End
+
+
+      // Student Route Data
+
+      Route::group(['prefix' => 'students', 'as' => 'students.', 'middleware' => ['module:user_section']], function () {
+        Route::controller(StudentController::class)->group(function () {
+            Route::get(Student::LIST[URI], 'index')->name('students-list');
+            Route::get(Student::ADD[URI], 'getAddView')->name('add');
+            Route::POST(Student::ADD[URI], 'add');
+            Route::get(Student::ORDER_LIST[URI] . '/{student_id}', 'getOrderListView')->name('order-list');
+            Route::get(Student::ORDER_LIST_EXPORT[URI] . '/{student_id}', 'exportOrderList')->name('order-list-export');
+            Route::post(Student::STATUS[URI], 'updateStatus')->name('updateStatus');
+            Route::get(Student::EXPORT[URI], 'exportList')->name('export');
+            Route::get(Student::PRODUCT_LIST[URI] . '/{student_id}', 'getProductListView')->name('product-list');
+
+            Route::post(Student::SALES_COMMISSION_UPDATE[URI] . '/{id}', 'updateSalesCommission')->name('sales-commission-update');
+            Route::get(Student::ORDER_DETAILS[URI] . '/{order_id}/{student_id}', 'getOrderDetailsView')->name('order-details');
+            Route::get(Student::VIEW[URI] . '/{id}/{tab?}', 'getView')->name('view');
+            Route::post(Student::UPDATE_SETTING[URI] . '/{id}', 'updateSetting')->name('update-setting');
+
+            Route::get(Student::WITHDRAW_LIST[URI], 'getWithdrawListView')->name('withdraw_list');
+            Route::get(Student::WITHDRAW_LIST_EXPORT[URI], 'exportWithdrawList')->name('withdraw-list-export-excel');
+            Route::get(Student::WITHDRAW_VIEW[URI] . '/{withdrawId}/{vendorId}', 'getWithdrawView')->name('withdraw_view');
+            Route::post(Student::WITHDRAW_STATUS[URI] . '/{id}', 'withdrawStatus')->name('withdraw_status');
+        });
+    });    
+   
+    // Student Route Data End
 
        // Dropshippers Route Data
 
