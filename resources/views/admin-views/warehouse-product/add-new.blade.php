@@ -255,24 +255,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                <div class="form-group">
-                                <div class="d-flex gap-2 mb-2">
-                                    <label class="title-color mb-0">
-                                        {{ translate('unit_price') }}
-                                        ({{ getCurrencySymbol(currencyCode: getCurrencyCode()) }}) (For Students)
-                                        <span class="input-required-icon">*</span>
-                                    </label>
+              
 
-                                    <span class="input-label-secondary cursor-pointer" data-toggle="tooltip"
-                                          title="{{ translate('set_the_selling_price_for_each_unit_of_this_product._This_Unit_Price_section_won’t_be_applied_if_you_set_a_variation_wise_price') }}.">
-                                        <img src="{{ dynamicAsset(path: 'public/assets/back-end/img/info-circle.svg') }}" alt="">
-                                    </span>
-                                </div>
-                                <input type="number" min="0" step="0.01"
-                                       placeholder="Unit price for student" name="purchase_price_for_student"
-                                       value="{{ old('purchase_price_for_student') }}" class="form-control" required>
-                            </div>
-                            
                     <div class="row align-items-end">
                         <div class="col-md-6 col-lg-4 col-xl-3 d-none">
                             <div class="form-group">
@@ -293,6 +277,25 @@
                                        class="form-control" required>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                                <div class="d-flex gap-2 mb-2">
+                                    <label class="title-color mb-0">
+                                        {{ translate('unit_price') }}
+                                        ({{ getCurrencySymbol(currencyCode: getCurrencyCode()) }}) (For Students)
+                                        <span class="input-required-icon">*</span>
+                                    </label>
+
+                                    <span class="input-label-secondary cursor-pointer" data-toggle="tooltip"
+                                          title="{{ translate('set_the_selling_price_for_each_unit_of_this_product._This_Unit_Price_section_won’t_be_applied_if_you_set_a_variation_wise_price') }}.">
+                                        <img src="{{ dynamicAsset(path: 'public/assets/back-end/img/info-circle.svg') }}" alt="">
+                                    </span>
+                                </div>
+                                <input type="number" min="0" step="0.01"
+                                       placeholder="Unit price for student" name="purchase_price_for_student"
+                                       value="{{ old('purchase_price_for_student') }}" class="form-control" required>
+                        </div>
+                        
                         <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="form-group">
                                 <div class="d-flex gap-2 mb-2">
