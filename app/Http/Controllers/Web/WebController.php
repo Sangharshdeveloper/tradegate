@@ -242,7 +242,7 @@ class WebController extends Controller
                 });
             })
             ->with('seller', function ($query) {
-
+                dd($query);
                 $query->with('product', function ($query) {
                     $query->active()->with('reviews', function ($query) {
                         $query->active();
@@ -252,7 +252,6 @@ class WebController extends Controller
             ->get()
             ->each(function ($shop) {
 
-            if( $shop->seller->type != '1'){
              $shop->orders_count = $shop->seller->orders_count;
 
                 $productReviews = $shop->seller->product->pluck('reviews')->collapse();
@@ -271,7 +270,7 @@ class WebController extends Controller
                 //  dd($shop);
                  return $shop;
 
-            }
+            
                 // return $shop;
             });
 
