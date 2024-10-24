@@ -1606,6 +1606,7 @@ class ProductManager
             if ($topVendorsSortBy['temporary_close_sorting'] == 'desc') {
                 $query = $query->sortBy('temporary_close');
             }
+
             return $query;
         }
         return $query;
