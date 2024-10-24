@@ -6,7 +6,7 @@ enum Supplier
 {
     const LIST = [
         URI => 'list',
-        VIEW => 'admin-views.supplier.list'
+        VIEW => 'admin-views.supplier.index'
     ];
 
     const ADD = [
