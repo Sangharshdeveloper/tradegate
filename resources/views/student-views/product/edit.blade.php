@@ -11,6 +11,7 @@
 @section('content')
 @php
 
+ dd($products);
 
 @endphp
     <div class="content container-fluid">
