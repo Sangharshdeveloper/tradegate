@@ -320,6 +320,14 @@
                                     </a>
                                 </li>
 
+                                <li class="nav-item {{Request::is('student/products/'.Product::SUPPLIER_LIST[URI])?'active':''}}">
+                                    <a class="nav-link " href="{{route('student.products.students-list')}}">
+                                        <span class="tio-circle nav-indicator-icon"></span>
+                                        <span
+                                            class="text-truncate text-capitalize">Suppliers Products</span>
+                                    </a>
+                                </li>
+
                                 <li style="display: none;" class="nav-item {{Request::is('student/products/'.Product::BULK_IMPORT[URI]) ? 'active':''}}">
                                     <a class="nav-link " href="{{route('student.products.bulk-import')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
