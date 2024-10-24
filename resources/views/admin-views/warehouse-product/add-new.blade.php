@@ -13,7 +13,7 @@
         <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
             <h2 class="h1 mb-0 d-flex gap-2">
                 <img src="{{ dynamicAsset(path: 'public/assets/back-end/img/inhouse-product-list.png') }}" alt="">
-                {{ translate('add_New_Product') }}
+                {{ 'Add new product in Warehouse' }}
             </h2>
         </div>
 
@@ -295,7 +295,7 @@
                                        placeholder="Unit price for student" name="purchase_price_for_student"
                                        value="{{ old('purchase_price_for_student') }}" class="form-control" required>
                         </div>
-                        
+
                         <div class="col-md-6 col-lg-4 col-xl-3">
                             <div class="form-group">
                                 <div class="d-flex gap-2 mb-2">
