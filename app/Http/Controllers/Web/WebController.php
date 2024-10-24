@@ -244,8 +244,7 @@ class WebController extends Controller
                 });
             })
             ->with('seller', function ($query) {
-                $query->where('type', '!=', '1')-> 
-
+                $query->
                 with('product', function ($query) {
                     $query->active()->with('reviews', function ($query) {
                         $query->active();
@@ -323,6 +322,8 @@ class WebController extends Controller
                 $vendorsList = $vendorsList->sortBy('average_rating');
             };
         }
+
+        dd($vendorsList);
 
         return view(VIEW_FILE_NAMES['all_stores_page'], [
             'vendorsList' => $vendorsList->paginate(12)->appends($request->all()),
