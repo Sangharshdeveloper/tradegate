@@ -248,6 +248,7 @@ class WebController extends Controller
                     });
                 })->withCount(['orders']);
             })
+            ->where(['type' != '1'])
             ->get()
             ->each(function ($shop) {
                 $shop->orders_count = $shop->seller->orders_count;
