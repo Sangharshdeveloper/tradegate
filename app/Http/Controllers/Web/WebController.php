@@ -231,7 +231,9 @@ class WebController extends Controller
 
         $vendorsList = Shop::active()
             ->withCount(['products' => function ($query) {
-                $query->active();
+                // Add the filter for seller type
+
+                $query->where('added_by', '!=', 'supplier')->active(); 
             }])
             ->when(isset($request['shop_name']), function ($query) use ($request) {
                 $key = explode(' ', $request['shop_name']);
@@ -242,8 +244,8 @@ class WebController extends Controller
                 });
             })
             ->with('seller', function ($query) {
-                $query->
-                
+                $query->where('type', '!=', '1')-> 
+
                 with('product', function ($query) {
                     $query->active()->with('reviews', function ($query) {
                         $query->active();
