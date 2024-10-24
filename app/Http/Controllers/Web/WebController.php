@@ -252,7 +252,7 @@ class WebController extends Controller
             ->get()
             ->each(function ($shop) {
 
-
+            if( $shop->seller->type != '1'){
              $shop->orders_count = $shop->seller->orders_count;
 
                 $productReviews = $shop->seller->product->pluck('reviews')->collapse();
@@ -268,9 +268,11 @@ class WebController extends Controller
                 $startDate = date('Y-m-d', strtotime($shop['vacation_start_date']));
                 $endDate = date('Y-m-d', strtotime($shop['vacation_end_date']));
                 $shop->is_vacation_mode_now = $shop['vacation_status'] && ($currentDate >= $shop['vacation_start_date']) && ($currentDate <= $shop['vacation_end_date']) ? 1 : 0;
-                 dd($shop);
+                //  dd($shop);
+                 return $shop;
 
-                return $shop;
+            }
+                // return $shop;
             });
 
         $inhouseProducts = Product::active()->with(['reviews', 'rating'])->withCount('reviews')->where(['added_by' => 'admin'])->get();
