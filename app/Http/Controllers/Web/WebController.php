@@ -326,7 +326,6 @@ class WebController extends Controller
             };
         }
 
-        dd($vendorsList);
 
         return view(VIEW_FILE_NAMES['all_stores_page'], [
             'vendorsList' => $vendorsList->paginate(12)->appends($request->all()),
