@@ -106,7 +106,7 @@ class StudentController extends BaseController
             'subject' => 'Student Registration Successfully Completed',
             'title' => 'Student Registration Successfully Completed',
             'userType' => 'student',
-            'type' => '2',
+            'type' => '3',
             'templateName' => 'registration',
         ];
         event(new VendorRegistrationEvent(email: $request['email'], data: $data));
