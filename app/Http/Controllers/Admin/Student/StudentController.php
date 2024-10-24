@@ -25,6 +25,8 @@ use App\Exports\VendorOrderListExport;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\SupplierAddRequest;
 use App\Repositories\DropshipperRepository;
+use App\Repositories\StudentRepository;
+use App\Repositories\SupplierRepository;
 use App\Services\ShopService;
 use App\Services\StudentService;
 use App\Traits\CommonTrait;
@@ -50,7 +52,7 @@ class StudentController extends BaseController
     use EmailTemplateTrait;
 
     public function __construct(
-        private readonly DropshipperRepository          $supplierRepo,
+        private readonly StudentRepository          $supplierRepo,
         private readonly OrderRepositoryInterface            $orderRepo,
         private readonly ProductRepositoryInterface          $productRepo,
         private readonly ReviewRepositoryInterface           $reviewRepo,
@@ -81,6 +83,7 @@ class StudentController extends BaseController
     {
         $current_date = date('Y-m-d');
         $suppliers = $this->supplierRepo->getListWhere(
+            filters: ['type'=>'3'],
             orderBy: ['id' => 'desc'],
             searchValue: $request['searchValue'],
             relations: ['orders', 'product'],

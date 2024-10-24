@@ -209,7 +209,7 @@
                     <input type="hidden" name="from_submit" value="admin">
                     <button type="reset" class="btn btn-secondary reset-button">{{translate('reset')}} </button>
                     <button type="button" class="btn btn--primary btn-user form-submit" data-form-id="add-vendor-form" data-redirect-route="{{route('admin.vendors.vendor-list')}}"
-                            data-message="Are you sure you want to dropshipper?}}">{{translate('submit')}}</button>
+                            data-message="Are you sure you want to student ?">{{translate('submit')}}</button>
                 </div>
             </div>
         </div>

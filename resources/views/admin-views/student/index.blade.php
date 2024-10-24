@@ -50,7 +50,7 @@
                                 </div>
                                 <a href="{{route('admin.students.add')}}" type="button" class="btn btn--primary text-nowrap">
                                     <i class="tio-add"></i>
-                                    {{'Add New Dropshipper'}}
+                                    {{'Add New Student'}}
                                 </a>
                             </div>
                         </div>
