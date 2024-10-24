@@ -260,7 +260,7 @@ class WebController extends Controller
                 $shop->average_rating = $productReviews->avg('rating');
                 $shop->review_count = $productReviews->count();
                 $shop->total_rating = $productReviews->sum('rating');
-
+                $shop->seller->where('type','!=',1);
                 $positiveReviewsCount = $productReviews->where('rating', '>=', 4)->count();
                 $shop->positive_review = ($shop->review_count !== 0) ? ($positiveReviewsCount * 100) / $shop->review_count : 0;
 
