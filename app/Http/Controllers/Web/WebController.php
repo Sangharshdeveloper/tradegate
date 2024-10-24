@@ -268,7 +268,7 @@ class WebController extends Controller
                 $startDate = date('Y-m-d', strtotime($shop['vacation_start_date']));
                 $endDate = date('Y-m-d', strtotime($shop['vacation_end_date']));
                 $shop->is_vacation_mode_now = $shop['vacation_status'] && ($currentDate >= $shop['vacation_start_date']) && ($currentDate <= $shop['vacation_end_date']) ? 1 : 0;
-                dd($shop);
+                // dd($shop);
 
                 return $shop;
             });
