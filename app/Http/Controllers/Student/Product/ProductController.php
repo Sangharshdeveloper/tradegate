@@ -50,6 +50,8 @@ class ProductController extends BaseController
     }
 
     public function __construct(
+        private readonly SupplierRepositoryInterface          $supplierRepo,
+
         private readonly AuthorRepositoryInterface                  $authorRepo,
         private readonly PublishingHouseRepositoryInterface         $publishingHouseRepo,
         private readonly DigitalProductAuthorRepositoryInterface    $digitalProductAuthorRepo,
@@ -642,7 +644,22 @@ class ProductController extends BaseController
         return view(Product::PRODUCT_GALLERY[VIEW], compact('products', 'brands', 'categories', 'searchValue'));
 
     }
+    public function suppliers(?Request $request, string|array $type = null): View|Collection|LengthAwarePaginator|null|callable|RedirectResponse
+    {
+        return $this->getListViewSupp(request: $request);
+    }
 
+    public function getListViewSupp(Request $request): View
+    {
+        $current_date = date('Y-m-d');
+        $suppliers = $this->supplierRepo->getListWhere(
+            orderBy: ['id' => 'desc'],
+            searchValue: $request['searchValue'],
+            relations: ['orders', 'product'],
+            dataLimit: getWebConfig(name: WebConfigKey::PAGINATION_LIMIT)
+        );
+        return view(Product::SUPPLIER_LIST[VIEW], compact('suppliers', 'current_date'));
+    }
 
     public function getSearchedProductsView(Request $request): JsonResponse
     {

@@ -321,7 +321,7 @@
                                 </li>
 
                                 <li class="nav-item {{Request::is('student/products/'.Product::SUPPLIER_LIST[URI])?'active':''}}">
-                                    <a class="nav-link " href="{{route('student.products.students-list')}}">
+                                    <a class="nav-link " href="{{route('student.products.suppliers-list')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>
                                         <span
                                             class="text-truncate text-capitalize">Suppliers Products</span>
