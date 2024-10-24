@@ -280,7 +280,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::group(['prefix' => 'warehouse-products', 'as' => 'warehouse-products.', 'middleware' => ['module:product_management']], function () {
         Route::controller(WarehouseProductController::class)->group(function () {
             Route::get(Product::LIST[URI] . '/{type}', 'index')->name('list');
-            Route::get(Product::ADD[URI], 'getAddView')->name('add');
+            Route::get(Product::ADD_IN_WAREHOUSE[URI], 'getAddView')->name('add');
             Route::post(Product::ADD[URI], 'add')->name('store');
             Route::get(Product::VIEW[URI] . '/{addedBy}/{id}', 'getView')->name('view');
             Route::post(Product::SKU_COMBINATION[URI], 'getSkuCombinationView')->name('sku-combination');

@@ -9,6 +9,11 @@ enum Product
         VIEW => 'admin-views.product.add-new'
     ];
 
+    const ADD_IN_WAREHOUSE = [
+        URI => 'add',
+        VIEW => 'admin-views.warehouse-product.add-new'
+    ];
+
     const LIST = [
         URI => 'list',
         VIEW => 'admin-views.product.list'
