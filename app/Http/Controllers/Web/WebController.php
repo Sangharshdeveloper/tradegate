@@ -242,19 +242,21 @@ class WebController extends Controller
                 });
             })
             ->with('seller', function ($query) {
-                $query->where('type', '!=', 1) // Add the filter for seller type
 
-                ->with('product', function ($query) {
+                $query->with('product', function ($query) {
                     $query->active()->with('reviews', function ($query) {
                         $query->active();
                     });
                 })->withCount(['orders']);
             })
+            ->with('seller',function ($query){
+                $query->where('type', '!=', 1); // Add the filter for seller type
+
+            })
             ->get()
             ->each(function ($shop) {
 
-                // $shop->orders_count = $shop->seller->orders_count;
-                $shop->orders_count = optional($shop->seller)->orders_count ?? 0;
+             $shop->orders_count = $shop->seller->orders_count;
 
                 $productReviews = $shop->seller->product->pluck('reviews')->collapse();
                 $productReviews = $productReviews->where('status', 1);
