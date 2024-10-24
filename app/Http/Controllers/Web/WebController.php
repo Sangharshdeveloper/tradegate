@@ -253,7 +253,7 @@ class WebController extends Controller
             ->get()
             ->each(function ($shop) {
 
-                $shop->orders_count = $shop->seller->orders_count;
+                // $shop->orders_count = $shop->seller->orders_count;
                 $shop->orders_count = optional($shop->seller)->orders_count ?? 0;
 
                 $productReviews = $shop->seller->product->pluck('reviews')->collapse();
