@@ -986,7 +986,7 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                 <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{'Student'}}</span>
                             </a>
                             <ul class="js-navbar-vertical-aside-submenu nav nav-sub"
-                                style="display: {{Request::is('admin/students*') || (Request::is('admin/orders/details/*') && request()->has('vendor-order-list'))?'block':'none'}}">
+                                style="display: {{Request::is('admin/students*') || (Request::is('admin/orders/details/*') && request()->has('student-order-list'))?'block':'none'}}">
                                 <li class="nav-item {{Request::is('admin/students/'.Student::ADD[URI])?'active':''}}">
                                     <a class="nav-link" title="{{translate('add_New_Vendor')}}"
                                         href="{{route('admin.students.add')}}">
@@ -996,7 +996,7 @@ $eCommerceLogo = getWebConfig(name: 'company_web_logo');
                                         </span>
                                     </a>
                                 </li>
-                                <li class="nav-item {{Request::is('admin/students/'.Supplier::LIST[URI]) ||Request::is('admin/students/'.Student::VIEW[URI].'*') ?'active':''}}">
+                                <li class="nav-item {{Request::is('admin/students/'.Student::LIST[URI]) ||Request::is('admin/students/'.Student::VIEW[URI].'*') ?'active':''}}">
                                     <a class="nav-link" title="Students list"
                                         href="{{route('admin.students.students-list')}}">
                                         <span class="tio-circle nav-indicator-icon"></span>

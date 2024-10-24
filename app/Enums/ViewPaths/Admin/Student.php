@@ -11,7 +11,7 @@ enum Student
 
     const ADD = [
         URI => 'add',
-        VIEW => 'admin-views.student.add-new-dropshipper'
+        VIEW => 'admin-views.student.add-new-student'
     ];
 
     const ORDER_LIST = [
