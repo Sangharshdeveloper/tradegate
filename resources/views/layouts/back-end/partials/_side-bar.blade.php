@@ -34,6 +34,7 @@ use App\Enums\ViewPaths\Admin\SocialLoginSettings;
 use App\Enums\ViewPaths\Admin\SocialMedia;
 use App\Enums\ViewPaths\Admin\SoftwareUpdate;
 use App\Enums\ViewPaths\Admin\Supplier;
+use App\Enums\ViewPaths\Admin\Student;
 use App\Enums\ViewPaths\Admin\Dropshipper;
 use App\Enums\ViewPaths\Admin\SubCategory;
 use App\Enums\ViewPaths\Admin\SubSubCategory;
