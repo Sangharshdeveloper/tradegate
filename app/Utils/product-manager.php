@@ -1607,11 +1607,13 @@ class ProductManager
                 $query = $query->sortBy('temporary_close');
             }
 
-            $query->where('type', '!=', 1); // Add the filter for seller type
 
+            $query = $query->where('type', '!=', '1'); // Add the filter for seller type
 
             return $query;
         }
+        $query = $query->where('type', '!=', '1'); // Add the filter for seller type
+
         return $query;
     }
 
@@ -1656,10 +1658,13 @@ class ProductManager
             } elseif ($vendorsSortBy['temporary_close_sorting'] == 'desc') {
                 $query = $query->sortBy('temporary_close');
             }
-            $query->where('type', '!=', 1); // Add the filter for seller type
+            $query = $query->where('type', '!=', '1'); // Add the filter for seller type
 
             return $query;
         }
+         // Add the filter for seller type
+         $query = $query->where('type', '!=', '1'); // Add the filter for seller type
+
         return $query;
     }
 
